@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=3 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
-[ext_resource type="Texture2D" uid="uid://dbqa5ejaeyfoy" path="res://sprites/plants/deadtree.png" id="2_f0oq7"]
-[ext_resource type="Material" uid="uid://cle6tda0v4ocr" path="res://shadow.tres" id="2_vwrsy"]
+[ext_resource type="PackedScene" uid="uid://de47yuehnopao" path="res://dead_tree.tscn" id="2_e11gv"]
 
 [node name="World" type="Node2D"]
 
@@ -17,10 +16,4 @@ offset_bottom = -49960.0
 scale = Vector2(1e+06, 1e+06)
 color = Color(0.623529, 0.615686, 0.384314, 1)
 
-[node name="DeadTree" type="Node2D" parent="."]
-position = Vector2(329, 123)
-
-[node name="Sprite2D" type="Sprite2D" parent="DeadTree"]
-material = ExtResource("2_vwrsy")
-position = Vector2(0, 20)
-texture = ExtResource("2_f0oq7")
+[node name="DeadTree" parent="." instance=ExtResource("2_e11gv")]
