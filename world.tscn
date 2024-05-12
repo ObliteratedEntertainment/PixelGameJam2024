@@ -1,16 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=4 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
 [ext_resource type="Texture2D" uid="uid://dbqa5ejaeyfoy" path="res://sprites/plants/deadtree.png" id="2_f0oq7"]
-[ext_resource type="Shader" path="res://shadow.gdshader" id="2_ijagd"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyma6"]
-shader = ExtResource("2_ijagd")
-shader_parameter/deform = Vector2(2, 2)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/modulate = null
-shader_parameter/x_buffer = 2.0
-shader_parameter/y_buffer = 2.0
+[ext_resource type="Material" uid="uid://cle6tda0v4ocr" path="res://shadow.tres" id="2_vwrsy"]
 
 [node name="World" type="Node2D"]
 
@@ -29,5 +21,6 @@ color = Color(0.623529, 0.615686, 0.384314, 1)
 position = Vector2(329, 123)
 
 [node name="Sprite2D" type="Sprite2D" parent="DeadTree"]
-material = SubResource("ShaderMaterial_kyma6")
+material = ExtResource("2_vwrsy")
+position = Vector2(0, 20)
 texture = ExtResource("2_f0oq7")
