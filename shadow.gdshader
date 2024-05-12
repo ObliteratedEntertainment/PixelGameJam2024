@@ -1,15 +1,22 @@
 /**
-* Shadow 2D. Found here: https://godotshaders.com/shader/2d-shadow-out-of-bounds/
+* Adapted from here: https://godotshaders.com/shader/2d-shadow-out-of-bounds/
+* Shadow 2D.
 * License: CC0
 * https://creativecommons.org/publicdomain/zero/1.0/
 */
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform vec2 deform = vec2(2.0, 2.0);
+// Amount of stretch to apply
+// NOTE: Something doesn't seem right with this, read more fully
+uniform vec2 deform = vec2(1.0, 1.0);
+// Shifts the shadow according to offset
 uniform vec2 offset = vec2(0.0, 0.0);
+// Shadow color
 uniform vec4 modulate : source_color;
-uniform float x_buffer = 2.0;//Increase these if you need your shadow to stretch further
+//Increase these if you need your shadow to stretch further
+// They are multiplier of the base size
+uniform float x_buffer = 2.0;
 uniform float y_buffer = 2.0;
 
 //uniform vec2 texture_size; //uncomment for GLES2

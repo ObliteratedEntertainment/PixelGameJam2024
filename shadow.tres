@@ -4,8 +4,8 @@
 
 [resource]
 shader = ExtResource("1_6rhvj")
-shader_parameter/deform = Vector2(2, 2)
+shader_parameter/deform = Vector2(1, 1)
 shader_parameter/offset = Vector2(0, 0)
-shader_parameter/modulate = null
+shader_parameter/modulate = Color(0.321569, 0.321569, 0.321569, 0.321569)
 shader_parameter/x_buffer = 2.0
 shader_parameter/y_buffer = 2.0
