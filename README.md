@@ -1,5 +1,7 @@
 This in an entry for this game jam: https://itch.io/jam/-pixel-game-jam-2024
 
+Engine version used: https://godotengine.org/download/archive/4.3-dev6/
+
 The jam theme is: Aqua
 
 # General Concepts:
