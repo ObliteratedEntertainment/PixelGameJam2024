@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cle6tda0v4ocr"]
+
+[ext_resource type="Shader" path="res://shadow.gdshader" id="1_6rhvj"]
+
+[resource]
+shader = ExtResource("1_6rhvj")
+shader_parameter/deform = Vector2(2, 2)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/modulate = null
+shader_parameter/x_buffer = 2.0
+shader_parameter/y_buffer = 2.0

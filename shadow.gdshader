@@ -1,5 +1,5 @@
 /**
-* Shadow 2D.
+* Shadow 2D. Found here: https://godotshaders.com/shader/2d-shadow-out-of-bounds/
 * License: CC0
 * https://creativecommons.org/publicdomain/zero/1.0/
 */
