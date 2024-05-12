@@ -7,6 +7,10 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
+// TODO: Need to find a way to handle the "base" of a sprite
+// Example, tree trunk should have a shadow, roots should not
+// Perhaps have a y pixel which is the "cutoff" or something?
+
 // Amount of stretch to apply
 // NOTE: Something doesn't seem right with this, read more fully
 uniform vec2 deform = vec2(1.0, 1.0);
