@@ -4,6 +4,7 @@ Engine version used: https://godotengine.org/download/archive/4.3-dev6/
 
 The jam theme is: Aqua
 
+
 # General Concepts:
 
 We are targeting the Playroom category.
@@ -31,6 +32,9 @@ Multiplayer elements
 
 
 # Playroom Features:
+
+To test with Playroom, utilize the upper-right "Remote Debug" -> "Run in Browser" feature to 
+get the playroom stuff to activate and have multiplayer running.
 
 ## Rooms:
 - Every Oasis is zoned as its own named room. Ie, `Oasis1_1`. The digit after the underscore is to allow overflow if the room is full to spawn a new shard for Oasis1.
