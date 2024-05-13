@@ -6,14 +6,25 @@
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
+position = Vector2(270, 158)
+motion_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="Player"]
+[node name="BackgroundWorldColor" type="ColorRect" parent="Player"]
 z_index = -10
 offset_left = -50000.0
 offset_top = -50000.0
 offset_right = -49960.0
 offset_bottom = -49960.0
 scale = Vector2(1e+06, 1e+06)
-color = Color(0.623529, 0.615686, 0.384314, 1)
+color = Color(0.901961, 0.901961, 0.627451, 1)
 
 [node name="DeadTree" parent="." instance=ExtResource("2_e11gv")]
+
+[node name="OasisStart" type="Node2D" parent="."]
+
+[node name="ZoneDefinition" type="Area2D" parent="OasisStart"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OasisStart/ZoneDefinition"]
+polygon = PackedVector2Array(215, 122, 223, 183, 267, 241, 451, 235, 434, 115, 327, 55, 232, 93)
