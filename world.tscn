@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://de47yuehnopao" path="res://dead_tree.tscn" id="2_e11gv"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
 position = Vector2(270, 158)

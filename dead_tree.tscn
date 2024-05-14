@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://de47yuehnopao"]
+[gd_scene load_steps=4 format=3 uid="uid://de47yuehnopao"]
 
 [ext_resource type="Material" uid="uid://cle6tda0v4ocr" path="res://shadow.tres" id="1_2k7at"]
 [ext_resource type="Texture2D" uid="uid://dbqa5ejaeyfoy" path="res://sprites/plants/deadtree.png" id="2_omynr"]
 
-[node name="DeadTree" type="Node2D"]
-position = Vector2(329, 123)
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7n53"]
+radius = 6.0
+
+[node name="DeadTree" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("1_2k7at")
-position = Vector2(0, 20)
+position = Vector2(2, -17)
 texture = ExtResource("2_omynr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d7n53")

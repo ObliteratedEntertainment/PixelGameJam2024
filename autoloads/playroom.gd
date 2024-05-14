@@ -1,5 +1,6 @@
 extends Node
 
+
 # To Test with Playroom connectivity
 # In the upper-right, click the "Remote Debug" option and
 # select "Run in Browser". 
@@ -91,7 +92,8 @@ func _ready() -> void:
 	
 	# TODO: Add retry logic if the first room is full,
 	#  fallback to the next and so on
-	connect_room(GLOBAL_ROOMS[0])
+	if not OS.has_feature("editor"):
+		connect_room(GLOBAL_ROOMS[0])
  
 ## Connect to a room (disconnect from the other if we were connected)
 func connect_room(room_name: String):

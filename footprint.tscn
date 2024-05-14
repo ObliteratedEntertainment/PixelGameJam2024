@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvcmvyirr1dnt"]
+
+[ext_resource type="Texture2D" uid="uid://d33cnh3n05i36" path="res://sprites/player/footprint.png" id="1_262m1"]
+[ext_resource type="Script" path="res://footprint.gd" id="2_0d04w"]
+
+[node name="Footprint" type="Sprite2D"]
+modulate = Color(0.224881, 0.136484, 0.039277, 1)
+z_index = -1
+texture = ExtResource("1_262m1")
+script = ExtResource("2_0d04w")
