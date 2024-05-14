@@ -1,17 +1,17 @@
 [gd_scene load_steps=2 format=3 uid="uid://bslsphkm41pqg"]
 
-[ext_resource type="Texture2D" uid="uid://d2ge4w1pli7n6" path="res://sprites/clouds/cloud_3.png" id="1_pc7v2"]
+[ext_resource type="Texture2D" uid="uid://d2ge4w1pli7n6" path="res://sprites/clouds/cloud_3.png" id="1_6ek73"]
 
 [node name="Cloud3" type="Sprite2D"]
 self_modulate = Color(1, 1, 1, 0.588235)
 z_index = 10
-texture = ExtResource("1_pc7v2")
+texture = ExtResource("1_6ek73")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.196078)
 self_modulate = Color(0, 0, 0, 1)
 position = Vector2(43, 131)
-texture = ExtResource("1_pc7v2")
+texture = ExtResource("1_6ek73")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 collision_layer = 4

@@ -17,6 +17,7 @@ var speed := 0.0
 var last_active_direction := Vector2.DOWN
 @export var idling := false
 @export var exhausted := false
+@export var dead := false
 
 func _physics_process(delta: float) -> void:
 

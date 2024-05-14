@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd4qtiyb6gckq"]
+
+[ext_resource type="Texture2D" uid="uid://cbjnnly4oimvf" path="res://sprites/rocks/rock_1.png" id="1_qcgli"]
+[ext_resource type="Texture2D" uid="uid://rtlcnpbvye53" path="res://sprites/rocks/rock_1_shadow.png" id="2_27jwv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlurd"]
+radius = 6.0
+
+[node name="Rock1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -4)
+texture = ExtResource("1_qcgli")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(1, -4)
+texture = ExtResource("2_27jwv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_jlurd")

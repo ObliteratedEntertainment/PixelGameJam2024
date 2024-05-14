@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://75w7b6m54kb6"]
+
+[ext_resource type="Texture2D" uid="uid://gp5px4rfsxau" path="res://sprites/plants/tree_stump.png" id="1_4dqpe"]
+[ext_resource type="Texture2D" uid="uid://dud80pf8e4uk0" path="res://sprites/plants/tree_stump_shadow.png" id="2_d4nxk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlurd"]
+radius = 5.0
+
+[node name="TreeStump" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("1_4dqpe")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(0, -3)
+texture = ExtResource("2_d4nxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jlurd")

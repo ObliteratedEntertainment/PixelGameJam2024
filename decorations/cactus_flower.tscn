@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://du8v06ko4d4qr"]
+
+[ext_resource type="Texture2D" uid="uid://co8ls4p1ymno" path="res://sprites/plants/cactus_rose.png" id="1_7vuok"]
+
+[node name="CactusFlower" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7vuok")

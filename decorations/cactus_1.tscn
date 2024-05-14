@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsqdtsq6dfs36"]
+
+[ext_resource type="Material" uid="uid://cle6tda0v4ocr" path="res://shadow.tres" id="1_q81sq"]
+[ext_resource type="Texture2D" uid="uid://udq5vahrw23c" path="res://sprites/plants/cactus_1.png" id="2_7q3nw"]
+[ext_resource type="Texture2D" uid="uid://b7tivhl3oig66" path="res://sprites/plants/cactus_1_shadow.png" id="3_kyhk2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7n53"]
+radius = 4.0
+
+[node name="Cactus1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_q81sq")
+position = Vector2(1, -3)
+texture = ExtResource("2_7q3nw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d7n53")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.588235)
+z_index = -1
+position = Vector2(2, -2)
+texture = ExtResource("3_kyhk2")
+
+[node name="FlowerSpots" type="Node2D" parent="."]
+
+[node name="FlowerSpot" type="Marker2D" parent="FlowerSpots"]
+position = Vector2(-2, -6)
+
+[node name="FlowerSpot2" type="Marker2D" parent="FlowerSpots"]
+position = Vector2(2, -4)

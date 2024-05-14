@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=19 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
-[ext_resource type="PackedScene" uid="uid://bslsphkm41pqg" path="res://cloud_3.tscn" id="2_6aaw5"]
-[ext_resource type="PackedScene" uid="uid://de47yuehnopao" path="res://dead_tree.tscn" id="2_e11gv"]
-[ext_resource type="PackedScene" uid="uid://n1r1g817woap" path="res://cloud_1.tscn" id="3_hlxtw"]
-[ext_resource type="PackedScene" uid="uid://c3nvgj3k7dygx" path="res://cloud_2.tscn" id="4_ae5dl"]
+[ext_resource type="PackedScene" uid="uid://bslsphkm41pqg" path="res://decorations/cloud_3.tscn" id="2_6aaw5"]
+[ext_resource type="PackedScene" uid="uid://de47yuehnopao" path="res://decorations/dead_tree.tscn" id="2_e11gv"]
+[ext_resource type="PackedScene" uid="uid://n1r1g817woap" path="res://decorations/cloud_1.tscn" id="3_hlxtw"]
+[ext_resource type="PackedScene" uid="uid://c3nvgj3k7dygx" path="res://decorations/cloud_2.tscn" id="4_ae5dl"]
+[ext_resource type="PackedScene" uid="uid://75w7b6m54kb6" path="res://decorations/tree_stump.tscn" id="6_xxmce"]
+[ext_resource type="PackedScene" uid="uid://dipdpwlx6c8ar" path="res://decorations/dirt_1.tscn" id="7_b5s2m"]
+[ext_resource type="PackedScene" uid="uid://dxchsddlllfl1" path="res://decorations/dirt_2.tscn" id="8_oqh35"]
+[ext_resource type="PackedScene" uid="uid://l2juh3st1mo6" path="res://decorations/dirt_3.tscn" id="8_wvhm6"]
+[ext_resource type="PackedScene" uid="uid://8dm41njm7pkj" path="res://decorations/dirt_4.tscn" id="9_po84g"]
+[ext_resource type="PackedScene" uid="uid://cbpxy556rj23y" path="res://decorations/dirt_7.tscn" id="10_ml4qh"]
+[ext_resource type="PackedScene" uid="uid://bjh0f1ppqw4gx" path="res://decorations/dirt_8.tscn" id="11_o0amn"]
+[ext_resource type="PackedScene" uid="uid://b7iec74heesa0" path="res://decorations/dirt_5.tscn" id="12_2bqt7"]
+[ext_resource type="PackedScene" uid="uid://cqjko0s7x7ltl" path="res://decorations/dirt_6.tscn" id="13_smej4"]
+[ext_resource type="PackedScene" uid="uid://bsqdtsq6dfs36" path="res://decorations/cactus_1.tscn" id="15_6w7c7"]
+[ext_resource type="PackedScene" uid="uid://bd4qtiyb6gckq" path="res://decorations/rock_1.tscn" id="16_8581n"]
+[ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="16_cohu3"]
+[ext_resource type="PackedScene" uid="uid://cfd4dfkvg2iuu" path="res://decorations/cactus_3.tscn" id="17_m07k5"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -55,3 +68,42 @@ position = Vector2(370, 264)
 position = Vector2(481, 28)
 
 [node name="Cloud1" parent="." instance=ExtResource("3_hlxtw")]
+
+[node name="TreeStump" parent="." instance=ExtResource("6_xxmce")]
+position = Vector2(237, 164)
+
+[node name="Dirt9" parent="." instance=ExtResource("13_smej4")]
+position = Vector2(169, 89)
+
+[node name="Dirt6" parent="." instance=ExtResource("12_2bqt7")]
+position = Vector2(304, 121)
+
+[node name="Dirt8" parent="." instance=ExtResource("11_o0amn")]
+position = Vector2(419, 160)
+
+[node name="Dirt7" parent="." instance=ExtResource("10_ml4qh")]
+position = Vector2(434, 260)
+
+[node name="Dirt4" parent="." instance=ExtResource("9_po84g")]
+position = Vector2(235, 228)
+
+[node name="Dirt3" parent="." instance=ExtResource("8_wvhm6")]
+position = Vector2(176, 259)
+
+[node name="Dirt1" parent="." instance=ExtResource("7_b5s2m")]
+position = Vector2(238, 163)
+
+[node name="Dirt2" parent="." instance=ExtResource("8_oqh35")]
+position = Vector2(155, 182)
+
+[node name="Rock1" parent="." instance=ExtResource("16_8581n")]
+position = Vector2(406, 154)
+
+[node name="Cactus3" parent="." instance=ExtResource("17_m07k5")]
+position = Vector2(450, 269)
+
+[node name="Cactus2" parent="." instance=ExtResource("16_cohu3")]
+position = Vector2(439, 249)
+
+[node name="Cactus1" parent="." instance=ExtResource("15_6w7c7")]
+position = Vector2(416, 256)

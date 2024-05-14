@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbpxy556rj23y"]
+
+[ext_resource type="Texture2D" uid="uid://dqdx3iya7m42o" path="res://sprites/dirty_spots/dirt_7.png" id="1_l52st"]
+
+[node name="Dirt7" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_l52st")

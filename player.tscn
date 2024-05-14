@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=44 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="2_e2s6s"]
@@ -7,25 +7,9 @@
 radius = 5.0
 height = 10.0
 
-[sub_resource type="Animation" id="Animation_v457y"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_q3sry"]
-resource_name = "IdleDown"
+[sub_resource type="Animation" id="Animation_jjatk"]
+resource_name = "DeathDown"
 length = 0.80001
-loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -37,25 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xv41s"]
-resource_name = "IdleUp"
-length = 0.80001
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1)]
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7)]
 }
 
 [sub_resource type="Animation" id="Animation_v27hb"]
@@ -94,6 +60,57 @@ tracks/0/keys = {
 "values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_q3sry"]
+resource_name = "IdleDown"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xv41s"]
+resource_name = "IdleUp"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1), Vector2i(7, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v457y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_waqnn"]
 resource_name = "RunDown"
 length = 0.80001
@@ -129,8 +146,8 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_1algh"]
-resource_name = "RunUp"
+[sub_resource type="Animation" id="Animation_okb0e"]
+resource_name = "RunLeft"
 length = 0.80001
 loop_mode = 1
 step = 0.1
@@ -144,15 +161,27 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5), Vector2i(5, 5), Vector2i(6, 5), Vector2i(7, 5)]
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6)]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("Sprite2D:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -211,8 +240,8 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_okb0e"]
-resource_name = "RunLeft"
+[sub_resource type="Animation" id="Animation_1algh"]
+resource_name = "RunUp"
 length = 0.80001
 loop_mode = 1
 step = 0.1
@@ -226,27 +255,15 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6)]
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5), Vector2i(5, 5), Vector2i(6, 5), Vector2i(7, 5)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -256,23 +273,6 @@ tracks/2/keys = {
 "args": [false],
 "method": &"_anim_place_footprint"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_jjatk"]
-resource_name = "DeathDown"
-length = 0.80001
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_djc75"]
@@ -288,6 +288,9 @@ _data = {
 "RunRight": SubResource("Animation_k8yte"),
 "RunUp": SubResource("Animation_1algh")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ntqn"]
+animation = &"DeathDown"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3n2ev"]
 animation = &"ExhaleDown"
@@ -403,13 +406,27 @@ advance_expression = "not idling"
 advance_mode = 2
 advance_expression = "idling"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yrhxp"]
+priority = 0
+advance_mode = 2
+advance_expression = "dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fo276"]
+priority = 0
+advance_mode = 2
+advance_expression = "dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rg5it"]
+states/DeathDown/node = SubResource("AnimationNodeAnimation_3ntqn")
+states/DeathDown/position = Vector2(800, 91.0625)
+states/End/position = Vector2(995, 89.75)
 states/Idle/node = SubResource("AnimationNodeStateMachine_y0qj0")
 states/Idle/position = Vector2(505, 164.5)
 states/Movement/node = SubResource("AnimationNodeBlendSpace2D_0choh")
 states/Movement/position = Vector2(505.5, 5.5)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l")]
-graph_offset = Vector2(0, -28)
+states/Start/position = Vector2(206, 164.75)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276")]
+graph_offset = Vector2(54, -42)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
@@ -421,7 +438,6 @@ shape = SubResource("CapsuleShape2D_njm32")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("2_e2s6s")
-flip_h = true
 hframes = 8
 vframes = 8
 
@@ -435,33 +451,36 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.287908
-parameters/current_delta = 0.00740741
+parameters/current_position = 0.637643
+parameters/current_delta = 0.00714286
+parameters/DeathDown/current_length = 0.80001
+parameters/DeathDown/current_position = 0.80001
+parameters/DeathDown/current_delta = 0.0
 parameters/End/current_length = null
 parameters/End/current_position = null
 parameters/End/current_delta = null
-parameters/Idle/current_length = 0.80001
-parameters/Idle/current_position = 0.171601
-parameters/Idle/current_delta = 0.00694444
+parameters/Idle/current_length = 0.0
+parameters/Idle/current_position = 0.0
+parameters/Idle/current_delta = 0.0
 parameters/Idle/End/current_length = 0.0
 parameters/Idle/End/current_position = 0.0
 parameters/Idle/End/current_delta = 0.0
 parameters/Idle/Exhausted/current_length = 0.80001
-parameters/Idle/Exhausted/current_position = 0.181591
-parameters/Idle/Exhausted/current_delta = 0.00998956
+parameters/Idle/Exhausted/current_position = 0.0
+parameters/Idle/Exhausted/current_delta = 0.181591
 parameters/Idle/Exhausted/blend_position = Vector2(0.729167, -0.718062)
 parameters/Idle/Exhausted/0/current_length = 0.80001
-parameters/Idle/Exhausted/0/current_position = 0.181591
-parameters/Idle/Exhausted/0/current_delta = 0.00998956
+parameters/Idle/Exhausted/0/current_position = 0.0
+parameters/Idle/Exhausted/0/current_delta = 0.181591
 parameters/Idle/Exhausted/1/current_length = null
 parameters/Idle/Exhausted/1/current_position = null
 parameters/Idle/Exhausted/1/current_delta = null
 parameters/Idle/Exhausted/2/current_length = 0.80001
-parameters/Idle/Exhausted/2/current_position = 0.181591
-parameters/Idle/Exhausted/2/current_delta = 0.00998956
+parameters/Idle/Exhausted/2/current_position = 0.0
+parameters/Idle/Exhausted/2/current_delta = 0.181591
 parameters/Idle/Exhausted/3/current_length = 0.80001
-parameters/Idle/Exhausted/3/current_position = 0.181591
-parameters/Idle/Exhausted/3/current_delta = 0.00998956
+parameters/Idle/Exhausted/3/current_position = 0.0
+parameters/Idle/Exhausted/3/current_delta = 0.181591
 parameters/Idle/Idle/current_length = 0.80001
 parameters/Idle/Idle/current_position = 0.525676
 parameters/Idle/Idle/current_delta = 0.0300353
@@ -482,21 +501,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.287908
-parameters/Movement/current_delta = 0.00740741
+parameters/Movement/current_position = 0.637643
+parameters/Movement/current_delta = 0.00714286
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.287908
-parameters/Movement/0/current_delta = 0.00740741
+parameters/Movement/0/current_position = 0.637643
+parameters/Movement/0/current_delta = 0.00714286
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.379647
-parameters/Movement/1/current_delta = 0.00740741
+parameters/Movement/1/current_position = 0.637643
+parameters/Movement/1/current_delta = 0.00714286
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.596324
-parameters/Movement/2/current_delta = 0.00740741
+parameters/Movement/2/current_position = 0.637643
+parameters/Movement/2/current_delta = 0.00714286
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.471324
-parameters/Movement/3/current_delta = 0.00740741
+parameters/Movement/3/current_position = 0.637643
+parameters/Movement/3/current_delta = 0.00714286
 parameters/Start/current_length = 0.0
 parameters/Start/current_position = 0.0
 parameters/Start/current_delta = 0.0
