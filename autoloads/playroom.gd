@@ -1,5 +1,6 @@
 extends Node
 
+const MAX_FOOTPRINTS_STORED = 30
 
 # To Test with Playroom connectivity
 # In the upper-right, click the "Remote Debug" option and
@@ -29,7 +30,8 @@ signal inscriptions_updated(room_name: String, inscriptions: Array[String])
 # Broadcasted when info about a player's death/inscription has been loaded
 # Can be used immediately, or can be requested through 
 # Playroom.get_death(...) or Playroom.get_inscription(...)
-signal death_loaded(room_name: String, player_name: String, location: Vector2, consumed: bool)
+signal death_loaded(room_name: String, player_name: String, location: Vector2, footprints: Array[Vector2])
+signal death_load_failed(room_name: String, player_name: String)
 signal inscription_loaded(room_name: String, player_name: String, location: Vector2, type: int, likes: int)
 
 # From the Dev dashboard of dev.joinplayroom.com
@@ -168,10 +170,16 @@ func request_inscriptions_list() -> void:
 	_playroom.getPersistentData("inscriptions") \
 		.then(_bridgeToJS(_receive_inscription_list))
 
+func request_death_data(player_name: String) -> void:
+	_playroom.getPersistentData("deaths_%s" % [player_name]) \
+		.then(_bridgeToJS(_receive_player_death))
 
 # Register where the player died
 # And include some of their footprints up to the point they died
 func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
+	if _current_room == "":
+		return
+	
 	# TODO: Shard the death tracker by zone since we cant change rooms
 	if not _created_death_tracker.has(_current_room):
 		_created_death_tracker[_current_room] = true
@@ -265,8 +273,46 @@ func _on_player_quit(room_name, player_name: String, args: Variant) -> void:
 func _receive_death_list(args: Variant) -> void:
 	if "length" in args[0]:
 		print("Death Map Length: ", args[0].length)
-		deaths_updated.emit(args[0])
+		
+		var player_names: Array[String] = []
+		
+		for i in range(args[0].length):
+			player_names.push_back(args[0][i])
+		
+		deaths_updated.emit(_current_room, player_names)
 
+func _receive_player_death(args: Variant) -> void:
+	var player_name = "profour" # test data
+	#print("Received player death data: ", player_name)
+	print("With args: ", args[0])
+	var death_data = JSON.parse_string(args[0])
+	
+	print("JSON Parsed object: ", death_data)
+	
+	if "p" in death_data and "f" in death_data:
+		var raw_position = death_data["p"]
+		if typeof(raw_position) != TYPE_ARRAY or len(raw_position) != 2:
+			death_load_failed.emit(_current_room, player_name)
+			return
+		
+		var raw_footprints = death_data["f"]
+		if typeof(raw_footprints) != TYPE_ARRAY:
+			death_load_failed.emit(_current_room, player_name)
+			return
+			
+		
+		var pos = Vector2(raw_position[0], raw_position[1])
+		
+		var fp: Array[Vector2] = []
+		for i in range(min(len(raw_footprints), MAX_FOOTPRINTS_STORED)):
+			var raw_coord = raw_footprints[i]
+			if typeof(raw_coord) != TYPE_ARRAY or len(raw_coord) != 2:
+				death_load_failed.emit(_current_room, player_name)
+				return
+			
+			fp.push_back(Vector2(raw_coord[0], raw_coord[1]))
+		
+		death_loaded.emit(_current_room, player_name, pos, fp)
 
 # Callback for the list of valid keys for persisted inscriptions
 func _receive_inscription_list(args: Variant) -> void:

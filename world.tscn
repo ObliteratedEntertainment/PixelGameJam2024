@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=20 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
 [ext_resource type="PackedScene" uid="uid://bslsphkm41pqg" path="res://decorations/cloud_3.tscn" id="2_6aaw5"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bd4qtiyb6gckq" path="res://decorations/rock_1.tscn" id="16_8581n"]
 [ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="16_cohu3"]
 [ext_resource type="PackedScene" uid="uid://cfd4dfkvg2iuu" path="res://decorations/cactus_3.tscn" id="17_m07k5"]
+[ext_resource type="Script" path="res://player_deaths_manager.gd" id="19_dbppj"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -107,3 +108,6 @@ position = Vector2(439, 249)
 
 [node name="Cactus1" parent="." instance=ExtResource("15_6w7c7")]
 position = Vector2(416, 256)
+
+[node name="PlayerDeathsManager" type="Node2D" parent="."]
+script = ExtResource("19_dbppj")

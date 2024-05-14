@@ -19,7 +19,12 @@ var last_active_direction := Vector2.DOWN
 @export var exhausted := false
 @export var dead := false
 
+var recent_footprints: Array[Vector2] = []
+
 func _physics_process(delta: float) -> void:
+
+	if Input.is_action_just_pressed("dev_death"):
+		die()
 
 	var speed := minf(speed + ACCEL * ACCEL * delta, MAX_SPEED)
 
@@ -46,12 +51,21 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func die():
+	dead = true
+	
+	Playroom.add_death_location(position, recent_footprints)
+
 func _anim_place_footprint(spawn_west: bool):
+	var footprint = FOOTPRINT.instantiate()
 	if spawn_west:
-		var footprint = FOOTPRINT.instantiate()
 		footprint.global_position = west_side.global_position
-		get_parent().add_child(footprint)
 	else:
-		var footprint = FOOTPRINT.instantiate()
 		footprint.global_position = east_side.global_position
-		get_parent().add_child(footprint)
+	
+	get_parent().add_child(footprint)
+	
+	recent_footprints.push_back(Vector2(footprint.global_position.x, footprint.global_position.y))
+	
+	while recent_footprints.size() > Playroom.MAX_FOOTPRINTS_STORED:
+		recent_footprints.pop_front()

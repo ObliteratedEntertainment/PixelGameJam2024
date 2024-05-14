@@ -5,5 +5,5 @@
 [node name="Dirt6" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
 texture = ExtResource("1_5w8tr")
