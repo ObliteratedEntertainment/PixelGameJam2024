@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=6 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
+[ext_resource type="PackedScene" uid="uid://bslsphkm41pqg" path="res://cloud_3.tscn" id="2_6aaw5"]
 [ext_resource type="PackedScene" uid="uid://de47yuehnopao" path="res://dead_tree.tscn" id="2_e11gv"]
+[ext_resource type="PackedScene" uid="uid://n1r1g817woap" path="res://cloud_1.tscn" id="3_hlxtw"]
+[ext_resource type="PackedScene" uid="uid://c3nvgj3k7dygx" path="res://cloud_2.tscn" id="4_ae5dl"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -9,6 +12,8 @@ y_sort_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
 position = Vector2(270, 158)
 motion_mode = 1
+idling = true
+exhausted = false
 
 [node name="BackgroundWorldColor" type="ColorRect" parent="Player"]
 z_index = -10
@@ -20,6 +25,19 @@ scale = Vector2(1e+06, 1e+06)
 color = Color(0.901961, 0.901961, 0.627451, 1)
 
 [node name="DeadTree" parent="." instance=ExtResource("2_e11gv")]
+position = Vector2(297, 111)
+
+[node name="DeadTree2" parent="." instance=ExtResource("2_e11gv")]
+position = Vector2(323, 126)
+
+[node name="DeadTree3" parent="." instance=ExtResource("2_e11gv")]
+position = Vector2(275, 126)
+
+[node name="DeadTree4" parent="." instance=ExtResource("2_e11gv")]
+position = Vector2(197, 83)
+
+[node name="DeadTree5" parent="." instance=ExtResource("2_e11gv")]
+position = Vector2(154, 182)
 
 [node name="OasisStart" type="Node2D" parent="."]
 
@@ -29,3 +47,11 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OasisStart/ZoneDefinition"]
 polygon = PackedVector2Array(215, 122, 223, 183, 267, 241, 451, 235, 434, 115, 327, 55, 232, 93)
+
+[node name="Cloud3" parent="." instance=ExtResource("2_6aaw5")]
+position = Vector2(370, 264)
+
+[node name="Cloud2" parent="." instance=ExtResource("4_ae5dl")]
+position = Vector2(481, 28)
+
+[node name="Cloud1" parent="." instance=ExtResource("3_hlxtw")]

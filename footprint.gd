@@ -5,7 +5,6 @@ func _ready() -> void:
 	
 	var tween := create_tween()
 	
-	await tween.tween_property(self, "modulate:a", 0.0, 10.0).finished
-	
-	queue_free()
+	tween.tween_property(self, "modulate:a", 0.0, 10.0)
+	tween.tween_callback(queue_free.bind(self))
 
