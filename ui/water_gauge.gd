@@ -73,6 +73,8 @@ func _on_player_flasks_changed(unused: int, total: int) -> void:
 		water_level.color = fill_water_healthy
 		background_bar.color = bg_water_healthy
 	else:
+		# TODO: consider strobing the water level when unhealthy
+		# below a certain amount
 		water_level.color = fill_water_unhealthy
 		background_bar.color = bg_water_unhealthy
 		
