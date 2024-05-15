@@ -55,6 +55,16 @@ func reset_state() -> void:
 	idling = false
 	last_active_direction = Vector2.DOWN
 	speed = 0.0
+	
+	WorldManager.player_flask_changed.emit(
+		unused_flasks,
+		total_flasks
+	)
+	WorldManager.player_water_changed.emit(
+		current_water,
+		0.0,
+		3
+	)
 
 func _physics_process(delta: float) -> void:
 
