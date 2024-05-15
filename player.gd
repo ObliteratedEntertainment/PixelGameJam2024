@@ -7,6 +7,7 @@ const MAX_SPEED := 80.0
 
 @onready var zone_detector: Area2D = $ZoneDetector
 @onready var shade_detector: Area2D = $ShadeDetector
+@onready var power_up_detector: Area2D = $PowerUpDetector
 
 
 # Spots to drop footprints at
@@ -25,8 +26,8 @@ var last_active_direction := Vector2.DOWN
 
 # Water system
 var current_water := 100.0
-var unused_flasks := 1
-var total_flasks := 1
+var unused_flasks := 0
+var total_flasks := 0
 var in_oasis := 0
 var in_shade := 0 # Needs to be a counter because there may be overlaps
 
@@ -44,6 +45,8 @@ func _ready() -> void:
 	
 	shade_detector.area_entered.connect(_on_shade_entered)
 	shade_detector.area_exited.connect(_on_shade_exited)
+	
+	power_up_detector.area_entered.connect(_on_power_up_entered)
 
 func reset_state() -> void:
 	current_water = 100.0
@@ -195,6 +198,16 @@ func _on_shade_entered(body: Area2D) -> void:
 func _on_shade_exited(body: Area2D) -> void:
 	in_shade -= 1
 
+func _on_power_up_entered(body: Area2D) -> void:
+	if body is FlaskPowerUp:
+		total_flasks += 1
+		unused_flasks += 1
+		WorldManager.player_flask_changed.emit(
+			unused_flasks,
+			total_flasks
+		)
+		
+		body.consume()
 
 func _on_respawn_requested() -> void:
 	

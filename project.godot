@@ -73,6 +73,7 @@ dev_death={
 
 [layer_names]
 
+2d_physics/layer_2="ItemLayer"
 2d_physics/layer_3="ShadeLayer"
 2d_physics/layer_4="ZoneLayer"
 

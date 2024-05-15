@@ -468,8 +468,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.398884
-parameters/current_delta = 0.00694444
+parameters/current_position = 0.0728094
+parameters/current_delta = 0.00740741
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.80001
 parameters/DeathDown/current_delta = 0.0
@@ -518,21 +518,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.398884
-parameters/Movement/current_delta = 0.00694444
+parameters/Movement/current_position = 0.0728094
+parameters/Movement/current_delta = 0.00740741
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.398884
-parameters/Movement/0/current_delta = 0.00694444
+parameters/Movement/0/current_position = 0.0728094
+parameters/Movement/0/current_delta = 0.00740741
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.398884
-parameters/Movement/1/current_delta = 0.00694444
+parameters/Movement/1/current_position = 0.0728094
+parameters/Movement/1/current_delta = 0.00740741
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.398884
-parameters/Movement/2/current_delta = 0.00694444
+parameters/Movement/2/current_position = 0.0728094
+parameters/Movement/2/current_delta = 0.00740741
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.398884
-parameters/Movement/3/current_delta = 0.00694444
+parameters/Movement/3/current_position = 0.0728094
+parameters/Movement/3/current_delta = 0.00740741
 parameters/Respawn/current_length = null
 parameters/Respawn/current_position = null
 parameters/Respawn/current_delta = null
@@ -565,4 +565,11 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShadeDetector"]
+shape = SubResource("CircleShape2D_i4c62")
+
+[node name="PowerUpDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpDetector"]
 shape = SubResource("CircleShape2D_i4c62")

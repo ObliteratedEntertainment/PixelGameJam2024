@@ -9,9 +9,11 @@ const INCREASING_ARROW = preload("res://ui/increasing_arrow.tscn")
 @export var bg_water_healthy := Color("001a2e")
 @export var bg_water_unhealthy := Color("350208")
 
+@onready var healthy_bubble: Sprite2D = $HealthyBubble
+@onready var unhealthy_bubble: Sprite2D = $UnhealthyBubble
+
 
 @onready var display_intensity: HBoxContainer = $HeatIntensity
-@onready var color_rect: ColorRect = $ColorRect
 @onready var water_level: ColorRect = $WaterLevel
 @onready var background_bar: ColorRect = $BackgroundBar
 
@@ -33,14 +35,21 @@ func _ready() -> void:
 	WorldManager.player_water_changed.emit(0, 0, 3)
 
 func _on_player_death(_location: Vector2) -> void:
-	pass
+	unhealthy_bubble.visible = true
+	healthy_bubble.visible = false
+	water_level.size.x = 0.0
 
 func _on_player_water_change(
 	total_water: float,
 	water_delta: float,
 	heat_intensity: int) -> void:
 	
-	water_level.size.x = (minf(total_water, 100.0) / 100.0) * max_water_level
+	var percentage = (minf(total_water, 100.0) / 100.0)
+	water_level.size.x = percentage * max_water_level
+	
+	var near_death = percentage < 0.25 and not has_unused_flasks
+	unhealthy_bubble.visible = near_death
+	healthy_bubble.visible = not near_death
 	
 	# Check if intensity changed for arrows
 	if current_intensity != heat_intensity:

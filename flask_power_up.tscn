@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://dq3wbxcbjbjlu"]
+
+[ext_resource type="Texture2D" uid="uid://bhn3fsgl8dqh" path="res://sprites/items/power_up_background.png" id="1_grj5l"]
+[ext_resource type="Script" path="res://flask_power_up.gd" id="1_ot1xf"]
+[ext_resource type="Texture2D" uid="uid://dr4e8ji3q3ybs" path="res://sprites/items/flask.png" id="2_0vr00"]
+[ext_resource type="Texture2D" uid="uid://bacnvtp6ehw86" path="res://sprites/items/power_up_foreground.png" id="2_fmfmn"]
+
+[sub_resource type="Animation" id="Animation_x3cml"]
+resource_name = "FX"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUpFX:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flask:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, -2), Vector2(0, -3), Vector2(0, -4), Vector2(0, -3), Vector2(0, -2), Vector2(0, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_71y2d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUpFX:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flask:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wlrtu"]
+_data = {
+"FX": SubResource("Animation_x3cml"),
+"RESET": SubResource("Animation_71y2d")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kfy8s"]
+radius = 7.0
+
+[node name="Flask" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ot1xf")
+
+[node name="PowerUpBG" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_grj5l")
+hframes = 8
+
+[node name="Flask" type="Sprite2D" parent="."]
+position = Vector2(-1, -6)
+texture = ExtResource("2_0vr00")
+
+[node name="PowerUpFX" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("2_fmfmn")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wlrtu")
+}
+autoplay = "FX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kfy8s")

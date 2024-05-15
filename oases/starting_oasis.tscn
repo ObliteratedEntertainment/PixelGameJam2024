@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cmn5brqbir8ed"]
+[gd_scene load_steps=27 format=3 uid="uid://cmn5brqbir8ed"]
 
 [ext_resource type="Script" path="res://oases/oasis.gd" id="1_abcjj"]
 [ext_resource type="PackedScene" uid="uid://x6tgegp3hxrt" path="res://decorations/oasis_tall_grass_1.tscn" id="1_gkufe"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://buim2kc6vvm4d" path="res://sprites/borders/oasis_border_9.png" id="21_0otvv"]
 [ext_resource type="Texture2D" uid="uid://dws81xj2fq1xx" path="res://sprites/borders/oasis_mud_patch_1.png" id="22_somoh"]
 [ext_resource type="PackedScene" uid="uid://cn2vru4y6kgtk" path="res://old_man.tscn" id="25_50ayw"]
+[ext_resource type="PackedScene" uid="uid://dq3wbxcbjbjlu" path="res://flask_power_up.tscn" id="26_ky2jt"]
 
 [node name="StartingOasis" type="Area2D"]
 y_sort_enabled = true
@@ -469,3 +470,6 @@ position = Vector2(-23, -52)
 
 [node name="Tent2" parent="Decorations" instance=ExtResource("12_ilaq6")]
 position = Vector2(196, -79)
+
+[node name="Flask" parent="." instance=ExtResource("26_ky2jt")]
+position = Vector2(321, -24)
