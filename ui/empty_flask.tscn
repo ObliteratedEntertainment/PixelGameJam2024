@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqnhyaf4m6j58"]
+
+[ext_resource type="Texture2D" uid="uid://c0pg7ba7q16e3" path="res://ui/empty_flask.png" id="1_35xl1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4780l"]
+atlas = ExtResource("1_35xl1")
+region = Rect2(34, 0, 34, 31)
+
+[node name="EmptyFlask" type="TextureRect"]
+self_modulate = Color(1, 1, 1, 0.521569)
+texture = SubResource("AtlasTexture_4780l")

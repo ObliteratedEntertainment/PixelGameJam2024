@@ -17,3 +17,10 @@ texture = ExtResource("2_ba53f")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 0, 22, 0, 12, -28, -14, -28)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-23, 1, 48, 15, 32, -18, 11, -28)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://yd8qmgg8lkpa"]
+
+[ext_resource type="Texture2D" uid="uid://bx6m5hn8x3wkt" path="res://ui/full_flask.png" id="1_v5emn"]
+
+[node name="FullFlask" type="TextureRect"]
+texture = ExtResource("1_v5emn")
+stretch_mode = 2

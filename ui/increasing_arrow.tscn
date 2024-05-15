@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://7jvh8ga724dn"]
+
+[ext_resource type="Texture2D" uid="uid://bma8c0gpgd20c" path="res://ui/water_arrow_bright.png" id="1_beqo5"]
+
+[node name="Increasing" type="TextureRect"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_beqo5")
+stretch_mode = 2

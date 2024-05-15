@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=49 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="2_e2s6s"]
@@ -396,6 +396,10 @@ y_label = "velocity.y"
 blend_mode = 1
 sync = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bocnv"]
+animation = &"DeathDown"
+play_mode = 1
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ipq5o"]
 advance_mode = 2
 
@@ -417,6 +421,13 @@ priority = 0
 advance_mode = 2
 advance_expression = "dead"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u1k1f"]
+advance_mode = 2
+advance_expression = "!dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fvhtm"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rg5it"]
 states/DeathDown/node = SubResource("AnimationNodeAnimation_3ntqn")
 states/DeathDown/position = Vector2(800, 91.0625)
@@ -425,9 +436,14 @@ states/Idle/node = SubResource("AnimationNodeStateMachine_y0qj0")
 states/Idle/position = Vector2(505, 164.5)
 states/Movement/node = SubResource("AnimationNodeBlendSpace2D_0choh")
 states/Movement/position = Vector2(505.5, 5.5)
+states/Respawn/node = SubResource("AnimationNodeAnimation_bocnv")
+states/Respawn/position = Vector2(802.25, 239)
 states/Start/position = Vector2(206, 164.75)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276")]
-graph_offset = Vector2(54, -42)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276"), "DeathDown", "Respawn", SubResource("AnimationNodeStateMachineTransition_u1k1f"), "Respawn", "Idle", SubResource("AnimationNodeStateMachineTransition_fvhtm")]
+graph_offset = Vector2(98, -2)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i4c62"]
+radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
@@ -452,8 +468,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.714958
-parameters/current_delta = 0.00625
+parameters/current_position = 0.00441468
+parameters/current_delta = 0.007093
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.80001
 parameters/DeathDown/current_delta = 0.0
@@ -502,21 +518,24 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.714958
-parameters/Movement/current_delta = 0.00625
+parameters/Movement/current_position = 0.00441468
+parameters/Movement/current_delta = 0.007093
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.714958
-parameters/Movement/0/current_delta = 0.00625
+parameters/Movement/0/current_position = 0.00441468
+parameters/Movement/0/current_delta = 0.007093
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.714958
-parameters/Movement/1/current_delta = 0.00625
+parameters/Movement/1/current_position = 0.00441468
+parameters/Movement/1/current_delta = 0.007093
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.714958
-parameters/Movement/2/current_delta = 0.00625
+parameters/Movement/2/current_position = 0.00441468
+parameters/Movement/2/current_delta = 0.007093
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.714958
-parameters/Movement/3/current_delta = 0.00625
+parameters/Movement/3/current_position = 0.00441468
+parameters/Movement/3/current_delta = 0.007093
+parameters/Respawn/current_length = null
+parameters/Respawn/current_position = null
+parameters/Respawn/current_delta = null
 parameters/Start/current_length = 0.0
 parameters/Start/current_position = 0.0
 parameters/Start/current_delta = 0.0
@@ -533,3 +552,17 @@ position = Vector2(-3, 1)
 self_modulate = Color(1, 1, 1, 0.392157)
 z_index = -1
 texture = ExtResource("3_qdbqr")
+
+[node name="ZoneDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneDetector"]
+shape = SubResource("CircleShape2D_i4c62")
+
+[node name="ShadeDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShadeDetector"]
+shape = SubResource("CircleShape2D_i4c62")

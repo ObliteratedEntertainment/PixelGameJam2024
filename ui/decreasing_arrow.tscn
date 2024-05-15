@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d165r4db68tbs"]
+
+[ext_resource type="Texture2D" uid="uid://g2xgp7njimbw" path="res://ui/heat_arrow_bright.png" id="1_oroe4"]
+
+[node name="Decreasing" type="TextureRect"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_oroe4")
+stretch_mode = 2

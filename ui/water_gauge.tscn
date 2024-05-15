@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://50v8sxikq02p"]
+
+[ext_resource type="Texture2D" uid="uid://djuob4ejbklja" path="res://ui/water_gauge.png" id="1_nvtti"]
+[ext_resource type="Texture2D" uid="uid://cbq56o4ussspj" path="res://ui/water_soul_icon.png" id="2_t1ag3"]
+[ext_resource type="Script" path="res://ui/water_gauge.gd" id="2_t82xu"]
+[ext_resource type="Texture2D" uid="uid://bgdluvvejbyj1" path="res://ui/health_ball_backdrop.png" id="3_vjppu"]
+
+[sub_resource type="Animation" id="Animation_lka7y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_df1g7"]
+resource_name = "run_health"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qmfp"]
+_data = {
+"RESET": SubResource("Animation_lka7y"),
+"run_health": SubResource("Animation_df1g7")
+}
+
+[node name="WaterGauge" type="TextureRect"]
+texture = ExtResource("1_nvtti")
+script = ExtResource("2_t82xu")
+
+[node name="WaterDroplet" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 52.0
+offset_bottom = 46.0
+texture = ExtResource("2_t1ag3")
+stretch_mode = 2
+
+[node name="AnimatedHealthBubble" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(20, 19)
+texture = ExtResource("3_vjppu")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedHealthBubble"]
+libraries = {
+"": SubResource("AnimationLibrary_8qmfp")
+}
+autoplay = "run_health"
+speed_scale = 0.25
+
+[node name="HeatIntensity" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -7.5
+offset_right = -10.0
+offset_bottom = 8.5
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -6.5
+offset_right = -5.0
+offset_bottom = 6.5
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.0941176, 0.576471, 0.882353, 1)
