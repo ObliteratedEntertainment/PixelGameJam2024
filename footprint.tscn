@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://footprint.gd" id="2_0d04w"]
 
 [node name="Footprint" type="Sprite2D"]
-modulate = Color(0.224881, 0.136484, 0.039277, 1)
+modulate = Color(0.223529, 0.137255, 0.0392157, 0.721569)
 z_index = -1
 scale = Vector2(2, 2)
 texture = ExtResource("1_262m1")

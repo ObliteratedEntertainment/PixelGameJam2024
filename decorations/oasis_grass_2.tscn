@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4asfhjvn7tsu"]
+
+[ext_resource type="Texture2D" uid="uid://c25jywtjww5r3" path="res://sprites/plants/oasis_grass_2.png" id="1_hey84"]
+
+[node name="OasisGrass2" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+texture = ExtResource("1_hey84")

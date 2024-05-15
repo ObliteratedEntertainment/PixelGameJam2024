@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3vufesco82sw"]
+
+[ext_resource type="Texture2D" uid="uid://bqgyhi0naqbx7" path="res://sprites/ponds/oasis_1.png" id="1_snioa"]
+
+[node name="Oasis1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -8
+texture = ExtResource("1_snioa")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.4)
+polygon = PackedVector2Array(-13, -19, -26, -13, -36, -5, -35, 7, -25, 16, -4, 20, 16, 19, 29, 13, 39, 3, 36, -6, 22, -17, 4, -21)

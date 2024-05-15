@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmdgfuc3qrg0k"]
+
+[ext_resource type="Texture2D" uid="uid://beikajbuf5g5n" path="res://sprites/buildings/tent_1.png" id="1_hrruu"]
+[ext_resource type="Texture2D" uid="uid://dmqr6ld3c42w0" path="res://sprites/buildings/tent_1_shadow.png" id="2_ba53f"]
+
+[node name="Tent1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -27)
+texture = ExtResource("1_hrruu")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.392157)
+z_index = 1
+position = Vector2(0, -27)
+texture = ExtResource("2_ba53f")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, 0, 22, 0, 12, -28, -14, -28)
