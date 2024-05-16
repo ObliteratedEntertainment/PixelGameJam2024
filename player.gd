@@ -20,6 +20,9 @@ const MAX_SPEED := 80.0
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
 @onready var grass_step: AudioStreamPlayer2D = $GrassFootstep
 
+@onready var sigh_and_breath: AudioStreamPlayer2D = $SighAndBreath
+@onready var last_sigh: AudioStreamPlayer2D = $LastSigh
+
 var speed := 0.0
 
 var last_active_direction := Vector2.DOWN
@@ -110,6 +113,8 @@ func _physics_process(delta: float) -> void:
 func die():
 	dead = true
 	
+	last_sigh.play()
+	
 	WorldManager.player_died.emit(position)
 	Playroom.add_death_location(position, recent_footprints)
 
@@ -160,6 +165,9 @@ func _process_water_drain(delta: float) -> void:
 	
 	# Clamp the water to be within range
 	current_water = maxf(current_water, 0.0)
+	
+	if int(current_water) < 100 && int(current_water) % 20 == 0 && !sigh_and_breath.playing:
+		sigh_and_breath.play()
 	
 	# if our water is still below zero,
 	# we died
