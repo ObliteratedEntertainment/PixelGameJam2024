@@ -24,6 +24,10 @@ const MAX_SPEED := 80.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
+@onready var grass_step: AudioStreamPlayer2D = $GrassFootstep
+
+@onready var sigh_and_breath: AudioStreamPlayer2D = $SighAndBreath
+@onready var last_sigh: AudioStreamPlayer2D = $LastSigh
 
 var speed := 0.0
 
@@ -124,6 +128,8 @@ func _physics_process(delta: float) -> void:
 func die():
 	dead = true
 	
+	last_sigh.play()
+	
 	WorldManager.player_died.emit(position)
 	Playroom.add_death_location(position, recent_footprints)
 
@@ -174,6 +180,9 @@ func _process_water_drain(delta: float) -> void:
 	
 	# Clamp the water to be within range
 	current_water = maxf(current_water, 0.0)
+	
+	if int(current_water) < 100 && int(current_water) % 20 == 0 && !sigh_and_breath.playing:
+		sigh_and_breath.play()
 	
 	# if our water is still below zero,
 	# we died
@@ -250,7 +259,10 @@ func _anim_place_footprint(spawn_west: bool):
 		footprint.global_position = east_side.global_position
 	
 	get_parent().add_child(footprint)
-	sand_step.play()
+	if in_oasis > 0:
+		grass_step.play()
+	else:
+		sand_step.play()
 	
 	recent_footprints.push_back(Vector2(footprint.global_position.x, footprint.global_position.y))
 	
