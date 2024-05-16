@@ -6,19 +6,22 @@
 [node name="Tent1" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -27)
 texture = ExtResource("1_hrruu")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
 self_modulate = Color(1, 1, 1, 0.392157)
+show_behind_parent = true
 z_index = 1
-position = Vector2(0, -27)
 texture = ExtResource("2_ba53f")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-24, 0, 22, 0, 12, -28, -14, -28)
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 

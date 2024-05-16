@@ -1,12 +1,39 @@
 @tool
 extends Node2D
 
-@export var used_flasks := 0
-@export var used_cactus_digs := 0
+@export var include_base_water := 100.0 : set = _base_set
+@export var used_flasks := 0 : set = _flask_set
+@export var used_cactus_digs := 0 : set = _cactus_set
+
+@export var display_color := Color.RED : set = _change_color
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	
+	if not is_part_of_edited_scene():
+		queue_free()
+		return
+	
+	queue_redraw()
 
 func _draw() -> void:
-	pass
+	var circle_size = 80.0 * 20.0 * ((include_base_water/100.0) + used_flasks + 0.5 * used_cactus_digs)
+	draw_arc(Vector2.ZERO, circle_size, 0.0, 2*PI, 64, display_color, 8.0)
+	
+	queue_redraw()
+
+func _change_color(val: Color):
+	display_color = val
+	queue_redraw()
+
+func _base_set(val: float) -> void:
+	include_base_water = minf(val, 100.0)
+	queue_redraw()
+
+func _flask_set(val: int):
+	used_flasks = val
+	queue_redraw()
+
+func _cactus_set(val: int):
+	used_cactus_digs = val
+	queue_redraw()

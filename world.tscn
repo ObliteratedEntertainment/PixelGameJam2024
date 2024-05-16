@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
-[ext_resource type="Script" path="res://utils/max_distance_helper.gd" id="4_126kj"]
+[ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="4_fid62"]
 [ext_resource type="Script" path="res://player_deaths_manager.gd" id="19_dbppj"]
 [ext_resource type="PackedScene" uid="uid://cmn5brqbir8ed" path="res://oases/starting_oasis.tscn" id="20_fn41c"]
 
@@ -32,8 +32,10 @@ y_sort_enabled = true
 [node name="StartingOasis" parent="Oases" instance=ExtResource("20_fn41c")]
 position = Vector2(-3, -2)
 
-[node name="MaxDistanceHelper" type="Node2D" parent="Oases"]
-script = ExtResource("4_126kj")
+[node name="MaxDistanceHelper2" parent="Oases/StartingOasis" instance=ExtResource("4_fid62")]
+position = Vector2(328, -15)
+include_base_water = 25.0
+display_color = Color(0.182124, 0.641811, 0, 1)
 
 [node name="DesertZones" type="Node2D" parent="."]
 y_sort_enabled = true
