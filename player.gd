@@ -18,6 +18,7 @@ const MAX_SPEED := 80.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
+@onready var grass_step: AudioStreamPlayer2D = $GrassFootstep
 
 var speed := 0.0
 
@@ -227,7 +228,10 @@ func _anim_place_footprint(spawn_west: bool):
 		footprint.global_position = east_side.global_position
 	
 	get_parent().add_child(footprint)
-	sand_step.play()
+	if in_oasis > 0:
+		grass_step.play()
+	else:
+		sand_step.play()
 	
 	recent_footprints.push_back(Vector2(footprint.global_position.x, footprint.global_position.y))
 	
