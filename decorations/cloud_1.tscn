@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://n1r1g817woap"]
+[gd_scene load_steps=4 format=3 uid="uid://n1r1g817woap"]
 
 [ext_resource type="Texture2D" uid="uid://dceow3lsd5861" path="res://sprites/clouds/cloud_1.png" id="1_5imjn"]
+[ext_resource type="Script" path="res://utils/shade.gd" id="2_l1et0"]
+[ext_resource type="Script" path="res://utils/cloud.gd" id="2_npqv4"]
 
 [node name="Cloud1" type="Sprite2D"]
 self_modulate = Color(1, 1, 1, 0.588235)
 z_index = 10
 texture = ExtResource("1_5imjn")
+script = ExtResource("2_npqv4")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.196078)
@@ -13,9 +16,11 @@ self_modulate = Color(0, 0, 0, 1)
 position = Vector2(43, 131)
 texture = ExtResource("1_5imjn")
 
-[node name="Area2D" type="Area2D" parent="Shadow"]
+[node name="Shade" type="Area2D" parent="Shadow"]
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("2_l1et0")
+shade_value = 2
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shadow/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shadow/Shade"]
 polygon = PackedVector2Array(-99, -44, -138, 11, -126, 29, -120, 26, -111, 33, -87, 17, -72, 39, -55, 40, -42, 49, 26, 17, 36, 22, 60, 21, 69, 6, 110, -11, 120, -6, 131, -12, 140, -12, 133, -18, 119, -14, 111, -20, 101, -16, 88, -18, 66, -15, 55, -16, 43, -7, 14, -16, 16, -26, 10, -29, -27, -26, -41, -28, -54, -35, -68, -29, -80, -35, -93, -44)

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const FOOTPRINT = preload("res://footprint.tscn")
 const DUG_HOLE = preload("res://dug_hole.tscn")
@@ -112,13 +113,15 @@ func _physics_process(delta: float) -> void:
 		speed = maxf(0.0, speed - ACCEL * delta)
 		
 	
-	animation_tree["parameters/Movement/blend_position"] = direction
-	animation_tree["parameters/Idle/Exhausted/blend_position"] = last_active_direction
-	animation_tree["parameters/Idle/Idle/blend_position"] = last_active_direction
-	animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 
+	if idling:
+		animation_tree["parameters/Idle/Exhausted/blend_position"] = last_active_direction
+		animation_tree["parameters/Idle/Idle/blend_position"] = last_active_direction
+	else:
+		animation_tree["parameters/Movement/blend_position"] = direction
 	
 	if Input.is_action_just_pressed("player_dig"):
+		animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 		digging = true
 		return
 
@@ -135,12 +138,20 @@ func die():
 
 func _process_water_drain(delta: float) -> void:
 	
+	# Start with a base of -3 for the heat burning you
 	var intensity = -3
 	
 	if in_oasis > 0:
 		intensity = 3
-	if in_shade > 0:
-		intensity += in_shade
+	
+	# Add booster from being in the shade
+	intensity += in_shade
+	
+	# If we are outside the oasis
+	# don't allow shade boosting to make us positive (healing)
+	if in_oasis <= 0:
+		# outside of an oasis you can't heal so no positive values allowed
+		intensity = min(0, intensity)
 	
 	# One flask should recharge in only 2 seconds of oasis time
 	const FLASK_RECHARGE_TIME = 100.0 / (2.0 * 3)
@@ -219,10 +230,16 @@ func _on_zone_exited(body: Area2D) -> void:
 		in_oasis -= 1
 
 func _on_shade_entered(body: Area2D) -> void:
-	in_shade += 1
+	if body is ShadeValue:
+		in_shade += body.shade_value
+	else:
+		in_shade += 1
 	
 func _on_shade_exited(body: Area2D) -> void:
-	in_shade -= 1
+	if body is ShadeValue:
+		in_shade -= body.shade_value
+	else:
+		in_shade -= 1
 
 func _on_power_up_entered(body: Area2D) -> void:
 	if body is FlaskPowerUp and not body.consumed:

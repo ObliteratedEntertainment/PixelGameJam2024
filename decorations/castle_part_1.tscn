@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dengmxvitikfg"]
+
+[ext_resource type="Texture2D" uid="uid://bmin6juwpksnx" path="res://sprites/buildings/castle_wall.png" id="1_0jofw"]
+[ext_resource type="Texture2D" uid="uid://bgtr234e004di" path="res://sprites/buildings/castle_ground.png" id="2_4lhef"]
+
+[node name="CastlePart" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Wall" type="StaticBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-49, 11)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+clip_children = 2
+position = Vector2(51, -55)
+texture = ExtResource("1_0jofw")
+
+[node name="KeepOutsideCollision" type="CollisionPolygon2D" parent="Wall"]
+position = Vector2(-29, -4)
+polygon = PackedVector2Array(30, -57, 29, -67, 30, -92, 51, -87, 124, -40, 130, -15, 112, -6, 67, -30, 62, -36, 36, -45)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-55, 12)
+texture = ExtResource("2_4lhef")

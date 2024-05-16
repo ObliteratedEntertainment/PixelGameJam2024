@@ -85,6 +85,7 @@ player_write={
 
 [layer_names]
 
+2d_physics/layer_1="PlayerLayer"
 2d_physics/layer_2="ItemLayer"
 2d_physics/layer_3="ShadeLayer"
 2d_physics/layer_4="ZoneLayer"

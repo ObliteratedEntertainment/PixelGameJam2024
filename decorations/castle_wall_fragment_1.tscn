@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1miusl8ct3ss"]
+
+[ext_resource type="Texture2D" uid="uid://7xiqcbl8wscg" path="res://sprites/buildings/castle_wall_fragment_1.png" id="1_yua3i"]
+[ext_resource type="Texture2D" uid="uid://b5bujn0t6xs31" path="res://sprites/buildings/castle_wall_fragment_1_shadow.png" id="2_2xkvy"]
+[ext_resource type="Script" path="res://utils/shade.gd" id="3_7y16j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh3w1"]
+size = Vector2(112, 14)
+
+[node name="CastleWallFragment1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -16)
+texture = ExtResource("1_yua3i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_xh3w1")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.313726)
+z_index = 1
+position = Vector2(13, 0)
+texture = ExtResource("2_2xkvy")
+
+[node name="Shade" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_7y16j")
+shade_value = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shade"]
+polygon = PackedVector2Array(-47, -1, -32, 24, 83, 23, 55, -3)
