@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const FOOTPRINT = preload("res://footprint.tscn")
+const DUG_HOLE = preload("res://dug_hole.tscn")
 
 const ACCEL := 100.0
 const MAX_SPEED := 80.0
@@ -15,6 +16,11 @@ const MAX_SPEED := 80.0
 @onready var east_side: Marker2D = $EastSide
 @onready var west_side: Marker2D = $WestSide
 
+@onready var west_dig: Marker2D = $WestDig
+@onready var east_dig: Marker2D = $EastDig
+
+
+
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
@@ -23,6 +29,7 @@ var speed := 0.0
 
 var last_active_direction := Vector2.DOWN
 @export var idling := false
+@export var digging := false
 @export var exhausted := false
 @export var dead := false
 
@@ -81,7 +88,12 @@ func _physics_process(delta: float) -> void:
 
 	var speed := minf(speed + ACCEL * ACCEL * delta, MAX_SPEED)
 
+	# Always calculate water drain while we are alive
 	_process_water_drain(delta)
+	
+	# prevent moving while digging
+	if digging:
+		return
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -99,9 +111,12 @@ func _physics_process(delta: float) -> void:
 	animation_tree["parameters/Movement/blend_position"] = direction
 	animation_tree["parameters/Idle/Exhausted/blend_position"] = last_active_direction
 	animation_tree["parameters/Idle/Idle/blend_position"] = last_active_direction
-		
-		
-		
+	animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
+
+	
+	if Input.is_action_just_pressed("player_dig"):
+		digging = true
+		return
 
 	move_and_slide()
 
@@ -217,7 +232,15 @@ func _on_respawn_requested() -> void:
 		global_position = recent_oasis.player_respawn.global_position
 		dead = false
 
+func _anim_dig_hole(spawn_west: bool):
+	
+	var hole = DUG_HOLE.instantiate()
+	if spawn_west:
+		hole.global_position = west_dig.global_position
+	else:
+		hole.global_position = east_dig.global_position
 
+	get_parent().add_child(hole)
 
 func _anim_place_footprint(spawn_west: bool):
 	var footprint = FOOTPRINT.instantiate()
