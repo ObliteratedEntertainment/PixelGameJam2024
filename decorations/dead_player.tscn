@@ -11,7 +11,7 @@ script = ExtResource("1_gb8v4")
 position = Vector2(0, -16)
 texture = ExtResource("1_uwj86")
 region_enabled = true
-region_rect = Rect2(224, 224, 32, 32)
+region_rect = Rect2(224, 336, 32, 32)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.392157)

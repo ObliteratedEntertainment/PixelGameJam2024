@@ -225,7 +225,7 @@ func _on_shade_exited(body: Area2D) -> void:
 	in_shade -= 1
 
 func _on_power_up_entered(body: Area2D) -> void:
-	if body is FlaskPowerUp:
+	if body is FlaskPowerUp and not body.consumed:
 		total_flasks += 1
 		unused_flasks += 1
 		WorldManager.player_flask_changed.emit(
@@ -252,13 +252,22 @@ func _anim_dig_hole(spawn_west: bool):
 	get_parent().add_child(hole)
 
 func _anim_place_footprint(spawn_west: bool):
-	var footprint = FOOTPRINT.instantiate()
+	var spawn_point = Vector2.ZERO
 	if spawn_west:
-		footprint.global_position = west_side.global_position
+		spawn_point = west_side.global_position
 	else:
-		footprint.global_position = east_side.global_position
+		spawn_point = east_side.global_position
 	
+	# check if this footprint is too close to the other
+	const TOO_CLOSE_FOOTPRINT = 10.0 # world coord distance
+	if len(recent_footprints) > 0 and \
+			spawn_point.distance_to(recent_footprints.back()) < TOO_CLOSE_FOOTPRINT:
+		return
+	
+	var footprint = FOOTPRINT.instantiate()
+	footprint.global_position = spawn_point
 	get_parent().add_child(footprint)
+	
 	if in_oasis > 0:
 		grass_step.play()
 	else:

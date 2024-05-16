@@ -5,7 +5,7 @@ class_name FlaskPowerUp
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var consumed = false
+var consumed := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +18,8 @@ func consume():
 	
 	consumed = true
 	flask.visible = false
+	
+	collision_layer = 0
 	
 	# TODO: call animation player to do a power removal
 	visible = false
