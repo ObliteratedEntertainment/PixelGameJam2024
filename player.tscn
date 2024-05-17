@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=94 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="2_e2s6s"]
@@ -27,6 +27,11 @@
 [ext_resource type="AudioStream" uid="uid://bi0jegvxfto4h" path="res://sfx/sand_digging_3.wav" id="25_pa1um"]
 [ext_resource type="AudioStream" uid="uid://crdangt5hf6ct" path="res://sfx/sand_digging_4.wav" id="26_xb6vr"]
 [ext_resource type="AudioStream" uid="uid://voa7xsio6uay" path="res://sfx/sand_digging_5.wav" id="27_gvqtd"]
+[ext_resource type="AudioStream" uid="uid://bsgw33d2kavsa" path="res://sfx/dirt_digging_1.wav" id="28_v3ptj"]
+[ext_resource type="AudioStream" uid="uid://bh0sfnvnj7bry" path="res://sfx/dirt_digging_2.wav" id="29_qjt7i"]
+[ext_resource type="AudioStream" uid="uid://cv04dnpot6ru5" path="res://sfx/dirt_digging_3.wav" id="30_c4r0o"]
+[ext_resource type="AudioStream" uid="uid://cp0onol7x5i1f" path="res://sfx/dirt_digging_4.wav" id="31_31cdm"]
+[ext_resource type="AudioStream" uid="uid://cxca7stghg23o" path="res://sfx/dirt_digging_5.wav" id="32_pvlua"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njm32"]
 radius = 5.0
@@ -647,6 +652,14 @@ stream_2/stream = ExtResource("25_pa1um")
 stream_3/stream = ExtResource("26_xb6vr")
 stream_4/stream = ExtResource("27_gvqtd")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m4xdk"]
+streams_count = 5
+stream_0/stream = ExtResource("28_v3ptj")
+stream_1/stream = ExtResource("29_qjt7i")
+stream_2/stream = ExtResource("30_c4r0o")
+stream_3/stream = ExtResource("31_31cdm")
+stream_4/stream = ExtResource("32_pvlua")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
 exhausted = true
@@ -672,8 +685,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.713543
-parameters/current_delta = 0.007201
+parameters/current_position = 0.0981684
+parameters/current_delta = 0.005848
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.80001
 parameters/DeathDown/current_delta = 0.0
@@ -732,21 +745,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.713543
-parameters/Movement/current_delta = 0.007201
+parameters/Movement/current_position = 0.0981684
+parameters/Movement/current_delta = 0.005848
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.713543
-parameters/Movement/0/current_delta = 0.007201
+parameters/Movement/0/current_position = 0.0981684
+parameters/Movement/0/current_delta = 0.005848
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.713543
-parameters/Movement/1/current_delta = 0.007201
+parameters/Movement/1/current_position = 0.0981684
+parameters/Movement/1/current_delta = 0.005848
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.713543
-parameters/Movement/2/current_delta = 0.007201
+parameters/Movement/2/current_position = 0.0981684
+parameters/Movement/2/current_delta = 0.005848
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.713543
-parameters/Movement/3/current_delta = 0.007201
+parameters/Movement/3/current_position = 0.0981684
+parameters/Movement/3/current_delta = 0.005848
 parameters/Respawn/current_length = null
 parameters/Respawn/current_position = null
 parameters/Respawn/current_delta = null
@@ -810,3 +823,6 @@ stream = SubResource("AudioStreamRandomizer_fu1j7")
 
 [node name="SandDigging" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_ruhcs")
+
+[node name="GrassDigging" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_m4xdk")
