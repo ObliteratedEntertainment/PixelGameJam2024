@@ -81,7 +81,7 @@ func _ready() -> void:
 
 func reset_state() -> void:
 	if is_remote_player:
-		modulate = Color(0.5, 1.0, 1.0, 0.9)
+		modulate = Color(0.4, 0.4, 1.0, 0.9)
 	
 	current_water = 100.0
 	unused_flasks = total_flasks
