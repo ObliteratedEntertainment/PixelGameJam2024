@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc4b1msoop28"]
+
+[ext_resource type="Script" path="res://hidden_water_hole.gd" id="1_oo6ld"]
+[ext_resource type="Texture2D" uid="uid://cgocso37r2d16" path="res://sprites/FX/watering_hole_detection.png" id="2_88lji"]
+[ext_resource type="Texture2D" uid="uid://cwfeedhqyqmos" path="res://sprites/items/active_watering_hole.png" id="3_hkxi0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kfy8s"]
+radius = 11.0
+
+[sub_resource type="Animation" id="Animation_3heiw"]
+resource_name = "active"
+length = 0.50001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_vvxd7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q1c0u"]
+_data = {
+"RESET": SubResource("Animation_vvxd7"),
+"active": SubResource("Animation_3heiw")
+}
+
+[node name="WateringHole" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_oo6ld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kfy8s")
+
+[node name="Detection" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.447059)
+z_index = -1
+texture = ExtResource("2_88lji")
+
+[node name="Activated" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_hkxi0")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Activated"]
+libraries = {
+"": SubResource("AnimationLibrary_q1c0u")
+}
+autoplay = "active"
+
+[node name="WateringHoleTimeout" type="Timer" parent="."]

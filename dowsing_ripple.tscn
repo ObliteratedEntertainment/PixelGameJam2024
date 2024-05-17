@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://drbeluybwl48c"]
+
+[ext_resource type="Texture2D" uid="uid://dv846okxaiwhh" path="res://sprites/FX/dowsing_ripple.png" id="1_giwfq"]
+[ext_resource type="Script" path="res://utils/dowsing_scan.gd" id="2_cl4k8"]
+
+[sub_resource type="Animation" id="Animation_1x3ua"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ripple:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ehh48"]
+resource_name = "ripple"
+length = 0.750013
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ripple:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ripple")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_ripple_ended"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72hyt"]
+_data = {
+"RESET": SubResource("Animation_1x3ua"),
+"ripple": SubResource("Animation_ehh48")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vsbow"]
+radius = 47.0
+height = 150.0
+
+[node name="Ripple" type="Sprite2D"]
+z_index = -1
+texture = ExtResource("1_giwfq")
+hframes = 6
+frame = 5
+script = ExtResource("2_cl4k8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_72hyt")
+}
+autoplay = "ripple"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vsbow")

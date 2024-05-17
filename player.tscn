@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=107 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="2_e2s6s"]
@@ -32,6 +32,11 @@
 [ext_resource type="AudioStream" uid="uid://cv04dnpot6ru5" path="res://sfx/dirt_digging_3.wav" id="30_c4r0o"]
 [ext_resource type="AudioStream" uid="uid://cp0onol7x5i1f" path="res://sfx/dirt_digging_4.wav" id="31_31cdm"]
 [ext_resource type="AudioStream" uid="uid://cxca7stghg23o" path="res://sfx/dirt_digging_5.wav" id="32_pvlua"]
+[ext_resource type="AudioStream" uid="uid://b1lh1oht77pdx" path="res://sfx/dowsing_1.wav" id="33_2ulrl"]
+[ext_resource type="AudioStream" uid="uid://duy2g8aq6sw56" path="res://sfx/dowsing_2.wav" id="34_u1kxh"]
+[ext_resource type="AudioStream" uid="uid://nq5am10ohjwv" path="res://sfx/dowsing_3.wav" id="35_b8i60"]
+[ext_resource type="AudioStream" uid="uid://bau8e85m5j1ob" path="res://sfx/dowsing_4.wav" id="36_ax0mi"]
+[ext_resource type="AudioStream" uid="uid://dglo6njf7ew7g" path="res://sfx/dowsing_5.wav" id="37_6woh2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njm32"]
 radius = 5.0
@@ -153,6 +158,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 10)]
 }
 
 [sub_resource type="Animation" id="Animation_waqnn"]
@@ -403,6 +420,48 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_0wqry"]
+resource_name = "WaterDowsing"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(4, 10), Vector2i(5, 10), Vector2i(6, 10), Vector2i(7, 10), Vector2i(8, 10), Vector2i(9, 10)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_player_dowsing_started"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:dowsing")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_djc75"]
 _data = {
 "DeathDown": SubResource("Animation_jjatk"),
@@ -415,6 +474,7 @@ _data = {
 "RunLeft": SubResource("Animation_okb0e"),
 "RunRight": SubResource("Animation_k8yte"),
 "RunUp": SubResource("Animation_1algh"),
+"WaterDowsing": SubResource("Animation_0wqry"),
 "dig_left": SubResource("Animation_36c2p"),
 "dig_right": SubResource("Animation_72aof")
 }
@@ -544,6 +604,9 @@ sync = true
 animation = &"DeathDown"
 play_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tpwa6"]
+animation = &"WaterDowsing"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ipq5o"]
 advance_mode = 2
 
@@ -597,21 +660,45 @@ advance_expression = "idling"
 advance_mode = 2
 advance_expression = "dead"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yt8sh"]
+advance_mode = 2
+advance_expression = "dowsing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cq8q7"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not idling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n8b16"]
+advance_mode = 2
+advance_expression = "dowsing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tys7o"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "idling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fi42o"]
+advance_mode = 2
+advance_expression = "dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rg5it"]
 states/DeathDown/node = SubResource("AnimationNodeAnimation_3ntqn")
-states/DeathDown/position = Vector2(800, 91.0625)
+states/DeathDown/position = Vector2(802.625, 210.062)
 states/Digging/node = SubResource("AnimationNodeBlendSpace1D_6yyxx")
 states/Digging/position = Vector2(800.25, -61.5)
 states/End/position = Vector2(995, 89.75)
 states/Idle/node = SubResource("AnimationNodeStateMachine_y0qj0")
-states/Idle/position = Vector2(505, 164.5)
+states/Idle/position = Vector2(322.75, 189.5)
 states/Movement/node = SubResource("AnimationNodeBlendSpace2D_0choh")
-states/Movement/position = Vector2(472, -47)
+states/Movement/position = Vector2(323, -69.5)
 states/Respawn/node = SubResource("AnimationNodeAnimation_bocnv")
-states/Respawn/position = Vector2(802.25, 239)
-states/Start/position = Vector2(206, 164.75)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276"), "DeathDown", "Respawn", SubResource("AnimationNodeStateMachineTransition_u1k1f"), "Respawn", "Idle", SubResource("AnimationNodeStateMachineTransition_fvhtm"), "Movement", "Digging", SubResource("AnimationNodeStateMachineTransition_cdqte"), "Idle", "Digging", SubResource("AnimationNodeStateMachineTransition_rcmg5"), "Digging", "Movement", SubResource("AnimationNodeStateMachineTransition_xi86q"), "Digging", "Idle", SubResource("AnimationNodeStateMachineTransition_w8mc7"), "Digging", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yq3k2")]
-graph_offset = Vector2(482, 60)
+states/Respawn/position = Vector2(792.25, 399.5)
+states/Start/position = Vector2(12.5, 157.75)
+states/WaterDowsing/node = SubResource("AnimationNodeAnimation_tpwa6")
+states/WaterDowsing/position = Vector2(685, -183.5)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276"), "DeathDown", "Respawn", SubResource("AnimationNodeStateMachineTransition_u1k1f"), "Respawn", "Idle", SubResource("AnimationNodeStateMachineTransition_fvhtm"), "Movement", "Digging", SubResource("AnimationNodeStateMachineTransition_cdqte"), "Idle", "Digging", SubResource("AnimationNodeStateMachineTransition_rcmg5"), "Digging", "Movement", SubResource("AnimationNodeStateMachineTransition_xi86q"), "Digging", "Idle", SubResource("AnimationNodeStateMachineTransition_w8mc7"), "Digging", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yq3k2"), "Movement", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_yt8sh"), "WaterDowsing", "Movement", SubResource("AnimationNodeStateMachineTransition_cq8q7"), "Idle", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_n8b16"), "WaterDowsing", "Idle", SubResource("AnimationNodeStateMachineTransition_tys7o"), "WaterDowsing", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fi42o")]
+graph_offset = Vector2(134, -258)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i4c62"]
 radius = 7.0
@@ -663,6 +750,14 @@ stream_2/stream = ExtResource("30_c4r0o")
 stream_3/stream = ExtResource("31_31cdm")
 stream_4/stream = ExtResource("32_pvlua")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ynyka"]
+streams_count = 5
+stream_0/stream = ExtResource("33_2ulrl")
+stream_1/stream = ExtResource("34_u1kxh")
+stream_2/stream = ExtResource("35_b8i60")
+stream_3/stream = ExtResource("36_ax0mi")
+stream_4/stream = ExtResource("37_6woh2")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
 exhausted = true
@@ -674,8 +769,8 @@ shape = SubResource("CapsuleShape2D_njm32")
 position = Vector2(0, -8)
 texture = ExtResource("2_e2s6s")
 hframes = 10
-vframes = 10
-frame = 73
+vframes = 11
+frame = 100
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 callback_mode_method = 1
@@ -689,18 +784,18 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.327535
-parameters/current_delta = 0.00833333
+parameters/current_position = 0.594464
+parameters/current_delta = 0.0185185
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.0
 parameters/DeathDown/current_delta = 0.80001
 parameters/Digging/current_length = 1.0
 parameters/Digging/current_position = 1.0
-parameters/Digging/current_delta = 0.0147938
+parameters/Digging/current_delta = 0.00735578
 parameters/Digging/blend_position = -0.247696
 parameters/Digging/0/current_length = 1.0
 parameters/Digging/0/current_position = 1.0
-parameters/Digging/0/current_delta = 0.0147938
+parameters/Digging/0/current_delta = 0.00735578
 parameters/Digging/1/current_length = null
 parameters/Digging/1/current_position = null
 parameters/Digging/1/current_delta = null
@@ -749,27 +844,30 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.327535
-parameters/Movement/current_delta = 0.00833333
+parameters/Movement/current_position = 0.594464
+parameters/Movement/current_delta = 0.0185185
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.327535
-parameters/Movement/0/current_delta = 0.00833333
+parameters/Movement/0/current_position = 0.594464
+parameters/Movement/0/current_delta = 0.0185185
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.327535
-parameters/Movement/1/current_delta = 0.00833333
+parameters/Movement/1/current_position = 0.594464
+parameters/Movement/1/current_delta = 0.0185185
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.327535
-parameters/Movement/2/current_delta = 0.00833333
+parameters/Movement/2/current_position = 0.594464
+parameters/Movement/2/current_delta = 0.0185185
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.327535
-parameters/Movement/3/current_delta = 0.00833333
+parameters/Movement/3/current_position = 0.594464
+parameters/Movement/3/current_delta = 0.0185185
 parameters/Respawn/current_length = 0.80001
 parameters/Respawn/current_position = 0.80001
 parameters/Respawn/current_delta = 0.0115956
 parameters/Start/current_length = 0.0
 parameters/Start/current_position = 0.0
 parameters/Start/current_delta = 0.0
+parameters/WaterDowsing/current_length = 1.0
+parameters/WaterDowsing/current_position = 1.0
+parameters/WaterDowsing/current_delta = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -833,3 +931,6 @@ stream = SubResource("AudioStreamRandomizer_ruhcs")
 
 [node name="GrassDigging" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_m4xdk")
+
+[node name="Dowsing" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ynyka")

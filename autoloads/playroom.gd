@@ -4,7 +4,8 @@ const MAX_FOOTPRINTS_STORED = 30
 
 const ACTION_NONE    = ""
 const ACTION_DIGGING = "G"
-const ACTION_WRITING = "W"
+const ACTION_DOWSING = "W"
+const ACTION_WRITING = "T"
 const ACTION_DIED    = "D"
 const ACTION_RESPAWN = "R"
 

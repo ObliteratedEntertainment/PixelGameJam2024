@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvdplvil00qo2"]
+[gd_scene load_steps=23 format=3 uid="uid://cvdplvil00qo2"]
 
 [ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="1_fda42"]
 [ext_resource type="Script" path="res://utils/editing_free.gd" id="1_qkgu3"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cqjko0s7x7ltl" path="res://decorations/dirt_6.tscn" id="7_l5fn5"]
 [ext_resource type="PackedScene" uid="uid://cbpxy556rj23y" path="res://decorations/dirt_7.tscn" id="8_16u8o"]
 [ext_resource type="PackedScene" uid="uid://nh2bano4ijb1" path="res://decorations/castle_ground_fragment_1.tscn" id="8_n58r0"]
+[ext_resource type="PackedScene" uid="uid://bc4b1msoop28" path="res://hidden_water_hole.tscn" id="9_w55pe"]
 [ext_resource type="PackedScene" uid="uid://bjh0f1ppqw4gx" path="res://decorations/dirt_8.tscn" id="9_wxd1l"]
 [ext_resource type="PackedScene" uid="uid://bd4qtiyb6gckq" path="res://decorations/rock_1.tscn" id="10_5xl5v"]
 [ext_resource type="PackedScene" uid="uid://75w7b6m54kb6" path="res://decorations/tree_stump.tscn" id="11_vb7pe"]
@@ -44,6 +45,15 @@ metadata/_edit_lock_ = true
 
 [node name="Dirt1" parent="." instance=ExtResource("2_yer6a")]
 position = Vector2(-585, 59)
+
+[node name="WateringHole" parent="." instance=ExtResource("9_w55pe")]
+position = Vector2(-1370, -456)
+
+[node name="WateringHole2" parent="." instance=ExtResource("9_w55pe")]
+position = Vector2(-1098, -454)
+
+[node name="WateringHole3" parent="." instance=ExtResource("9_w55pe")]
+position = Vector2(-1046, -455)
 
 [node name="CastleParts" parent="." instance=ExtResource("3_nsgft")]
 position = Vector2(-919, -763)

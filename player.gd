@@ -3,6 +3,7 @@ class_name Player
 
 const FOOTPRINT = preload("res://footprint.tscn")
 const DUG_HOLE = preload("res://dug_hole.tscn")
+const DOWSING_RIPPLE = preload("res://dowsing_ripple.tscn")
 
 const ACCEL := 100.0
 const MAX_SPEED := 80.0
@@ -46,17 +47,23 @@ var remote_tweener: Tween = null
 @onready var sigh_and_breath: AudioStreamPlayer2D = $SighAndBreath
 @onready var last_sigh: AudioStreamPlayer2D = $LastSigh
 
+@onready var sfx_dowsing: AudioStreamPlayer2D = $Dowsing
+@onready var dowsing_scanner: DowsingScanner = $DowsingScanner
+
 var speed := MAX_SPEED
 
 var last_active_direction := Vector2.DOWN
 @export var idling := false
 @export var digging := false
+@export var dowsing := false
+@export var writing := false
 @export var exhausted := false
 @export var dead := false
 @export var disconnected := false #only applies to remote players
 
 # Water system
 var current_water := 100.0
+var water_buffs := 0
 var unused_flasks := 0
 var total_flasks := 0
 var in_oasis := 0
@@ -93,6 +100,9 @@ func reset_state() -> void:
 	dead = false
 	exhausted = false
 	idling = false
+	digging = false
+	dowsing = false
+	writing = false
 	last_active_direction = Vector2.DOWN
 	speed = MAX_SPEED
 	
@@ -121,8 +131,8 @@ func _physics_process(delta: float) -> void:
 	# Always calculate water drain while we are alive
 	_process_water_drain(delta)
 	
-	# prevent moving while digging
-	if digging:
+	# prevent moving while digging/dowsing/writing
+	if digging or dowsing or writing:
 		return
 
 	# Get the input direction and handle the movement/deceleration.
@@ -243,14 +253,15 @@ func _check_player_actions():
 			return
 		
 	else:
+		
 		if Input.is_action_just_pressed("player_dig"):
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
-			if in_oasis > 0:
-				grass_digging.play()
-			else:
-				sand_digging.play()
 			Playroom.set_player_action(Playroom.ACTION_DIGGING)
+			return
+		elif Input.is_action_just_pressed("player_dowse"):
+			dowsing = true
+			Playroom.set_player_action(Playroom.ACTION_DOWSING)
 			return
 
 func die() -> void:
@@ -303,6 +314,12 @@ func _process_water_drain(delta: float) -> void:
 	const DRAIN_TIME_PER_FLASK = 100.0 / (20.0 * 3)
 	
 	var water_change = delta * DRAIN_TIME_PER_FLASK * intensity
+	
+	# if we ate cactus flowers or tapped a water hole
+	# add in those buffs now
+	if water_buffs > 0:
+		water_change += water_buffs
+		water_buffs = 0
 	
 	current_water += water_change
 	
@@ -426,8 +443,14 @@ func _on_respawn_requested() -> void:
 		Playroom.set_player_action(Playroom.ACTION_RESPAWN)
 
 func _anim_dig_hole(spawn_west: bool):
-	Playroom.set_player_action(Playroom.ACTION_NONE)
+	if not is_remote_player:
+		Playroom.set_player_action(Playroom.ACTION_NONE)
 	
+	if in_oasis > 0:
+		grass_digging.play()
+	else:
+		sand_digging.play()
+		
 	var hole = DUG_HOLE.instantiate()
 	if spawn_west:
 		hole.global_position = west_dig.global_position
@@ -435,6 +458,14 @@ func _anim_dig_hole(spawn_west: bool):
 		hole.global_position = east_dig.global_position
 
 	get_parent().add_child(hole)
+	
+	for item in power_up_detector.get_overlapping_areas():
+		if item is WaterHolePowerUp and not item.consumed:
+			item.consume()
+			
+			# Immediately add a lot of water to the player
+			water_buffs += 50.0
+			 
 
 func _anim_place_footprint(spawn_west: bool):
 	var spawn_point = Vector2.ZERO
@@ -466,3 +497,13 @@ func _anim_place_footprint(spawn_west: bool):
 func _anim_player_death_finished() -> void:
 	if not is_remote_player:
 		WorldManager.player_waiting_respawn.emit(position)
+
+
+func _anim_player_dowsing_started() -> void:
+	if not is_remote_player:
+		Playroom.set_player_action(Playroom.ACTION_NONE)
+		sfx_dowsing.play()
+		
+		var ripple = DOWSING_RIPPLE.instantiate()
+		ripple.position = global_position
+		get_parent().add_child(ripple)
