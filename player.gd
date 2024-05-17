@@ -20,8 +20,6 @@ const MAX_SPEED := 80.0
 @onready var west_dig: Marker2D = $WestDig
 @onready var east_dig: Marker2D = $EastDig
 
-
-
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
