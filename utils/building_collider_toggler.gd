@@ -9,7 +9,7 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and not body.is_remote_player:
 		print("Player entered")
 		for col in keep_out_colliders:
 			col.set_disabled(true)
@@ -18,7 +18,7 @@ func _on_body_entered(body: Node2D) -> void:
 			col.set_disabled(false)
 
 func _on_body_exited(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and not body.is_remote_player:
 		print("Player left")
 		for col in keep_out_colliders:
 			col.set_disabled(false)

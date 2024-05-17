@@ -2,6 +2,12 @@ extends Node
 
 const MAX_FOOTPRINTS_STORED = 30
 
+const ACTION_NONE    = ""
+const ACTION_DIGGING = "G"
+const ACTION_WRITING = "W"
+const ACTION_DIED    = "D"
+const ACTION_RESPAWN = "R"
+
 # To Test with Playroom connectivity
 # In the upper-right, click the "Remote Debug" option and
 # select "Run in Browser". 
@@ -59,6 +65,7 @@ const GLOBAL_ROOMS = [
 
 # Room Code of the current room we are connected to
 var _current_room: String = ""
+var connected: bool = false
 
 # Check if the player has entered their name
 # Into the room's global username lookup list (they should only do it once)
@@ -125,9 +132,16 @@ func connect_room(room_name: String):
 		_bridgeToJS(_on_disconnected)
 	)
 
+func whoami() -> String:
+	if connected:
+		return _playroom.myPlayer().state.profile.name
+	
+	return "UNKNOWN"
+
 # Update the player's position so others can see them
 func update_my_pos(pos: Vector2) -> void:
-	_playroom.myPlayer().setState("pos", JSON.stringify([pos.x, pos.y]))
+	if connected:
+		_playroom.myPlayer().setState("pos", JSON.stringify([pos.x, pos.y]))
 
 # Ask for the current position of other players we know of
 func get_other_player_position(player: String) -> Vector2:
@@ -150,8 +164,26 @@ func get_other_player_position(player: String) -> Vector2:
 	if typeof(parsed) != TYPE_ARRAY or len(parsed) != 2:
 		return Vector2.ZERO
 	
-	return Vector2(parsed.data[0], parsed.data[1])
+	return Vector2(parsed[0], parsed[1])
 
+func set_player_action(action: String):
+	if connected:
+		_playroom.myPlayer().setState("action", action)
+
+func get_other_player_action(player: String) -> String:
+	if _current_room not in _tracked_room_players:
+		return ""
+	
+	if player not in _tracked_room_players[_current_room]:
+		return ""
+	
+	var action_data = _tracked_room_players[_current_room][player].getState("action")
+	
+	if action_data == null:
+		return ""
+	
+	return action_data
+	
  
 # Request the list of deaths in the current room we are connected to
 # This will get the list of all playernames with deaths
@@ -208,6 +240,7 @@ func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
 func _on_insert_coin(args: Variant):
 	print("Joined room successfully: ", _current_room, " Args: ", args)
 	print("Room claims to be: ", _playroom.getRoomCode())
+	connected = true
 	_current_room = _playroom.getRoomCode()
 	server_connected.emit(_current_room)
 	
@@ -237,6 +270,7 @@ func _on_disconnected(args: Variant):
 		
 		_tracked_room_players.erase(_current_room)
 	
+	connected = false
 	_current_room = ""
 
 	# TODO: we should attempt to reconnect
@@ -264,7 +298,7 @@ func _on_player_join(args: Variant):
 	player_joined.emit(_current_room, player_name)
 
 # Called when a player quits
-func _on_player_quit(room_name, player_name: String, args: Variant) -> void:
+func _on_player_quit(args: Variant, room_name: String, player_name: String) -> void:
 	print("[Playroom] Player quit the room: ", room_name, " Player: ", player_name)
 	player_left.emit(room_name, player_name)
 

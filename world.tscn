@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=7 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
+[ext_resource type="Script" path="res://remote_player_manager.gd" id="1_gjvwk"]
 [ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="4_fid62"]
 [ext_resource type="PackedScene" uid="uid://cvdplvil00qo2" path="res://desert_zones/starter_zone.tscn" id="5_hbtdc"]
 [ext_resource type="Script" path="res://player_deaths_manager.gd" id="19_dbppj"]
@@ -9,7 +10,12 @@
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 
+[node name="RemotePlayerManager" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("1_gjvwk")
+
 [node name="PlayerDeathsManager" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("19_dbppj")
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]

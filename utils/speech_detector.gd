@@ -20,13 +20,13 @@ func _ready() -> void:
 		lbl.visible = false
 
 func _on_body_entered(body: Node2D):
-	if body is Player:
+	if body is Player and not body.is_remote_player:
 		dialog_hint.visible = false
 		dialog_box.visible = true
 		dialog_box.get_children()[dialog_offset].visible = true
 		
 func _on_body_exited(body: Node2D):
-	if body is Player:
+	if body is Player and not body.is_remote_player:
 		dialog_box.visible = false
 		dialog_box.get_children()[dialog_offset].visible = false
 		
