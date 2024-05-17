@@ -18,7 +18,7 @@ var remote_tweener: Tween = null
 
 # indicator if the player's position should be sent out
 @export var player_broadcast_ready := true
-@export var player_last_broadcast := Vector2.ZERO
+@export var player_last_broadcast := Vector2(-99999, -99999)
 
 @onready var zone_detector: Area2D = $ZoneDetector
 @onready var shade_detector: Area2D = $ShadeDetector
@@ -253,7 +253,7 @@ func _check_player_actions():
 			Playroom.set_player_action(Playroom.ACTION_DIGGING)
 			return
 
-func die():
+func die() -> void:
 	dead = true
 	
 	last_sigh.play()
@@ -265,6 +265,17 @@ func die():
 	else:
 		# do nothing for remote player until they respawn
 		pass
+
+func remote_left() -> void:
+	die()
+	
+	if remote_tweener != null:
+		remote_tweener.kill()
+	
+	remote_tweener = create_tween()
+	remote_tweener.tween_property(self, "modulate:a", 0.0, 0.8*5)
+	remote_tweener.tween_callback(queue_free)
+	
 
 func _process_water_drain(delta: float) -> void:
 	if is_remote_player:
@@ -451,10 +462,6 @@ func _anim_place_footprint(spawn_west: bool):
 	
 	while recent_footprints.size() > Playroom.MAX_FOOTPRINTS_STORED:
 		recent_footprints.pop_front()
-
-func _anim_player_freed() -> void:
-	get_parent().remove_child(self)
-	queue_free()
 
 func _anim_player_death_finished() -> void:
 	if not is_remote_player:

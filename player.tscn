@@ -675,7 +675,7 @@ position = Vector2(0, -8)
 texture = ExtResource("2_e2s6s")
 hframes = 10
 vframes = 10
-frame = 43
+frame = 73
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 callback_mode_method = 1

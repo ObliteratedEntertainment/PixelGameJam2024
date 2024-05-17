@@ -28,6 +28,6 @@ func _on_player_left(room: String, player: String) -> void:
 	
 	if player in player_lookups:
 		print("Player left the game: ", player)
-		remove_child(player_lookups[player])
+		player_lookups[player].remote_left()
 		player_lookups.erase(player)
 
