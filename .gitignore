@@ -3,4 +3,5 @@
 .godot/
 android/
 docs/*.gif
+builds
 sfx/original/
