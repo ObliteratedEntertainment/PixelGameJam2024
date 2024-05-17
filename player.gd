@@ -33,12 +33,13 @@ const MAX_SPEED := 80.0
 @onready var west_dig: Marker2D = $WestDig
 @onready var east_dig: Marker2D = $EastDig
 
-
-
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
+@onready var sand_digging: AudioStreamPlayer2D = $SandDigging
+
 @onready var grass_step: AudioStreamPlayer2D = $GrassFootstep
+@onready var grass_digging: AudioStreamPlayer2D = $GrassDigging
 
 @onready var sigh_and_breath: AudioStreamPlayer2D = $SighAndBreath
 @onready var last_sigh: AudioStreamPlayer2D = $LastSigh
@@ -220,6 +221,10 @@ func _check_player_actions():
 		if Input.is_action_just_pressed("player_dig"):
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
+			if in_oasis > 0:
+				grass_digging.play()
+			else:
+				sand_digging.play()
 			Playroom.set_player_action(Playroom.ACTION_DIGGING)
 			return
 
