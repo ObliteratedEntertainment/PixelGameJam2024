@@ -71,3 +71,4 @@ libraries = {
 autoplay = "active"
 
 [node name="WateringHoleTimeout" type="Timer" parent="."]
+one_shot = true

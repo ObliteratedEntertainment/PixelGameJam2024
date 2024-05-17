@@ -48,7 +48,6 @@ var remote_tweener: Tween = null
 @onready var last_sigh: AudioStreamPlayer2D = $LastSigh
 
 @onready var sfx_dowsing: AudioStreamPlayer2D = $Dowsing
-@onready var dowsing_scanner: DowsingScanner = $DowsingScanner
 
 var speed := MAX_SPEED
 
@@ -230,6 +229,9 @@ func _check_player_actions():
 		if action == Playroom.ACTION_DIGGING:
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
+			return
+		elif action == Playroom.ACTION_DOWSING:
+			dowsing = true
 			return
 		elif action == Playroom.ACTION_DIED and not dead:
 			die()
