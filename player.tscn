@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=88 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="2_e2s6s"]
@@ -22,6 +22,11 @@
 [ext_resource type="AudioStream" uid="uid://bxbr5nr0sqaa2" path="res://sfx/sign_and_breath_2.wav" id="20_a7le1"]
 [ext_resource type="AudioStream" uid="uid://6kislx8dp4r1" path="res://sfx/sign_and_breath_3.wav" id="21_tk3h3"]
 [ext_resource type="AudioStream" uid="uid://jf1xi6qya0o2" path="res://sfx/sign_1.wav" id="22_kis06"]
+[ext_resource type="AudioStream" uid="uid://cjgk1nfnbwxlf" path="res://sfx/sand_digging_1.wav" id="23_shepk"]
+[ext_resource type="AudioStream" uid="uid://d2phfjx6fmmn5" path="res://sfx/sand_digging_2.wav" id="24_km5g4"]
+[ext_resource type="AudioStream" uid="uid://bi0jegvxfto4h" path="res://sfx/sand_digging_3.wav" id="25_pa1um"]
+[ext_resource type="AudioStream" uid="uid://crdangt5hf6ct" path="res://sfx/sand_digging_4.wav" id="26_xb6vr"]
+[ext_resource type="AudioStream" uid="uid://voa7xsio6uay" path="res://sfx/sand_digging_5.wav" id="27_gvqtd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njm32"]
 radius = 5.0
@@ -634,6 +639,14 @@ stream_2/stream = ExtResource("21_tk3h3")
 streams_count = 1
 stream_0/stream = ExtResource("22_kis06")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ruhcs"]
+streams_count = 5
+stream_0/stream = ExtResource("23_shepk")
+stream_1/stream = ExtResource("24_km5g4")
+stream_2/stream = ExtResource("25_pa1um")
+stream_3/stream = ExtResource("26_xb6vr")
+stream_4/stream = ExtResource("27_gvqtd")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
 exhausted = true
@@ -659,8 +672,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.631775
-parameters/current_delta = 0.00694444
+parameters/current_position = 0.713543
+parameters/current_delta = 0.007201
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.80001
 parameters/DeathDown/current_delta = 0.0
@@ -719,21 +732,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.631775
-parameters/Movement/current_delta = 0.00694444
+parameters/Movement/current_position = 0.713543
+parameters/Movement/current_delta = 0.007201
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.631775
-parameters/Movement/0/current_delta = 0.00694444
+parameters/Movement/0/current_position = 0.713543
+parameters/Movement/0/current_delta = 0.007201
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.631775
-parameters/Movement/1/current_delta = 0.00694444
+parameters/Movement/1/current_position = 0.713543
+parameters/Movement/1/current_delta = 0.007201
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.631775
-parameters/Movement/2/current_delta = 0.00694444
+parameters/Movement/2/current_position = 0.713543
+parameters/Movement/2/current_delta = 0.007201
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.631775
-parameters/Movement/3/current_delta = 0.00694444
+parameters/Movement/3/current_position = 0.713543
+parameters/Movement/3/current_delta = 0.007201
 parameters/Respawn/current_length = null
 parameters/Respawn/current_position = null
 parameters/Respawn/current_delta = null
@@ -794,3 +807,6 @@ volume_db = -4.952
 
 [node name="LastSigh" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_fu1j7")
+
+[node name="SandDigging" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ruhcs")

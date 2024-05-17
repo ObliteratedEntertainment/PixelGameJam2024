@@ -25,6 +25,8 @@ const MAX_SPEED := 80.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @onready var sand_step: AudioStreamPlayer2D = $SandFootstep
+@onready var sand_digging: AudioStreamPlayer2D = $SandDigging
+
 @onready var grass_step: AudioStreamPlayer2D = $GrassFootstep
 
 @onready var sigh_and_breath: AudioStreamPlayer2D = $SighAndBreath
@@ -123,6 +125,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("player_dig"):
 		animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 		digging = true
+		sand_digging.play()
 		return
 
 	move_and_slide()
