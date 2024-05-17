@@ -8,6 +8,7 @@ signal zone_entered(zone_name: String)
 
 
 signal player_died(location: Vector2)
+signal player_waiting_respawn()
 signal player_respawn()
 
 signal player_water_changed(total_water: float, water_delta: float, heat_intensity: int)

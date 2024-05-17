@@ -9,10 +9,12 @@ const MAX_SPEED := 80.0
 
 @export var is_remote_player := false
 @export var remote_player_id := ""
-@export var remote_old_position := Vector2.ZERO
-@export var remote_new_position := Vector2.ZERO
-@export var remote_pos_interp := 0.0
-@export var remote_time_normalization := 1.0
+var remote_old_position := Vector2.ZERO
+var remote_new_position := Vector2.ZERO
+var remote_pos_interp := 0.0
+var remote_time_normalization := 1.0
+var remote_just_respawned := false
+var remote_tweener: Tween = null
 
 # indicator if the player's position should be sent out
 @export var player_broadcast_ready := true
@@ -67,7 +69,8 @@ var recent_footprints: Array[Vector2] = []
 func _ready() -> void:
 	reset_state()
 	
-	WorldManager.player_respawn.connect(_on_respawn_requested)
+	if not is_remote_player:
+		WorldManager.player_respawn.connect(_on_respawn_requested)
 	
 	broadcast_position_timer.timeout.connect(_on_broadcast_timeout)
 	
@@ -81,7 +84,7 @@ func _ready() -> void:
 
 func reset_state() -> void:
 	if is_remote_player:
-		modulate = Color(0.4, 0.4, 1.0, 0.9)
+		modulate = Color(0.4, 0.4, 1.0, 0.8)
 	
 	current_water = 100.0
 	unused_flasks = total_flasks
@@ -110,11 +113,13 @@ func _physics_process(delta: float) -> void:
 		die()
 	
 	if dead:
+		# Check to see if the remote player has revived
+		if is_remote_player:
+			_check_player_actions()
 		return
 
 	# Always calculate water drain while we are alive
-	if not is_remote_player:
-		_process_water_drain(delta)
+	_process_water_drain(delta)
 	
 	# prevent moving while digging
 	if digging:
@@ -175,8 +180,15 @@ func _get_player_movement_input(delta: float) -> Vector2:
 			
 			# if we are too far behind, 
 			# snap our position to the beginning of the interp
-			if position.distance_squared_to(remote_old_position) > (10.0 * 10.0):
+			if remote_just_respawned:
+				position = remote_new_position
+				remote_old_position = remote_new_position
+				remote_pos_interp = 1.0
+				remote_just_respawned = false
+				return Vector2.ZERO
+			elif position.distance_squared_to(remote_old_position) > (10.0 * 10.0):
 				position = remote_old_position
+			
 		
 		
 		var new_desired_position = lerp(remote_old_position, remote_new_position, remote_pos_interp)
@@ -211,10 +223,23 @@ func _check_player_actions():
 			return
 		elif action == Playroom.ACTION_DIED and not dead:
 			die()
+			if remote_tweener != null:
+				remote_tweener.kill()
+			remote_tweener = create_tween()
+			# Fade out at the same rate the death animation occurs
+			remote_tweener.tween_property(self, "modulate:a", 0.0, 0.8)
 			return
 		elif action == Playroom.ACTION_RESPAWN and dead:
-			# TODO: this might be better to do by detecting movement?
-			_on_respawn_requested()
+			remote_just_respawned = true
+			dead = false
+			
+			# Fade back in with the respawn
+			if remote_tweener != null:
+				remote_tweener.kill()
+			remote_tweener = create_tween()
+			# Fade out at the same rate the death animation occurs
+			remote_tweener.tween_property(self, "modulate:a", 1.0, 0.8)
+			
 			return
 		
 	else:
@@ -242,6 +267,8 @@ func die():
 		pass
 
 func _process_water_drain(delta: float) -> void:
+	if is_remote_player:
+		return
 	
 	# Start with a base of -3 for the heat burning you
 	var intensity = -3
@@ -340,6 +367,8 @@ func _on_zone_exited(body: Area2D) -> void:
 	
 	if body is Oasis:
 		in_oasis -= 1
+	
+	in_oasis = maxi(in_oasis, 0)
 
 func _on_shade_entered(body: Area2D) -> void:
 	if is_remote_player:
@@ -358,6 +387,8 @@ func _on_shade_exited(body: Area2D) -> void:
 		in_shade -= body.shade_value
 	else:
 		in_shade -= 1
+		
+	in_shade = maxi(in_shade, 0)
 
 func _on_power_up_entered(body: Area2D) -> void:
 	if is_remote_player:
@@ -379,7 +410,9 @@ func _on_respawn_requested() -> void:
 	
 	if recent_oasis != null:
 		global_position = recent_oasis.player_respawn.global_position
+		reset_state()
 		dead = false
+		Playroom.set_player_action(Playroom.ACTION_RESPAWN)
 
 func _anim_dig_hole(spawn_west: bool):
 	Playroom.set_player_action(Playroom.ACTION_NONE)
@@ -422,3 +455,7 @@ func _anim_place_footprint(spawn_west: bool):
 func _anim_player_freed() -> void:
 	get_parent().remove_child(self)
 	queue_free()
+
+func _anim_player_death_finished() -> void:
+	if not is_remote_player:
+		WorldManager.player_waiting_respawn.emit(position)

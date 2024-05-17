@@ -11,7 +11,7 @@ var tween: Tween = null
 func _ready() -> void:
 	initial_position = position
 	
-	reset()
+	#reset()
 
 func reset():
 	if tween != null:
