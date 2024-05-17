@@ -461,6 +461,8 @@ func _anim_dig_hole(spawn_west: bool):
 
 	get_parent().add_child(hole)
 	
+	# Check if the digging caused anything to activate
+	# that was hidden underground
 	for item in power_up_detector.get_overlapping_areas():
 		if item is WaterHolePowerUp and not item.consumed:
 			item.consume()
