@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=124 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="2_qte35"]
@@ -41,6 +41,16 @@
 [ext_resource type="AudioStream" uid="uid://caujw5171dywa" path="res://sfx/water_pouring_2.wav" id="39_owcn4"]
 [ext_resource type="AudioStream" uid="uid://4qk8ia74ep22" path="res://sfx/water_pouring_3.wav" id="40_iuwfq"]
 [ext_resource type="AudioStream" uid="uid://dnfj17ht20ntb" path="res://sfx/water_pouring_4.wav" id="41_wgxs3"]
+[ext_resource type="AudioStream" uid="uid://cg3setga34kpy" path="res://sfx/gulping_1.wav" id="42_p4llc"]
+[ext_resource type="AudioStream" uid="uid://nmudna5350wb" path="res://sfx/gulping_2.wav" id="43_sdk2n"]
+[ext_resource type="AudioStream" uid="uid://uhnsswimdymk" path="res://sfx/gulping_3.wav" id="44_h6cx6"]
+[ext_resource type="AudioStream" uid="uid://ddq3a5cu7b2g5" path="res://sfx/gulping_4.wav" id="45_i4dpd"]
+[ext_resource type="AudioStream" uid="uid://0t7qjgcv320" path="res://sfx/pickup_1.wav" id="46_qlcd4"]
+[ext_resource type="AudioStream" uid="uid://ct4iwhnh4cdjv" path="res://sfx/pickup_2.wav" id="47_lhy0y"]
+[ext_resource type="AudioStream" uid="uid://dmkp1i8wcbf48" path="res://sfx/pickup_3.wav" id="48_mt1xs"]
+[ext_resource type="AudioStream" uid="uid://bumu2uonsr8tp" path="res://sfx/pickup_4.wav" id="49_xbi2y"]
+[ext_resource type="AudioStream" uid="uid://dokk75uow1kxo" path="res://sfx/pickup_5.wav" id="50_hqidm"]
+[ext_resource type="AudioStream" uid="uid://cf7l78pvxnenj" path="res://sfx/pickup_6.wav" id="51_b78q5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njm32"]
 radius = 5.0
@@ -769,6 +779,22 @@ stream_1/stream = ExtResource("39_owcn4")
 stream_2/stream = ExtResource("40_iuwfq")
 stream_3/stream = ExtResource("41_wgxs3")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ptgdn"]
+streams_count = 4
+stream_0/stream = ExtResource("42_p4llc")
+stream_1/stream = ExtResource("43_sdk2n")
+stream_2/stream = ExtResource("44_h6cx6")
+stream_3/stream = ExtResource("45_i4dpd")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_20vsm"]
+streams_count = 6
+stream_0/stream = ExtResource("46_qlcd4")
+stream_1/stream = ExtResource("47_lhy0y")
+stream_2/stream = ExtResource("48_mt1xs")
+stream_3/stream = ExtResource("49_xbi2y")
+stream_4/stream = ExtResource("50_hqidm")
+stream_5/stream = ExtResource("51_b78q5")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
 exhausted = true
@@ -795,8 +821,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.601738
-parameters/current_delta = 0.00107525
+parameters/current_position = 0.294105
+parameters/current_delta = 0.015282
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.0
 parameters/DeathDown/current_delta = 0.80001
@@ -855,21 +881,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.601738
-parameters/Movement/current_delta = 0.00107525
+parameters/Movement/current_position = 0.294105
+parameters/Movement/current_delta = 0.015282
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.601738
-parameters/Movement/0/current_delta = 0.00107525
+parameters/Movement/0/current_position = 0.294105
+parameters/Movement/0/current_delta = 0.015282
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.601738
-parameters/Movement/1/current_delta = 0.00107525
+parameters/Movement/1/current_position = 0.294105
+parameters/Movement/1/current_delta = 0.015282
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.601738
-parameters/Movement/2/current_delta = 0.00107525
+parameters/Movement/2/current_position = 0.294105
+parameters/Movement/2/current_delta = 0.015282
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.601738
-parameters/Movement/3/current_delta = 0.00107525
+parameters/Movement/3/current_position = 0.294105
+parameters/Movement/3/current_delta = 0.015282
 parameters/Respawn/current_length = 0.80001
 parameters/Respawn/current_position = 0.80001
 parameters/Respawn/current_delta = 0.0115956
@@ -958,3 +984,9 @@ bus = &"SFX"
 
 [node name="WaterRefill" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_1epao")
+
+[node name="Gulping" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ptgdn")
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_20vsm")

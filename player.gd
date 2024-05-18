@@ -63,6 +63,10 @@ var remote_tweener: Tween = null
 
 @onready var water_refill: AudioStreamPlayer2D = $WaterRefill
 
+@onready var gulping: AudioStreamPlayer2D = $Gulping
+
+@onready var pickup: AudioStreamPlayer2D = $Pickup
+
 var speed := MAX_SPEED
 
 var last_active_direction := Vector2.DOWN
@@ -380,6 +384,7 @@ func _process_water_drain(delta: float) -> void:
 	if current_water <= 0 and unused_flasks > 0:
 		current_water += 100.0
 		unused_flasks -= 1
+		gulping.play()
 		WorldManager.player_flask_changed.emit(
 			unused_flasks,
 			total_flasks
@@ -491,6 +496,7 @@ func _on_power_up_entered(body: Area2D) -> void:
 	if body is FlaskPowerUp and not body.consumed:
 		total_flasks += 1
 		unused_flasks += 1
+		pickup.play()
 		WorldManager.player_flask_changed.emit(
 			unused_flasks,
 			total_flasks
@@ -501,6 +507,7 @@ func _on_power_up_entered(body: Area2D) -> void:
 		
 		body.consume()
 	elif body is ShovelPowerUp and not body.consumed:
+		pickup.play()
 		Playroom.set_player_upgrade(Playroom.UPGRADE_SHOVEL)
 		_show_shovel()
 		body.consume()
