@@ -14,6 +14,7 @@ signal switch_menu()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	grab()
 	
 	start.focus_entered.connect(_show_selector.bind(start_selector))
 	start.mouse_entered.connect(_show_selector.bind(start_selector))
@@ -22,8 +23,6 @@ func _ready() -> void:
 	settings.focus_entered.connect(_show_selector.bind(settings_selector))
 	settings.mouse_entered.connect(_show_selector.bind(settings_selector))
 	settings.pressed.connect(_on_settings)
-	
-	#grab()
 
 func grab() -> void:
 	start.grab_focus()
