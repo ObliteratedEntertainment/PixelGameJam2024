@@ -61,6 +61,8 @@ var remote_tweener: Tween = null
 
 @onready var sfx_dowsing: AudioStreamPlayer2D = $Dowsing
 
+@onready var water_refill: AudioStreamPlayer2D = $WaterRefill
+
 var speed := MAX_SPEED
 
 var last_active_direction := Vector2.DOWN
@@ -541,6 +543,8 @@ func _anim_dig_hole(spawn_west: bool):
 			
 			# Immediately add a lot of water to the player
 			water_buffs += 50.0
+			
+			water_refill.play()
 			 
 
 func _anim_place_footprint(spawn_west: bool):
