@@ -11,6 +11,8 @@ var tween: Tween = null
 func _ready() -> void:
 	initial_position = position
 	
+	#WorldManager.player_respawn.connect(reset)
+	
 	#reset()
 
 func reset():

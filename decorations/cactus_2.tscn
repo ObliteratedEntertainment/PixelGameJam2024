@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://2otgb546q5w"]
+[gd_scene load_steps=5 format=3 uid="uid://2otgb546q5w"]
 
+[ext_resource type="Script" path="res://utils/cactus.gd" id="1_7dtxp"]
 [ext_resource type="Texture2D" uid="uid://dsy8x8ik8puo8" path="res://sprites/plants/cactus_2.png" id="2_fhg31"]
 [ext_resource type="Texture2D" uid="uid://bg25v3omgnup1" path="res://sprites/plants/cactus_2_shadow.png" id="3_h0d3n"]
 
@@ -7,6 +8,7 @@
 radius = 3.0
 
 [node name="Cactus2" type="StaticBody2D"]
+script = ExtResource("1_7dtxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2, -4)

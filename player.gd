@@ -127,6 +127,8 @@ func reset_state() -> void:
 			0.0,
 			3
 		)
+		
+		WorldManager.player_idle.emit(false)
 
 func _physics_process(delta: float) -> void:
 
@@ -155,11 +157,18 @@ func _physics_process(delta: float) -> void:
 	var direction := _get_player_movement_input(delta)
 	
 	if direction:
+		# If we were previously idling
+		if not idling and not is_remote_player:
+			WorldManager.player_idle.emit(false)
+		
 		idling = false
 		last_active_direction = direction
 		#speed = minf(speed + ACCEL * ACCEL * delta, MAX_SPEED)
 		velocity = direction * speed
 	else:
+		# If we weren't previously idling
+		if not idling and not is_remote_player:
+			WorldManager.player_idle.emit(true)
 		idling = true
 		velocity = Vector2.ZERO
 		#speed = maxf(0.0, speed - ACCEL * delta)
@@ -177,6 +186,7 @@ func _physics_process(delta: float) -> void:
 	# Only the local player will move with physics
 	if not is_remote_player:
 		move_and_slide()
+		
 
 	if not is_remote_player and \
 			player_broadcast_ready and \

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cmn5brqbir8ed"]
+[gd_scene load_steps=33 format=3 uid="uid://cmn5brqbir8ed"]
 
 [ext_resource type="Script" path="res://oases/oasis.gd" id="1_abcjj"]
 [ext_resource type="PackedScene" uid="uid://x6tgegp3hxrt" path="res://decorations/oasis_tall_grass_1.tscn" id="1_gkufe"]
@@ -29,6 +29,9 @@
 [ext_resource type="Texture2D" uid="uid://dws81xj2fq1xx" path="res://sprites/borders/oasis_mud_patch_1.png" id="22_somoh"]
 [ext_resource type="PackedScene" uid="uid://cn2vru4y6kgtk" path="res://old_man.tscn" id="25_50ayw"]
 [ext_resource type="PackedScene" uid="uid://bc4b1msoop28" path="res://hidden_water_hole.tscn" id="28_iqvhm"]
+[ext_resource type="PackedScene" uid="uid://bsqdtsq6dfs36" path="res://decorations/cactus_1.tscn" id="30_rbb51"]
+[ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="31_eof6k"]
+[ext_resource type="PackedScene" uid="uid://cfd4dfkvg2iuu" path="res://decorations/cactus_3.tscn" id="32_lnsp4"]
 
 [node name="StartingOasis" type="Area2D"]
 y_sort_enabled = true
@@ -519,5 +522,14 @@ position = Vector2(196, -79)
 
 [node name="WateringHole" parent="." instance=ExtResource("28_iqvhm")]
 position = Vector2(-117, 20)
+
+[node name="Cactus1" parent="." instance=ExtResource("30_rbb51")]
+position = Vector2(-63, 71)
+
+[node name="Cactus2" parent="Cactus1" instance=ExtResource("31_eof6k")]
+position = Vector2(88, 24)
+
+[node name="Cactus3" parent="Cactus1/Cactus2" instance=ExtResource("32_lnsp4")]
+position = Vector2(103, 11)
 
 [editable path="OldMan/Speech Detector"]

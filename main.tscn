@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cusjl8n1wtb6f"]
+[gd_scene load_steps=42 format=3 uid="uid://cusjl8n1wtb6f"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_0mgpi"]
 [ext_resource type="Script" path="res://ui/main_menu_cloud_driver.gd" id="1_m4e8c"]
@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://bsqdtsq6dfs36" path="res://decorations/cactus_1.tscn" id="21_witkp"]
 [ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="22_xquog"]
 [ext_resource type="PackedScene" uid="uid://cfd4dfkvg2iuu" path="res://decorations/cactus_3.tscn" id="23_ge6et"]
-[ext_resource type="PackedScene" uid="uid://du8v06ko4d4qr" path="res://decorations/cactus_flower.tscn" id="24_b8jnw"]
 [ext_resource type="Script" path="res://ui/menu_controller.gd" id="24_scbo7"]
 [ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="26_qeoya"]
 [ext_resource type="LabelSettings" uid="uid://dspmfew4vn2dr" path="res://ui/main_menu_font.tres" id="27_gnrig"]
@@ -55,6 +54,21 @@ gradient = SubResource("Gradient_l3231")
 width = 120
 height = 32
 
+[sub_resource type="Animation" id="Animation_jtiib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_6y344"]
 resource_name = "idle"
 length = 0.80001
@@ -71,21 +85,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_jtiib"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t34jq"]
@@ -296,35 +295,11 @@ position = Vector2(211, 282)
 [node name="Cactus1" parent="MenuWorld" instance=ExtResource("21_witkp")]
 position = Vector2(190, 293)
 
-[node name="CactusFlower6" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(228, 299)
-
-[node name="CactusFlower5" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(230, 294)
-
-[node name="CactusFlower4" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(213, 272)
-
-[node name="CactusFlower3" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(208, 273)
-
-[node name="CactusFlower2" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(192, 290)
-
-[node name="CactusFlower7" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(462, 103)
-
 [node name="Cactus5" parent="MenuWorld" instance=ExtResource("21_witkp")]
 position = Vector2(463, 110)
 
-[node name="CactusFlower8" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(504, 137)
-
 [node name="Cactus6" parent="MenuWorld" instance=ExtResource("21_witkp")]
 position = Vector2(504, 143)
-
-[node name="CactusFlower" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
-position = Vector2(189, 287)
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ttt4t")
