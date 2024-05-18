@@ -64,6 +64,7 @@ var last_active_direction := Vector2.DOWN
 @export var exhausted := false
 @export var dead := false
 @export var disconnected := false #only applies to remote players
+@export var invulnerable := false
 
 var has_shovel := false
 
@@ -142,6 +143,10 @@ func _physics_process(delta: float) -> void:
 	
 	# prevent moving while digging/dowsing/writing
 	if digging or dowsing or writing:
+		return
+	
+	# Don't move while invulnerable (UI menus)
+	if invulnerable:
 		return
 
 	# Get the input direction and handle the movement/deceleration.
@@ -308,6 +313,11 @@ func remote_left() -> void:
 
 func _process_water_drain(delta: float) -> void:
 	if is_remote_player:
+		return
+	
+	# Useful when in escape menu or dialogs
+	# to prevent player water draining
+	if invulnerable:
 		return
 	
 	# Start with a base of -3 for the heat burning you

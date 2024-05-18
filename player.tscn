@@ -336,6 +336,48 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_0wqry"]
+resource_name = "WaterDowsing"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(4, 10), Vector2i(5, 10), Vector2i(6, 10), Vector2i(7, 10), Vector2i(8, 10), Vector2i(9, 10)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_player_dowsing_started"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:dowsing")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="Animation" id="Animation_36c2p"]
 resource_name = "dig_left"
 step = 0.1
@@ -411,48 +453,6 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath(".:digging")
-tracks/2/interp = 0
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_0wqry"]
-resource_name = "WaterDowsing"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(4, 10), Vector2i(5, 10), Vector2i(6, 10), Vector2i(7, 10), Vector2i(8, 10), Vector2i(9, 10)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_anim_player_dowsing_started"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:dowsing")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -784,8 +784,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.122834
-parameters/current_delta = 0.00694444
+parameters/current_position = 0.46855
+parameters/current_delta = 0.00714286
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.0
 parameters/DeathDown/current_delta = 0.80001
@@ -844,21 +844,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.122834
-parameters/Movement/current_delta = 0.00694444
+parameters/Movement/current_position = 0.46855
+parameters/Movement/current_delta = 0.00714286
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.122834
-parameters/Movement/0/current_delta = 0.00694444
+parameters/Movement/0/current_position = 0.46855
+parameters/Movement/0/current_delta = 0.00714286
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.122834
-parameters/Movement/1/current_delta = 0.00694444
+parameters/Movement/1/current_position = 0.46855
+parameters/Movement/1/current_delta = 0.00714286
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.122834
-parameters/Movement/2/current_delta = 0.00694444
+parameters/Movement/2/current_position = 0.46855
+parameters/Movement/2/current_delta = 0.00714286
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.122834
-parameters/Movement/3/current_delta = 0.00694444
+parameters/Movement/3/current_position = 0.46855
+parameters/Movement/3/current_delta = 0.00714286
 parameters/Respawn/current_length = 0.80001
 parameters/Respawn/current_position = 0.80001
 parameters/Respawn/current_delta = 0.0115956
@@ -903,34 +903,41 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpDetector"]
 shape = SubResource("CircleShape2D_i4c62")
 
-[node name="SandFootstep" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_i2k00")
-volume_db = -10.0
-
 [node name="WestDig" type="Marker2D" parent="."]
 position = Vector2(-9, 3)
 
 [node name="EastDig" type="Marker2D" parent="."]
 position = Vector2(12, 3)
 
+[node name="BroadcastPositionTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SandFootstep" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_i2k00")
+volume_db = -10.0
+bus = &"SFX"
+
 [node name="GrassFootstep" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_yv1n3")
+bus = &"SFX"
 
 [node name="SighAndBreath" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_o5336")
 volume_db = -4.952
+bus = &"SFX"
 
 [node name="LastSigh" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_fu1j7")
-
-[node name="BroadcastPositionTimer" type="Timer" parent="."]
-autostart = true
+bus = &"SFX"
 
 [node name="SandDigging" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_ruhcs")
+bus = &"SFX"
 
 [node name="GrassDigging" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_m4xdk")
+bus = &"SFX"
 
 [node name="Dowsing" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_ynyka")
+bus = &"SFX"

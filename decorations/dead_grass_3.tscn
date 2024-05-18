@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8v1aiqlxfn7y"]
+
+[ext_resource type="Texture2D" uid="uid://de3sib1b6kvoi" path="res://sprites/plants/dead_grass_3.png" id="1_up6te"]
+[ext_resource type="Texture2D" uid="uid://drxl3gay8u5gq" path="res://sprites/plants/dead_grass_3_shadow.png" id="2_klom6"]
+
+[node name="DeadGrass3" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_up6te")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+texture = ExtResource("2_klom6")

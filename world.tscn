@@ -10,57 +10,56 @@
 [ext_resource type="Script" path="res://player_deaths_manager.gd" id="19_dbppj"]
 [ext_resource type="PackedScene" uid="uid://cmn5brqbir8ed" path="res://oases/starting_oasis.tscn" id="20_fn41c"]
 
-[sub_resource type="Animation" id="Animation_nnvf2"]
-resource_name = "to_oasis"
-length = 5.0
+[sub_resource type="Animation" id="Animation_xxx13"]
+resource_name = "RESET"
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("OasisBGM:volume_db")
+tracks/0/path = NodePath("DesertBGM:volume_db")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 2),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-80.0, 0.0]
+"values": [-80.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DesertBGM:volume_db")
+tracks/1/path = NodePath("DesertBGM:stream_paused")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(0.5, 2),
-"update": 0,
-"values": [0.0, -80.0]
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("OasisBGM:stream_paused")
+tracks/2/path = NodePath("OasisBGM:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, false]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DesertBGM:stream_paused")
+tracks/3/path = NodePath("OasisBGM:stream_paused")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_dwm7j"]
@@ -116,56 +115,57 @@ tracks/3/keys = {
 "values": [false, false]
 }
 
-[sub_resource type="Animation" id="Animation_xxx13"]
-resource_name = "RESET"
+[sub_resource type="Animation" id="Animation_nnvf2"]
+resource_name = "to_oasis"
+length = 5.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DesertBGM:volume_db")
+tracks/0/path = NodePath("OasisBGM:volume_db")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 2),
 "update": 0,
-"values": [-80.0]
+"values": [-80.0, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DesertBGM:stream_paused")
+tracks/1/path = NodePath("DesertBGM:volume_db")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [0.0, -80.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("OasisBGM:volume_db")
+tracks/2/path = NodePath("OasisBGM:stream_paused")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("OasisBGM:stream_paused")
+tracks/3/path = NodePath("DesertBGM:stream_paused")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sxm3c"]
@@ -244,10 +244,12 @@ script = ExtResource("7_i8uon")
 stream = ExtResource("7_pdph2")
 volume_db = -80.0
 autoplay = true
+bus = &"BGM"
 
 [node name="OasisBGM" type="AudioStreamPlayer" parent="BGM"]
 stream = ExtResource("8_843ex")
 autoplay = true
+bus = &"BGM"
 
 [node name="BGMCrossFader" type="AnimationPlayer" parent="BGM"]
 libraries = {

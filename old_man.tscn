@@ -84,3 +84,4 @@ texture = ExtResource("2_gjgyq")
 
 [node name="Mumblings" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_xnqd4")
+bus = &"SFX"

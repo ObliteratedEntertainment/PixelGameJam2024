@@ -1,211 +1,585 @@
-[gd_scene load_steps=15 format=3 uid="uid://dg685leglcy4e"]
+[gd_scene load_steps=44 format=3 uid="uid://cusjl8n1wtb6f"]
 
-[ext_resource type="PackedScene" uid="uid://50v8sxikq02p" path="res://ui/water_gauge.tscn" id="1_qrhh3"]
-[ext_resource type="PackedScene" uid="uid://dic8xj22l5wul" path="res://world.tscn" id="1_w7p1e"]
-[ext_resource type="Script" path="res://ui/screen_wipe.gd" id="1_wa3t1"]
-[ext_resource type="PackedScene" uid="uid://8u45aqgregkk" path="res://ui/flask_bar.tscn" id="2_4mwnd"]
-[ext_resource type="Texture2D" uid="uid://bx8847wwmrxi2" path="res://ui/wasd_layout.png" id="6_a42a4"]
-[ext_resource type="Texture2D" uid="uid://co3eb6fdcrd2n" path="res://ui/screen_wipe_sand_particles.png" id="6_jhg2m"]
-[ext_resource type="Texture2D" uid="uid://c1yttn7wiksst" path="res://ui/key_e.png" id="7_536ju"]
-[ext_resource type="Texture2D" uid="uid://bbwdbnaqoovsc" path="res://ui/key_r.png" id="8_hc3cf"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_0mgpi"]
+[ext_resource type="Script" path="res://ui/main_menu_cloud_driver.gd" id="1_m4e8c"]
+[ext_resource type="Texture2D" uid="uid://cjd8nqcrkdnd" path="res://ui/OASIS_logo.png" id="1_vsut2"]
+[ext_resource type="PackedScene" uid="uid://n1r1g817woap" path="res://decorations/cloud_1.tscn" id="1_wixhy"]
+[ext_resource type="PackedScene" uid="uid://de47yuehnopao" path="res://decorations/dead_tree.tscn" id="2_3v2rs"]
+[ext_resource type="PackedScene" uid="uid://c3nvgj3k7dygx" path="res://decorations/cloud_2.tscn" id="2_gln5x"]
+[ext_resource type="PackedScene" uid="uid://bslsphkm41pqg" path="res://decorations/cloud_3.tscn" id="3_jxtuu"]
+[ext_resource type="PackedScene" uid="uid://dxchsddlllfl1" path="res://decorations/dirt_2.tscn" id="3_rt3gq"]
+[ext_resource type="PackedScene" uid="uid://l2juh3st1mo6" path="res://decorations/dirt_3.tscn" id="8_g055v"]
+[ext_resource type="PackedScene" uid="uid://b7iec74heesa0" path="res://decorations/dirt_5.tscn" id="9_ram4b"]
+[ext_resource type="PackedScene" uid="uid://cqjko0s7x7ltl" path="res://decorations/dirt_6.tscn" id="10_iyumj"]
+[ext_resource type="PackedScene" uid="uid://bjh0f1ppqw4gx" path="res://decorations/dirt_8.tscn" id="11_t6k6o"]
+[ext_resource type="PackedScene" uid="uid://8dm41njm7pkj" path="res://decorations/dirt_4.tscn" id="12_fm8ab"]
+[ext_resource type="AudioStream" uid="uid://bmbs3bmb11vck" path="res://oasis-desert-zone-bgm.ogg" id="13_ttt4t"]
+[ext_resource type="PackedScene" uid="uid://cilum5h5icmdo" path="res://decorations/dead_grass_1.tscn" id="14_swp66"]
+[ext_resource type="PackedScene" uid="uid://cs5oacdiylgas" path="res://decorations/dead_grass_4.tscn" id="14_xuice"]
+[ext_resource type="PackedScene" uid="uid://b8v1aiqlxfn7y" path="res://decorations/dead_grass_3.tscn" id="15_nbtf0"]
+[ext_resource type="PackedScene" uid="uid://co0ex3jlm31c0" path="res://decorations/dead_grass_5.tscn" id="16_2ov2y"]
+[ext_resource type="PackedScene" uid="uid://bs3fyjnikoc16" path="res://decorations/dead_grass_2.tscn" id="17_yikx2"]
+[ext_resource type="Texture2D" uid="uid://7s7iffnav6md" path="res://sprites/dirty_spots/stain_1.png" id="19_wnueh"]
+[ext_resource type="Texture2D" uid="uid://4d5kdu0piitr" path="res://sprites/dirty_spots/stain_2.png" id="20_4hcp7"]
+[ext_resource type="PackedScene" uid="uid://bsqdtsq6dfs36" path="res://decorations/cactus_1.tscn" id="21_witkp"]
+[ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="22_xquog"]
+[ext_resource type="PackedScene" uid="uid://cfd4dfkvg2iuu" path="res://decorations/cactus_3.tscn" id="23_ge6et"]
+[ext_resource type="PackedScene" uid="uid://du8v06ko4d4qr" path="res://decorations/cactus_flower.tscn" id="24_b8jnw"]
+[ext_resource type="Script" path="res://ui/menu_controller.gd" id="24_scbo7"]
+[ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="26_qeoya"]
+[ext_resource type="LabelSettings" uid="uid://dspmfew4vn2dr" path="res://ui/main_menu_font.tres" id="27_gnrig"]
+[ext_resource type="AudioStream" uid="uid://ukd6vweylb6" path="res://sfx/ui_button_1.wav" id="28_477in"]
+[ext_resource type="AudioStream" uid="uid://bxx5ixjmn4226" path="res://sfx/ui_button_2.wav" id="29_7gkm3"]
+[ext_resource type="AudioStream" uid="uid://s446am1odksh" path="res://sfx/ui_button_3.wav" id="30_3yglh"]
+[ext_resource type="Texture2D" uid="uid://v362oj1or0oj" path="res://playroom_logo_1.png" id="32_fhul8"]
+[ext_resource type="Script" path="res://ui/settings.gd" id="32_t3lpg"]
 
-[sub_resource type="Gradient" id="Gradient_ldnr1"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.515, 1)
-colors = PackedColorArray(0.776471, 0.776471, 0.580392, 1, 0.642518, 0.641079, 0.43149, 1, 0.776471, 0.776471, 0.580392, 1)
+[sub_resource type="Curve2D" id="Curve2D_ujgx0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 984, 55, 0, 0, 0, 0, -252, 55)
+}
+point_count = 2
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cf8v6"]
-gradient = SubResource("Gradient_ldnr1")
-width = 640
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vo144"]
+streams_count = 3
+stream_0/stream = ExtResource("28_477in")
+stream_1/stream = ExtResource("29_7gkm3")
+stream_2/stream = ExtResource("30_3yglh")
 
-[sub_resource type="Animation" id="Animation_l4b5d"]
-resource_name = "FadeIn"
+[sub_resource type="Gradient" id="Gradient_l3231"]
+offsets = PackedFloat32Array(0, 0.994318)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_umg34"]
+gradient = SubResource("Gradient_l3231")
+width = 120
+height = 32
+
+[sub_resource type="Animation" id="Animation_6y344"]
+resource_name = "idle"
+length = 0.80001
+loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
+tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(961, 0), Vector2(1914, 0)]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_jrxw5"]
-resource_name = "FadeOut"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(961, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Control")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.999),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_anim_fade_out_completed"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_ehqjt"]
+[sub_resource type="Animation" id="Animation_jtiib"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
+tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhs26"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t34jq"]
 _data = {
-"FadeIn": SubResource("Animation_l4b5d"),
-"FadeOut": SubResource("Animation_jrxw5"),
-"RESET": SubResource("Animation_ehqjt")
+"RESET": SubResource("Animation_jtiib"),
+"idle": SubResource("Animation_6y344")
 }
+
+[sub_resource type="Gradient" id="Gradient_621d0"]
+offsets = PackedFloat32Array(0.0340909, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_57tsd"]
+gradient = SubResource("Gradient_621d0")
+width = 160
+height = 32
+
+[sub_resource type="Theme" id="Theme_owypu"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-
-[node name="ScreenWipe" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="ScreenWipe"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_wa3t1")
-
-[node name="SandFadeIn" type="TextureRect" parent="ScreenWipe/Control"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -321.0
-offset_top = -20.0
-offset_bottom = 340.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("6_jhg2m")
+mouse_filter = 1
+script = ExtResource("1_0mgpi")
 
-[node name="LoadingPeriod" type="TextureRect" parent="ScreenWipe/Control"]
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -961.0
-offset_right = -361.0
-offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture1D_cf8v6")
+mouse_filter = 2
+color = Color(0.901961, 0.901961, 0.627451, 1)
 
-[node name="SandFadeOut" type="TextureRect" parent="ScreenWipe/Control"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -1282.0
-offset_top = -20.0
-offset_right = -961.0
-offset_bottom = 340.0
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("6_jhg2m")
-flip_h = true
+[node name="MenuWorld" type="Node2D" parent="." node_paths=PackedStringArray("followers")]
+script = ExtResource("1_m4e8c")
+speed = 30.0
+followers = [NodePath("Path2D/PathFollow2D"), NodePath("Path2D2/PathFollow2D"), NodePath("Path2D3/PathFollow2D")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenWipe"]
-libraries = {
-"": SubResource("AnimationLibrary_dhs26")
-}
-speed_scale = 3.0
+[node name="Path2D" type="Path2D" parent="MenuWorld"]
+curve = SubResource("Curve2D_ujgx0")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="PathFollow2D" type="PathFollow2D" parent="MenuWorld/Path2D"]
+position = Vector2(893.778, 55)
+progress = 90.2307
+rotates = false
+
+[node name="Cloud1" parent="MenuWorld/Path2D/PathFollow2D" instance=ExtResource("1_wixhy")]
+
+[node name="Path2D2" type="Path2D" parent="MenuWorld"]
+position = Vector2(-205, 76)
+curve = SubResource("Curve2D_ujgx0")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="MenuWorld/Path2D2"]
+position = Vector2(365.996, 55)
+progress = 618.004
+rotates = false
+
+[node name="Cloud2" parent="MenuWorld/Path2D2/PathFollow2D" instance=ExtResource("2_gln5x")]
+
+[node name="Path2D3" type="Path2D" parent="MenuWorld"]
+position = Vector2(-205, 76)
+curve = SubResource("Curve2D_ujgx0")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="MenuWorld/Path2D3"]
+position = Vector2(351.288, 55)
+progress = 632.712
+rotates = false
+
+[node name="Cloud3" parent="MenuWorld/Path2D3/PathFollow2D" instance=ExtResource("3_jxtuu")]
+position = Vector2(291, -168)
+
+[node name="DeadTree" parent="MenuWorld" instance=ExtResource("2_3v2rs")]
+position = Vector2(82, 269)
+
+[node name="Dirt2" parent="MenuWorld" instance=ExtResource("3_rt3gq")]
+position = Vector2(77, 266)
+
+[node name="DeadTree5" parent="MenuWorld" instance=ExtResource("2_3v2rs")]
+position = Vector2(538, 57)
+
+[node name="DeadTree4" parent="MenuWorld" instance=ExtResource("2_3v2rs")]
+position = Vector2(127, 129)
+
+[node name="DeadTree3" parent="MenuWorld" instance=ExtResource("2_3v2rs")]
+position = Vector2(446, 189)
+
+[node name="DeadTree6" parent="MenuWorld" instance=ExtResource("2_3v2rs")]
+position = Vector2(474, 322)
+
+[node name="Dirt4" parent="MenuWorld" instance=ExtResource("12_fm8ab")]
+position = Vector2(541, 62)
+
+[node name="Dirt8" parent="MenuWorld" instance=ExtResource("11_t6k6o")]
+position = Vector2(131, 134)
+
+[node name="Dirt7" parent="MenuWorld" instance=ExtResource("10_iyumj")]
+position = Vector2(419, 192)
+
+[node name="Dirt6" parent="MenuWorld" instance=ExtResource("9_ram4b")]
+position = Vector2(501, 314)
+
+[node name="Dirt3" parent="MenuWorld" instance=ExtResource("8_g055v")]
+position = Vector2(396, 252)
+
+[node name="DeadGrass1" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(105, 203)
+
+[node name="DeadGrass11" parent="MenuWorld" instance=ExtResource("14_xuice")]
+position = Vector2(59, 320)
+
+[node name="DeadGrass10" parent="MenuWorld" instance=ExtResource("15_nbtf0")]
+position = Vector2(27, 328)
+
+[node name="DeadGrass2" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(60, 269)
+
+[node name="DeadGrass9" parent="MenuWorld" instance=ExtResource("16_2ov2y")]
+position = Vector2(239, 292)
+
+[node name="DeadGrass8" parent="MenuWorld" instance=ExtResource("14_xuice")]
+position = Vector2(231, 284)
+
+[node name="DeadGrass7" parent="MenuWorld" instance=ExtResource("16_2ov2y")]
+position = Vector2(425, 326)
+
+[node name="DeadGrass6" parent="MenuWorld" instance=ExtResource("15_nbtf0")]
+position = Vector2(508, 321)
+
+[node name="DeadGrass5" parent="MenuWorld" instance=ExtResource("14_xuice")]
+position = Vector2(487, 306)
+
+[node name="DeadGrass4" parent="MenuWorld" instance=ExtResource("16_2ov2y")]
+position = Vector2(398, 252)
+
+[node name="DeadGrass24" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(607, 337)
+
+[node name="DeadGrass23" parent="MenuWorld" instance=ExtResource("16_2ov2y")]
+position = Vector2(461, 324)
+
+[node name="DeadGrass22" parent="MenuWorld" instance=ExtResource("15_nbtf0")]
+position = Vector2(430, 196)
+
+[node name="DeadGrass25" parent="MenuWorld" instance=ExtResource("14_xuice")]
+position = Vector2(428, 207)
+
+[node name="DeadGrass21" parent="MenuWorld" instance=ExtResource("17_yikx2")]
+position = Vector2(548, 230)
+
+[node name="DeadGrass26" parent="MenuWorld" instance=ExtResource("16_2ov2y")]
+position = Vector2(602, 25)
+
+[node name="DeadGrass20" parent="MenuWorld" instance=ExtResource("14_xuice")]
+position = Vector2(444, 43)
+
+[node name="DeadGrass27" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(462, 180)
+
+[node name="DeadGrass19" parent="MenuWorld" instance=ExtResource("16_2ov2y")]
+position = Vector2(529, 123)
+
+[node name="DeadGrass28" parent="MenuWorld" instance=ExtResource("15_nbtf0")]
+position = Vector2(524, 59)
+
+[node name="DeadGrass29" parent="MenuWorld" instance=ExtResource("17_yikx2")]
+position = Vector2(376, 113)
+
+[node name="DeadGrass17" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(317, 84)
+
+[node name="DeadGrass30" parent="MenuWorld" instance=ExtResource("15_nbtf0")]
+position = Vector2(249, 113)
+
+[node name="DeadGrass16" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(25, 15)
+
+[node name="DeadGrass15" parent="MenuWorld" instance=ExtResource("15_nbtf0")]
+position = Vector2(59, 86)
+
+[node name="DeadGrass13" parent="MenuWorld" instance=ExtResource("14_swp66")]
+position = Vector2(152, 129)
+
+[node name="Stain1" type="Sprite2D" parent="MenuWorld"]
+position = Vector2(218, 297)
+texture = ExtResource("19_wnueh")
+
+[node name="Stain2" type="Sprite2D" parent="MenuWorld"]
+position = Vector2(471, 130)
+texture = ExtResource("20_4hcp7")
+
+[node name="DeadTree2" parent="MenuWorld" instance=ExtResource("2_3v2rs")]
+position = Vector2(510, 312)
+
+[node name="Cactus4" parent="MenuWorld" instance=ExtResource("21_witkp")]
+position = Vector2(251, 306)
+
+[node name="Cactus3" parent="MenuWorld" instance=ExtResource("23_ge6et")]
+position = Vector2(229, 306)
+
+[node name="Cactus2" parent="MenuWorld" instance=ExtResource("22_xquog")]
+position = Vector2(211, 282)
+
+[node name="Cactus1" parent="MenuWorld" instance=ExtResource("21_witkp")]
+position = Vector2(190, 293)
+
+[node name="CactusFlower6" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(228, 299)
+
+[node name="CactusFlower5" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(230, 294)
+
+[node name="CactusFlower4" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(213, 272)
+
+[node name="CactusFlower3" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(208, 273)
+
+[node name="CactusFlower2" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(192, 290)
+
+[node name="CactusFlower7" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(462, 103)
+
+[node name="Cactus5" parent="MenuWorld" instance=ExtResource("21_witkp")]
+position = Vector2(463, 110)
+
+[node name="CactusFlower8" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(504, 137)
+
+[node name="Cactus6" parent="MenuWorld" instance=ExtResource("21_witkp")]
+position = Vector2(504, 143)
+
+[node name="CactusFlower" parent="MenuWorld" instance=ExtResource("24_b8jnw")]
+position = Vector2(189, 287)
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_ttt4t")
+autoplay = true
+bus = &"BGM"
+
+[node name="SFX UI" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_vo144")
+bus = &"SFX"
+
+[node name="Menu" type="CanvasLayer" parent="."]
 layer = 2
+script = ExtResource("24_scbo7")
 
-[node name="WaterGauge" type="MarginContainer" parent="UI"]
-offset_right = 309.0
-offset_bottom = 47.0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-
-[node name="WaterGauge" parent="UI/WaterGauge" instance=ExtResource("1_qrhh3")]
-layout_mode = 2
-
-[node name="FlaskBar" type="MarginContainer" parent="UI"]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 55
-theme_override_constants/margin_top = 42
-
-[node name="Flasks" parent="UI/FlaskBar" instance=ExtResource("2_4mwnd")]
-layout_mode = 2
-
-[node name="MoveHint" type="MarginContainer" parent="UI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="TextureRect" type="TextureRect" parent="UI/MoveHint"]
-layout_mode = 2
-texture = ExtResource("6_a42a4")
+[node name="Logo" type="TextureRect" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -80.0
+offset_right = 105.5
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_vsut2")
 stretch_mode = 2
 
-[node name="ActionBar" type="MarginContainer" parent="UI"]
+[node name="Options" type="VBoxContainer" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Start" type="TextureButton" parent="Menu/Options"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_umg34")
+
+[node name="Label" type="Label" parent="Menu/Options/Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -15.0
+offset_right = 45.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "START"
+label_settings = ExtResource("27_gnrig")
+
+[node name="Selector2" type="Sprite2D" parent="Menu/Options/Start"]
+position = Vector2(20, 18)
+texture = ExtResource("26_qeoya")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/Options/Start/Selector2"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="Settings" type="TextureButton" parent="Menu/Options"]
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_57tsd")
+
+[node name="Label" type="Label" parent="Menu/Options/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -15.0
+offset_right = 72.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SETTINGS"
+label_settings = ExtResource("27_gnrig")
+
+[node name="Selector" type="Sprite2D" parent="Menu/Options/Settings"]
+visible = false
+position = Vector2(-7, 18)
+texture = ExtResource("26_qeoya")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/Options/Settings/Selector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+texture_filter = 1
+offset_left = 3.0
+offset_top = 317.0
+offset_right = 183.0
+offset_bottom = 357.0
+texture = ExtResource("32_fhul8")
+stretch_mode = 2
+
+[node name="Settings" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+script = ExtResource("32_t3lpg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.5
+offset_top = -32.0
+offset_right = 190.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="BgmSelector" type="Sprite2D" parent="Settings/VBoxContainer/HBoxContainer"]
+visible = false
+position = Vector2(-12.5, 17)
+texture = ExtResource("26_qeoya")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Settings/VBoxContainer/HBoxContainer/BgmSelector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="BGM" type="Label" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Music"
+label_settings = ExtResource("27_gnrig")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BGMLevel" type="HSlider" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_neighbor_top = NodePath("../../../Accept")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/SFXLevel")
+focus_next = NodePath("../../HBoxContainer2/SFXLevel")
+focus_previous = NodePath("../../../Accept")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="SfxSelector" type="Sprite2D" parent="Settings/VBoxContainer/HBoxContainer2"]
+visible = false
+position = Vector2(22.5, 17)
+texture = ExtResource("26_qeoya")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Settings/VBoxContainer/HBoxContainer2/SfxSelector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="SFX" type="Label" parent="Settings/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "SFX"
+label_settings = ExtResource("27_gnrig")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXLevel" type="HSlider" parent="Settings/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_neighbor_top = NodePath("../../HBoxContainer/BGMLevel")
+focus_neighbor_bottom = NodePath("../../../Accept")
+focus_next = NodePath("../../../Accept")
+focus_previous = NodePath("../../HBoxContainer/BGMLevel")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Accept" type="TextureButton" parent="Settings"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -22.0
-offset_top = -17.0
+offset_left = -140.0
+offset_top = -37.0
+offset_right = -8.0
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+focus_neighbor_top = NodePath("../VBoxContainer/HBoxContainer2/SFXLevel")
+focus_next = NodePath("../VBoxContainer/HBoxContainer/BGMLevel")
+focus_previous = NodePath("../VBoxContainer/HBoxContainer2/SFXLevel")
+theme = SubResource("Theme_owypu")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ActionBar"]
-layout_mode = 2
-theme_override_constants/separation = 32
+[node name="AcceptSelector" type="Sprite2D" parent="Settings/Accept"]
+visible = false
+position = Vector2(-1, 15)
+texture = ExtResource("26_qeoya")
+hframes = 10
+vframes = 11
 
-[node name="TextureRect" type="TextureRect" parent="UI/ActionBar/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_536ju")
-stretch_mode = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Settings/Accept/AcceptSelector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
 
-[node name="TextureRect2" type="TextureRect" parent="UI/ActionBar/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("8_hc3cf")
-
-[node name="World" parent="." instance=ExtResource("1_w7p1e")]
-metadata/_edit_lock_ = true
+[node name="Label" type="Label" parent="Settings/Accept"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -15.0
+offset_right = 54.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ACCEPT"
+label_settings = ExtResource("27_gnrig")
