@@ -1,7 +1,7 @@
 [gd_scene load_steps=107 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
-[ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="2_e2s6s"]
+[ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="2_qte35"]
 [ext_resource type="Texture2D" uid="uid://o4nkn2fbx3ly" path="res://sprites/player/player_shadow.png" id="3_qdbqr"]
 [ext_resource type="AudioStream" uid="uid://dw2k3135rlgcb" path="res://sfx/sand_steps_1.wav" id="4_06mgg"]
 [ext_resource type="AudioStream" uid="uid://deg7f32o2aej8" path="res://sfx/sand_steps_2.wav" id="5_07gwn"]
@@ -767,7 +767,7 @@ shape = SubResource("CapsuleShape2D_njm32")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2_e2s6s")
+texture = ExtResource("2_qte35")
 hframes = 10
 vframes = 11
 frame = 100
@@ -784,8 +784,8 @@ tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.0524827
-parameters/current_delta = 0.006927
+parameters/current_position = 0.122834
+parameters/current_delta = 0.00694444
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.0
 parameters/DeathDown/current_delta = 0.80001
@@ -844,21 +844,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.0524827
-parameters/Movement/current_delta = 0.006927
+parameters/Movement/current_position = 0.122834
+parameters/Movement/current_delta = 0.00694444
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.0524827
-parameters/Movement/0/current_delta = 0.006927
+parameters/Movement/0/current_position = 0.122834
+parameters/Movement/0/current_delta = 0.00694444
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.0524827
-parameters/Movement/1/current_delta = 0.006927
+parameters/Movement/1/current_position = 0.122834
+parameters/Movement/1/current_delta = 0.00694444
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.0524827
-parameters/Movement/2/current_delta = 0.006927
+parameters/Movement/2/current_position = 0.122834
+parameters/Movement/2/current_delta = 0.00694444
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.0524827
-parameters/Movement/3/current_delta = 0.006927
+parameters/Movement/3/current_position = 0.122834
+parameters/Movement/3/current_delta = 0.00694444
 parameters/Respawn/current_length = 0.80001
 parameters/Respawn/current_position = 0.80001
 parameters/Respawn/current_delta = 0.0115956
@@ -867,7 +867,7 @@ parameters/Start/current_position = 0.0
 parameters/Start/current_delta = 0.0
 parameters/WaterDowsing/current_length = 1.0
 parameters/WaterDowsing/current_position = 1.0
-parameters/WaterDowsing/current_delta = 0.0
+parameters/WaterDowsing/current_delta = 0.0126253
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

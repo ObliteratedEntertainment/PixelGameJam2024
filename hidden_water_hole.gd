@@ -26,6 +26,7 @@ func consume():
 	consumed = true
 	
 	# show the water active from digging
+	visible = true
 	activated.visible = true
 	
 	collision_layer = 0

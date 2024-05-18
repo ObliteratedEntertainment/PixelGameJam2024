@@ -5,6 +5,9 @@ const FOOTPRINT = preload("res://footprint.tscn")
 const DUG_HOLE = preload("res://dug_hole.tscn")
 const DOWSING_RIPPLE = preload("res://dowsing_ripple.tscn")
 
+const PLAYER_HAS_SHOVEL = preload("res://sprites/player/player.png")
+const PLAYER_NO_TOOL = preload("res://sprites/player/player_notool.png")
+
 const ACCEL := 100.0
 const MAX_SPEED := 80.0
 
@@ -26,6 +29,8 @@ var remote_tweener: Tween = null
 @onready var power_up_detector: Area2D = $PowerUpDetector
 @onready var broadcast_position_timer: Timer = $BroadcastPositionTimer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 # Spots to drop footprints at
@@ -60,6 +65,8 @@ var last_active_direction := Vector2.DOWN
 @export var dead := false
 @export var disconnected := false #only applies to remote players
 
+var has_shovel := false
+
 # Water system
 var current_water := 100.0
 var water_buffs := 0
@@ -74,6 +81,9 @@ var recent_footprints: Array[Vector2] = []
 
 func _ready() -> void:
 	reset_state()
+	
+	if is_remote_player:
+		camera_2d.enabled = false
 	
 	if not is_remote_player:
 		WorldManager.player_respawn.connect(_on_respawn_requested)
@@ -222,6 +232,12 @@ func _get_player_movement_input(delta: float) -> Vector2:
 
 func _check_player_actions():
 	if is_remote_player:
+		
+		# Check to see if they got the shovel upgrade
+		if not has_shovel and \
+				Playroom.get_player_upgrade(remote_player_id, Playroom.UPGRADE_SHOVEL):
+			_show_shovel()
+		
 		# TODO: Update actions to have a location attached to them
 		# so we can replay more accurately
 		var action = Playroom.get_other_player_action(remote_player_id)
@@ -256,12 +272,12 @@ func _check_player_actions():
 		
 	else:
 		
-		if Input.is_action_just_pressed("player_dig"):
+		if has_shovel and Input.is_action_just_pressed("player_dig"):
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
 			Playroom.set_player_action(Playroom.ACTION_DIGGING)
 			return
-		elif Input.is_action_just_pressed("player_dowse"):
+		elif has_shovel and Input.is_action_just_pressed("player_dowse"):
 			dowsing = true
 			Playroom.set_player_action(Playroom.ACTION_DOWSING)
 			return
@@ -438,6 +454,10 @@ func _on_power_up_entered(body: Area2D) -> void:
 		)
 		
 		body.consume()
+	elif body is ShovelPowerUp and not body.consumed:
+		Playroom.set_player_upgrade(Playroom.UPGRADE_SHOVEL)
+		_show_shovel()
+		body.consume()
 
 func _on_respawn_requested() -> void:
 	if is_remote_player:
@@ -516,3 +536,11 @@ func _anim_player_dowsing_started() -> void:
 		var ripple = DOWSING_RIPPLE.instantiate()
 		ripple.position = global_position
 		get_parent().add_child(ripple)
+
+
+func _show_shovel() -> void:
+	has_shovel = true
+	sprite_2d.texture = PLAYER_HAS_SHOVEL
+	
+	if not is_remote_player:
+		WorldManager.player_upgraded.emit(Playroom.UPGRADE_SHOVEL)

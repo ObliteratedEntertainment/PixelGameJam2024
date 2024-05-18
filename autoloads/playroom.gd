@@ -9,6 +9,8 @@ const ACTION_WRITING = "T"
 const ACTION_DIED    = "D"
 const ACTION_RESPAWN = "R"
 
+const UPGRADE_SHOVEL = "SHOVEL"
+
 # To Test with Playroom connectivity
 # In the upper-right, click the "Remote Debug" option and
 # select "Run in Browser". 
@@ -170,6 +172,24 @@ func get_other_player_position(player: String) -> Vector2:
 func set_player_action(action: String):
 	if connected:
 		_playroom.myPlayer().setState("action", action)
+
+func set_player_upgrade(upgrade: String) -> void:
+	if connected:
+		_playroom.myPlayer().setState(upgrade, "T")
+
+func get_player_upgrade(player: String, upgrade: String) -> bool:
+	if _current_room not in _tracked_room_players:
+		return false
+	
+	if player not in _tracked_room_players[_current_room]:
+		return false
+	
+	var action_data = _tracked_room_players[_current_room][player].getState(upgrade)
+	
+	if action_data == null:
+		return false
+	
+	return action_data == "T"
 
 func get_other_player_action(player: String) -> String:
 	if _current_room not in _tracked_room_players:

@@ -9,6 +9,7 @@ func _ready() -> void:
 	WorldManager.oasis_entered.connect(_on_entered_oasis)
 	WorldManager.oasis_left.connect(_on_left_oasis)
 	
+	
 
 
 func _on_entered_oasis() -> void:

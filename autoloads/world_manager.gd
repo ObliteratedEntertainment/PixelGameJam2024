@@ -16,6 +16,7 @@ signal player_respawn()
 
 signal player_water_changed(total_water: float, water_delta: float, heat_intensity: int)
 signal player_flask_changed(available_flasks: int, total_flasks: int)
+signal player_upgraded(upgrade: String)
 
 var current_zone := ""
 

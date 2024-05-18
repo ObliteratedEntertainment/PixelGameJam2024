@@ -1,7 +1,7 @@
 extends Area2D
-class_name FlaskPowerUp
+class_name ShovelPowerUp
 
-@onready var flask: Sprite2D = $Flask
+@onready var shovel: Sprite2D = $Shovel
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -14,7 +14,7 @@ func consume():
 		return
 	
 	consumed = true
-	flask.visible = false
+	shovel.visible = false
 	
 	collision_layer = 0
 	
