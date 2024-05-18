@@ -101,11 +101,6 @@ func _ready() -> void:
 	
 	_playroom = JavaScriptBridge.get_interface("Playroom")
 	_console = JavaScriptBridge.get_interface("console")
-	
-	# TODO: Add retry logic if the first room is full,
-	#  fallback to the next and so on
-	if not OS.has_feature("editor"):
-		connect_room(GLOBAL_ROOMS[0])
  
 ## Connect to a room (disconnect from the other if we were connected)
 func connect_room(room_name: String):

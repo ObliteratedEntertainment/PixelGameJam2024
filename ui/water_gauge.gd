@@ -6,8 +6,8 @@ const INCREASING_ARROW = preload("res://ui/increasing_arrow.tscn")
 @export var fill_water_healthy := Color("1893e1")
 @export var fill_water_unhealthy := Color("ba4ff5")
 
-@export var bg_water_healthy := Color("001a2e")
-@export var bg_water_unhealthy := Color("350208")
+@export var bg_water_healthy := Color("222065")
+@export var bg_water_unhealthy := Color("840d22")
 
 @onready var healthy_bubble: Sprite2D = $HealthyBubble
 @onready var unhealthy_bubble: Sprite2D = $UnhealthyBubble
@@ -84,7 +84,7 @@ func _on_player_flasks_changed(unused: int, total: int) -> void:
 	else:
 		# TODO: consider strobing the water level when unhealthy
 		# below a certain amount
-		water_level.color = fill_water_unhealthy
+		water_level.color = fill_water_healthy
 		background_bar.color = bg_water_unhealthy
 		
 	

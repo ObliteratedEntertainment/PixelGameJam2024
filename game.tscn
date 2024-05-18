@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dg685leglcy4e"]
+[gd_scene load_steps=20 format=3 uid="uid://dg685leglcy4e"]
 
 [ext_resource type="PackedScene" uid="uid://50v8sxikq02p" path="res://ui/water_gauge.tscn" id="1_qrhh3"]
 [ext_resource type="PackedScene" uid="uid://dic8xj22l5wul" path="res://world.tscn" id="1_w7p1e"]
 [ext_resource type="Script" path="res://ui/screen_wipe.gd" id="1_wa3t1"]
+[ext_resource type="Script" path="res://game.gd" id="1_xyfbp"]
 [ext_resource type="PackedScene" uid="uid://8u45aqgregkk" path="res://ui/flask_bar.tscn" id="2_4mwnd"]
 [ext_resource type="Texture2D" uid="uid://bx8847wwmrxi2" path="res://ui/wasd_layout.png" id="6_a42a4"]
 [ext_resource type="Texture2D" uid="uid://co3eb6fdcrd2n" path="res://ui/screen_wipe_sand_particles.png" id="6_jhg2m"]
@@ -10,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c1yttn7wiksst" path="res://ui/key_e.png" id="7_536ju"]
 [ext_resource type="FontFile" uid="uid://cvjjixrtqbbwt" path="res://Kenney Mini Square Mono.ttf" id="8_h2kua"]
 [ext_resource type="Texture2D" uid="uid://bbwdbnaqoovsc" path="res://ui/key_r.png" id="8_hc3cf"]
+[ext_resource type="PackedScene" uid="uid://cqtqx0vslyudt" path="res://ui/settings.tscn" id="12_sb374"]
 
 [sub_resource type="Gradient" id="Gradient_ldnr1"]
 interpolation_mode = 2
@@ -94,6 +96,7 @@ outline_size = 4
 [node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_xyfbp")
 
 [node name="ScreenWipe" type="CanvasLayer" parent="."]
 
@@ -264,6 +267,8 @@ offset_right = 36.0
 offset_bottom = 36.0
 text = "TEXT"
 label_settings = SubResource("LabelSettings_xpwmq")
+
+[node name="Settings" parent="." instance=ExtResource("12_sb374")]
 
 [node name="World" parent="." instance=ExtResource("1_w7p1e")]
 metadata/_edit_lock_ = true

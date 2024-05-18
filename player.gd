@@ -88,6 +88,7 @@ func _ready() -> void:
 	
 	if not is_remote_player:
 		WorldManager.player_respawn.connect(_on_respawn_requested)
+		WorldManager.ui_active.connect(_on_ui_active)
 	
 	broadcast_position_timer.timeout.connect(_on_broadcast_timeout)
 	
@@ -336,7 +337,7 @@ func _process_water_drain(delta: float) -> void:
 		intensity = min(0, intensity)
 	
 	# One flask should recharge in only 2 seconds of oasis time
-	const FLASK_RECHARGE_TIME = 100.0 / (2.0 * 3)
+	const FLASK_RECHARGE_TIME = 100.0 / (1.0 * 3)
 	
 	# One flask (100.0) should equal roughly 20 seconds of -3 drain
 	const DRAIN_TIME_PER_FLASK = 100.0 / (20.0 * 3)
@@ -478,6 +479,9 @@ func _on_respawn_requested() -> void:
 		reset_state()
 		dead = false
 		Playroom.set_player_action(Playroom.ACTION_RESPAWN)
+
+func _on_ui_active(showing: bool) -> void:
+	invulnerable = showing
 
 func _anim_dig_hole(spawn_west: bool):
 	if not is_remote_player:

@@ -1,0 +1,198 @@
+[gd_scene load_steps=12 format=3 uid="uid://cqtqx0vslyudt"]
+
+[ext_resource type="Script" path="res://ui/settings.gd" id="1_7u0wv"]
+[ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="2_563s3"]
+[ext_resource type="AudioStream" uid="uid://ukd6vweylb6" path="res://sfx/ui_button_1.wav" id="2_jsoop"]
+[ext_resource type="AudioStream" uid="uid://bxx5ixjmn4226" path="res://sfx/ui_button_2.wav" id="3_11tyg"]
+[ext_resource type="LabelSettings" uid="uid://dspmfew4vn2dr" path="res://ui/main_menu_font.tres" id="3_ujnbr"]
+[ext_resource type="AudioStream" uid="uid://s446am1odksh" path="res://sfx/ui_button_3.wav" id="4_pmm23"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2dcav"]
+streams_count = 3
+stream_0/stream = ExtResource("2_jsoop")
+stream_1/stream = ExtResource("3_11tyg")
+stream_2/stream = ExtResource("4_pmm23")
+
+[sub_resource type="Animation" id="Animation_jtiib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6y344"]
+resource_name = "idle"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t34jq"]
+_data = {
+"RESET": SubResource("Animation_jtiib"),
+"idle": SubResource("Animation_6y344")
+}
+
+[sub_resource type="Theme" id="Theme_owypu"]
+
+[node name="Settings" type="CanvasLayer"]
+layer = 2
+visible = false
+script = ExtResource("1_7u0wv")
+
+[node name="SFX UI" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_2dcav")
+bus = &"SFX"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.5
+offset_top = -32.0
+offset_right = 190.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BgmSelector" type="Sprite2D" parent="VBoxContainer/HBoxContainer"]
+visible = false
+position = Vector2(-12.5, 17)
+texture = ExtResource("2_563s3")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/BgmSelector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="BGM" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Music"
+label_settings = ExtResource("3_ujnbr")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BGMLevel" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_neighbor_top = NodePath("../../../Accept")
+focus_neighbor_bottom = NodePath("../../HBoxContainer2/SFXLevel")
+focus_next = NodePath("../../HBoxContainer2/SFXLevel")
+focus_previous = NodePath("../../../Accept")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SfxSelector" type="Sprite2D" parent="VBoxContainer/HBoxContainer2"]
+visible = false
+position = Vector2(22.5, 17)
+texture = ExtResource("2_563s3")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer2/SfxSelector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="SFX" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "SFX"
+label_settings = ExtResource("3_ujnbr")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXLevel" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_neighbor_top = NodePath("../../HBoxContainer/BGMLevel")
+focus_neighbor_bottom = NodePath("../../../Accept")
+focus_next = NodePath("../../../Accept")
+focus_previous = NodePath("../../HBoxContainer/BGMLevel")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Accept" type="TextureButton" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -101.0
+offset_right = 66.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_top = NodePath("../VBoxContainer/HBoxContainer2/SFXLevel")
+focus_next = NodePath("../VBoxContainer/HBoxContainer/BGMLevel")
+focus_previous = NodePath("../VBoxContainer/HBoxContainer2/SFXLevel")
+theme = SubResource("Theme_owypu")
+
+[node name="AcceptSelector" type="Sprite2D" parent="Accept"]
+visible = false
+position = Vector2(-1, 15)
+texture = ExtResource("2_563s3")
+hframes = 10
+vframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Accept/AcceptSelector"]
+libraries = {
+"": SubResource("AnimationLibrary_t34jq")
+}
+autoplay = "idle"
+
+[node name="Label" type="Label" parent="Accept"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -15.0
+offset_right = 54.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ACCEPT"
+label_settings = ExtResource("3_ujnbr")

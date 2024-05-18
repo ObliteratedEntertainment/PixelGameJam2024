@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal switch_menu()
 
-@onready var sfx_ui: AudioStreamPlayer = $"../SFX UI"
+@onready var sfx_ui: AudioStreamPlayer = $"SFX UI"
 
 @onready var bgm_level: HSlider = $VBoxContainer/HBoxContainer/BGMLevel
 @onready var sfx_level: HSlider = $VBoxContainer/HBoxContainer2/SFXLevel

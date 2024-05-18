@@ -1,5 +1,7 @@
 extends Node
 
+signal ui_active(showing: bool)
+
 signal game_started()
 signal game_completed()
 

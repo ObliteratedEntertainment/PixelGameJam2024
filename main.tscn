@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cusjl8n1wtb6f"]
+[gd_scene load_steps=43 format=3 uid="uid://cusjl8n1wtb6f"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_0mgpi"]
 [ext_resource type="Script" path="res://ui/main_menu_cloud_driver.gd" id="1_m4e8c"]
@@ -32,7 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://bxx5ixjmn4226" path="res://sfx/ui_button_2.wav" id="29_7gkm3"]
 [ext_resource type="AudioStream" uid="uid://s446am1odksh" path="res://sfx/ui_button_3.wav" id="30_3yglh"]
 [ext_resource type="Texture2D" uid="uid://v362oj1or0oj" path="res://playroom_logo_1.png" id="32_fhul8"]
-[ext_resource type="Script" path="res://ui/settings.gd" id="32_t3lpg"]
+[ext_resource type="PackedScene" uid="uid://cqtqx0vslyudt" path="res://ui/settings.tscn" id="33_x0rmv"]
 
 [sub_resource type="Curve2D" id="Curve2D_ujgx0"]
 _data = {
@@ -102,8 +102,6 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
 gradient = SubResource("Gradient_621d0")
 width = 160
 height = 32
-
-[sub_resource type="Theme" id="Theme_owypu"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -445,141 +443,4 @@ offset_bottom = 357.0
 texture = ExtResource("32_fhul8")
 stretch_mode = 2
 
-[node name="Settings" type="CanvasLayer" parent="."]
-layer = 2
-visible = false
-script = ExtResource("32_t3lpg")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -190.5
-offset_top = -32.0
-offset_right = 190.5
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
-layout_mode = 2
-
-[node name="BgmSelector" type="Sprite2D" parent="Settings/VBoxContainer/HBoxContainer"]
-visible = false
-position = Vector2(-12.5, 17)
-texture = ExtResource("26_qeoya")
-hframes = 10
-vframes = 11
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Settings/VBoxContainer/HBoxContainer/BgmSelector"]
-libraries = {
-"": SubResource("AnimationLibrary_t34jq")
-}
-autoplay = "idle"
-
-[node name="BGM" type="Label" parent="Settings/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "Music"
-label_settings = ExtResource("27_gnrig")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="BGMLevel" type="HSlider" parent="Settings/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-focus_neighbor_top = NodePath("../../../Accept")
-focus_neighbor_bottom = NodePath("../../HBoxContainer2/SFXLevel")
-focus_next = NodePath("../../HBoxContainer2/SFXLevel")
-focus_previous = NodePath("../../../Accept")
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Settings/VBoxContainer"]
-layout_mode = 2
-
-[node name="SfxSelector" type="Sprite2D" parent="Settings/VBoxContainer/HBoxContainer2"]
-visible = false
-position = Vector2(22.5, 17)
-texture = ExtResource("26_qeoya")
-hframes = 10
-vframes = 11
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Settings/VBoxContainer/HBoxContainer2/SfxSelector"]
-libraries = {
-"": SubResource("AnimationLibrary_t34jq")
-}
-autoplay = "idle"
-
-[node name="SFX" type="Label" parent="Settings/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(90, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "SFX"
-label_settings = ExtResource("27_gnrig")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="SFXLevel" type="HSlider" parent="Settings/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-focus_neighbor_top = NodePath("../../HBoxContainer/BGMLevel")
-focus_neighbor_bottom = NodePath("../../../Accept")
-focus_next = NodePath("../../../Accept")
-focus_previous = NodePath("../../HBoxContainer/BGMLevel")
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="Accept" type="TextureButton" parent="Settings"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -140.0
-offset_top = -37.0
-offset_right = -8.0
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-focus_neighbor_top = NodePath("../VBoxContainer/HBoxContainer2/SFXLevel")
-focus_next = NodePath("../VBoxContainer/HBoxContainer/BGMLevel")
-focus_previous = NodePath("../VBoxContainer/HBoxContainer2/SFXLevel")
-theme = SubResource("Theme_owypu")
-
-[node name="AcceptSelector" type="Sprite2D" parent="Settings/Accept"]
-visible = false
-position = Vector2(-1, 15)
-texture = ExtResource("26_qeoya")
-hframes = 10
-vframes = 11
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Settings/Accept/AcceptSelector"]
-libraries = {
-"": SubResource("AnimationLibrary_t34jq")
-}
-autoplay = "idle"
-
-[node name="Label" type="Label" parent="Settings/Accept"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -15.0
-offset_right = 54.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "ACCEPT"
-label_settings = ExtResource("27_gnrig")
+[node name="Settings" parent="." instance=ExtResource("33_x0rmv")]
