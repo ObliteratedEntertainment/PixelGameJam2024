@@ -5,7 +5,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	menu.grab()
 	menu.switch_menu.connect(_switch_to_settings)
 	settings.switch_menu.connect(_switch_to_main)
 
