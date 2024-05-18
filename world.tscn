@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=8 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
 [ext_resource type="Script" path="res://remote_player_manager.gd" id="1_gjvwk"]
 [ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="4_fid62"]
 [ext_resource type="PackedScene" uid="uid://cvdplvil00qo2" path="res://desert_zones/starter_zone.tscn" id="5_hbtdc"]
+[ext_resource type="AudioStream" uid="uid://bmbs3bmb11vck" path="res://oasis-desert-zone-bgm.ogg" id="7_pdph2"]
 [ext_resource type="Script" path="res://player_deaths_manager.gd" id="19_dbppj"]
 [ext_resource type="PackedScene" uid="uid://cmn5brqbir8ed" path="res://oases/starting_oasis.tscn" id="20_fn41c"]
 
@@ -68,3 +69,7 @@ y_sort_enabled = true
 
 [node name="StarterZone" parent="DesertZones" instance=ExtResource("5_hbtdc")]
 position = Vector2(1687, -203)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_pdph2")
+autoplay = true
