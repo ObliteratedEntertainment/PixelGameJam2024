@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxs7tgh7lrhgc"]
+
+[ext_resource type="Texture2D" uid="uid://6hq2onhp7mw8" path="res://ui/flask_added_icon.png" id="1_nxt47"]
+[ext_resource type="Script" path="res://ui/buff_movement.gd" id="2_xjlfr"]
+
+[node name="FlaskAddedBuff" type="Sprite2D"]
+position = Vector2(0, -25)
+texture = ExtResource("1_nxt47")
+script = ExtResource("2_xjlfr")

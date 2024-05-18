@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcmg4ddi8nkte"]
+
+[ext_resource type="Texture2D" uid="uid://5xi7ubgkvrdx" path="res://ui/water_added_icon.png" id="1_y2p5r"]
+[ext_resource type="Script" path="res://ui/buff_movement.gd" id="2_duoa5"]
+
+[node name="WaterAddedBuff" type="Sprite2D"]
+position = Vector2(0, -25)
+texture = ExtResource("1_y2p5r")
+script = ExtResource("2_duoa5")

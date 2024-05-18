@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
+const WATER_ADDED_BUFF = preload("res://ui/water_added_buff.tscn")
+const FLASK_ADDED_BUFF = preload("res://ui/flask_added_buff.tscn")
+const FLASK_USED_BUFF = preload("res://ui/flask_used_buff.tscn")
+
 const FOOTPRINT = preload("res://footprint.tscn")
 const DUG_HOLE = preload("res://dug_hole.tscn")
 const DOWSING_RIPPLE = preload("res://dowsing_ripple.tscn")
@@ -40,6 +44,9 @@ var remote_tweener: Tween = null
 
 @onready var west_dig: Marker2D = $WestDig
 @onready var east_dig: Marker2D = $EastDig
+
+#Where should we spawn buffs at above the player
+@onready var buff_start: Marker2D = $BuffStart
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
@@ -346,8 +353,8 @@ func _process_water_drain(delta: float) -> void:
 		# outside of an oasis you can't heal so no positive values allowed
 		intensity = min(0, intensity)
 	
-	# One flask should recharge in only 2 seconds of oasis time
-	const FLASK_RECHARGE_TIME = 100.0 / (1.0 * 3)
+	# One flask should recharge in only 3 seconds of oasis time
+	const FLASK_RECHARGE_TIME = 100.0 / (3.0 * 3)
 	
 	# One flask (100.0) should equal roughly 20 seconds of -3 drain
 	const DRAIN_TIME_PER_FLASK = 100.0 / (20.0 * 3)
@@ -359,6 +366,10 @@ func _process_water_drain(delta: float) -> void:
 	if water_buffs > 0:
 		water_change += water_buffs
 		water_buffs = 0
+		
+		var buffed = WATER_ADDED_BUFF.instantiate()
+		buffed.position = buff_start.position
+		add_child(buffed)
 	
 	current_water += water_change
 	
@@ -371,6 +382,11 @@ func _process_water_drain(delta: float) -> void:
 			unused_flasks,
 			total_flasks
 		)
+		
+		var buffed = FLASK_USED_BUFF.instantiate()
+		buffed.position = buff_start.position
+		add_child(buffed)
+		
 	
 	# Check if we can recharge flasks while in an oasis
 	var empty_flasks = total_flasks - unused_flasks
@@ -384,6 +400,10 @@ func _process_water_drain(delta: float) -> void:
 			unused_flasks,
 			total_flasks
 		)
+		
+		var buffed = FLASK_ADDED_BUFF.instantiate()
+		buffed.position = buff_start.position
+		add_child(buffed)
 	elif empty_flasks == 0:
 		current_water = minf(current_water, 100.0)
 		
@@ -473,6 +493,9 @@ func _on_power_up_entered(body: Area2D) -> void:
 			unused_flasks,
 			total_flasks
 		)
+		var buffed = FLASK_ADDED_BUFF.instantiate()
+		buffed.position = buff_start.position
+		add_child(buffed)
 		
 		body.consume()
 	elif body is ShovelPowerUp and not body.consumed:
