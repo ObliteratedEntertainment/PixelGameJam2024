@@ -1,10 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn2vru4y6kgtk"]
+[gd_scene load_steps=14 format=3 uid="uid://cn2vru4y6kgtk"]
 
 [ext_resource type="Texture2D" uid="uid://iypqcay167vf" path="res://sprites/old_man_npc/old_man.png" id="1_jde18"]
 [ext_resource type="Texture2D" uid="uid://o4nkn2fbx3ly" path="res://sprites/player/player_shadow.png" id="2_gjgyq"]
+[ext_resource type="AudioStream" uid="uid://b8k5l33oelblr" path="res://sfx/mumblings_1.wav" id="3_cbd8k"]
+[ext_resource type="AudioStream" uid="uid://b843a3ag6fllw" path="res://sfx/mumblings_2.wav" id="4_psi55"]
+[ext_resource type="AudioStream" uid="uid://dop5h47num27h" path="res://sfx/mumblings_3.wav" id="5_bwjmw"]
+[ext_resource type="AudioStream" uid="uid://cabx17od0agtq" path="res://sfx/mumblings_4.wav" id="6_wx0cq"]
+[ext_resource type="AudioStream" uid="uid://d262rnskhxkve" path="res://sfx/mumblings_5.wav" id="7_fu70a"]
+[ext_resource type="AudioStream" uid="uid://cewakhdram0nw" path="res://sfx/mumblings_6.wav" id="8_21lxl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ulfnh"]
 radius = 5.09902
+
+[sub_resource type="Animation" id="Animation_u6anm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_gcuhv"]
 resource_name = "idle"
@@ -24,26 +45,20 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_u6anm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7i4yg"]
 _data = {
 "RESET": SubResource("Animation_u6anm"),
 "idle": SubResource("Animation_gcuhv")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xnqd4"]
+streams_count = 6
+stream_0/stream = ExtResource("3_cbd8k")
+stream_1/stream = ExtResource("4_psi55")
+stream_2/stream = ExtResource("5_bwjmw")
+stream_3/stream = ExtResource("6_wx0cq")
+stream_4/stream = ExtResource("7_fu70a")
+stream_5/stream = ExtResource("8_21lxl")
 
 [node name="OldMan" type="StaticBody2D"]
 
@@ -66,3 +81,6 @@ autoplay = "idle"
 self_modulate = Color(1, 1, 1, 0.392157)
 z_index = -1
 texture = ExtResource("2_gjgyq")
+
+[node name="Mumblings" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xnqd4")
