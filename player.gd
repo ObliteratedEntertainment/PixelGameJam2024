@@ -378,6 +378,9 @@ func _on_zone_entered(body: Area2D) -> void:
 	print("Entered zone: ", body)
 	
 	if body is Oasis:
+		if in_oasis == 0:
+			WorldManager.oasis_entered.emit()
+			
 		in_oasis += 1
 		recent_oasis = body
 	
@@ -397,6 +400,8 @@ func _on_zone_exited(body: Area2D) -> void:
 	
 	if body is Oasis:
 		in_oasis -= 1
+		if in_oasis <= 0:
+			WorldManager.oasis_left.emit()
 	
 	in_oasis = maxi(in_oasis, 0)
 

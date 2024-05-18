@@ -3,6 +3,9 @@ extends Node
 signal game_started()
 signal game_completed()
 
+signal oasis_entered()
+signal oasis_left()
+
 signal zone_left(zone_name: String)
 signal zone_entered(zone_name: String)
 
