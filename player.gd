@@ -72,6 +72,8 @@ var remote_tweener: Tween = null
 
 @onready var pickup: AudioStreamPlayer2D = $Pickup
 
+@onready var write: AudioStreamPlayer2D = $Writing
+
 var speed := MAX_SPEED
 
 var last_active_direction := Vector2.DOWN
@@ -325,6 +327,7 @@ func _check_player_actions():
 			return
 		elif Input.is_action_just_pressed("player_write"):
 			writing = true
+			write.play()
 			Playroom.set_player_action(Playroom.ACTION_WRITING, global_position)
 			return
 
