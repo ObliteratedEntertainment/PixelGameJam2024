@@ -21,7 +21,7 @@ const MAX_SPEED := 80.0
 var remote_old_position := Vector2.ZERO
 var remote_pos_interp := 1.0
 var remote_time_normalization := 1.0
-var remote_just_respawned := false
+var remote_first_move := true
 var remote_tweener: Tween = null
 var remote_queued_actions: Array[Playroom.PlayerActionData] = []
 var remote_active_action: Playroom.PlayerActionData = null
@@ -115,6 +115,7 @@ func _ready() -> void:
 		camera_2d.enabled = false
 	
 	if not is_remote_player:
+		Playroom.server_connected.connect(_on_server_connected)
 		WorldManager.player_respawn.connect(_on_respawn_requested)
 		WorldManager.ui_active.connect(_on_ui_active)
 		WorldManager.player_finished_writing.connect(_finish_writing_comment)
@@ -218,12 +219,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 
-	var can_broadcast = player_first_broadcast or \
-		not is_remote_player and \
-				player_broadcast_ready and \
+	var can_broadcast = player_broadcast_ready and \
 				not player_last_broadcast.is_equal_approx(position)
 
-	if can_broadcast:
+	if not is_remote_player and (player_first_broadcast or can_broadcast):
 		player_first_broadcast = false
 		player_broadcast_ready = false
 		player_last_broadcast = position
@@ -254,6 +253,9 @@ func _check_player_actions() -> void:
 		if action == Playroom.ACTION_DIGGING:
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
+			return
+		elif action == Playroom.ACTION_WRITING:
+			writing = true
 			return
 		elif action == Playroom.ACTION_DOWSING:
 			dowsing = true
@@ -628,18 +630,22 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 	# Try to fetch more actions if we have flushed our current queue
 	if len(remote_queued_actions) == 0:
 		# this always represents 1 second of queued actions 
+		# If the player isn't moving, this will be unchanged
 		var new_remote_actions = Playroom.get_other_player_position(remote_player_id)
 		
 		# double check that this "update" isnt what we already handled
+		# this isn't perfect, but should be close enough
+		# the reason being the current processed bundle's active action might
+		# be lagging behind and not on the last action yet, which is what we are comparing
+		# for bundle equality
+		# TODO: if time, hash the entire incoming action bundle and compare hashes of bundles
 		var fresh_actions = true
-		if len(new_remote_actions) > 0:
+		if len(new_remote_actions) > 0 and remote_active_action != null:
 			var last_action = new_remote_actions[len(new_remote_actions)-1]
-			if remote_active_action != null and \
-					remote_active_action.position.is_equal_approx(last_action.position) and \
+			if remote_active_action.position.is_equal_approx(last_action.position) and \
 					remote_active_action.action == last_action.action:
 				fresh_actions = false
 			
-					
 		if fresh_actions:
 			for action in new_remote_actions:
 				remote_queued_actions.push_back(action)
@@ -658,6 +664,7 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 			remote_old_position = remote_active_action.position
 			_consume_remote_action()
 		
+		# guaranteed to have something here
 		remote_active_action = remote_queued_actions.pop_front()
 		
 		# reset our interpolation
@@ -669,11 +676,12 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 		remote_time_normalization = min(1.0, (remote_active_action.position.distance_to(remote_old_position)) / (MAX_SPEED*0.9))
 		
 		# Check if a respawn happened, we need to handle that immediately
-		if remote_active_action.action == Playroom.ACTION_RESPAWN:
+		if remote_first_move or remote_active_action.action == Playroom.ACTION_RESPAWN:
+			remote_first_move = false
 			position = remote_active_action.position
 			remote_old_position = remote_active_action.position
 			remote_pos_interp = 1.0
-			_consume_remote_action() 
+			_consume_remote_action()
 			return Vector2.ZERO
 
 		# if we are too far behind, 
@@ -702,3 +710,8 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 	# Otherwise update position and point the player in that animated direction
 	position = new_desired_position
 	return position.direction_to(remote_active_action.position)
+
+func _on_server_connected(room: String) -> void:
+	if is_remote_player:
+		return
+	player_first_broadcast = true
