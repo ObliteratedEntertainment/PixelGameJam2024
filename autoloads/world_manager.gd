@@ -32,6 +32,10 @@ var total_deaths := 0
 var game_start_time := 0
 var game_end_time := 0
 
+var player_has_shovel := false
+var player_has_flask := false
+var player_completed_game := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,6 +45,8 @@ func _ready() -> void:
 	
 	game_started.connect(_on_game_start)
 	game_completed.connect(_on_game_ended)
+	
+	player_upgraded.connect(_on_player_upgrade)
 
 func _on_game_start() -> void:
 	total_water_consumed = 0
@@ -48,9 +54,21 @@ func _on_game_start() -> void:
 	game_start_time = Time.get_ticks_msec()
 
 func _on_game_ended() -> void:
+	if player_completed_game:
+		return
+	
+	player_completed_game = true
 	game_end_time = Time.get_ticks_msec()
 
+func _on_player_upgrade(upgrade: String) -> void:
+	if upgrade == Playroom.UPGRADE_FLASK:
+		player_has_flask = true
+	elif upgrade == Playroom.UPGRADE_SHOVEL:
+		player_has_shovel = true
+
 func _on_water_consumed(_total: float, delta: float, _intensity: int) -> void:
+	if player_completed_game:
+		return
 	# consuming water is a negative value
 	# regen is positive
 	if delta < 0.0:
@@ -63,4 +81,6 @@ func _on_zone_entered(zone: String) -> void:
 	current_zone = zone
 
 func _on_player_death(_pos: Vector2) -> void:
+	if player_completed_game:
+		return
 	total_deaths += 1

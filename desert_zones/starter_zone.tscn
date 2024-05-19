@@ -38,11 +38,6 @@ metadata/_edit_lock_ = true
 position = Vector2(-1358, 180)
 display_color = Color(0.182124, 0.641811, 0, 1)
 
-[node name="Oasis2" type="Polygon2D" parent="EditingHelpers"]
-position = Vector2(3392, -390)
-polygon = PackedVector2Array(-1791, 9, -1834, 156, -1801, 305, -1661, 368, -1519, 379, -1342, 272, -1343, 82, -1492, -21, -1702, -48)
-metadata/_edit_lock_ = true
-
 [node name="Dirt1" parent="." instance=ExtResource("2_yer6a")]
 position = Vector2(-585, 59)
 
@@ -56,7 +51,7 @@ position = Vector2(-1098, -454)
 position = Vector2(-1046, -455)
 
 [node name="CastleParts" parent="." instance=ExtResource("3_nsgft")]
-position = Vector2(-919, -763)
+position = Vector2(1834, -143)
 
 [node name="Flask" parent="CastleParts" instance=ExtResource("6_txfox")]
 position = Vector2(-47, -13)
@@ -71,13 +66,16 @@ position = Vector2(-117, -119)
 position = Vector2(82, 55)
 
 [node name="CastleWallFragment1" parent="CastleParts" instance=ExtResource("7_dn86b")]
-position = Vector2(-434, 294)
+position = Vector2(-574, 212)
 
 [node name="CastleWallFragment2" parent="CastleParts" instance=ExtResource("7_dn86b")]
-position = Vector2(-171, 296)
+position = Vector2(-773, 76)
+
+[node name="CastleWallFragment3" parent="CastleParts" instance=ExtResource("7_dn86b")]
+position = Vector2(-913, 209)
 
 [node name="CastleGroundFragment1" parent="CastleParts" instance=ExtResource("8_n58r0")]
-position = Vector2(-441, 245)
+position = Vector2(-581, 163)
 
 [node name="CloudManager" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -86,8 +84,17 @@ script = ExtResource("18_i6fwy")
 [node name="Cloud5" parent="CloudManager" instance=ExtResource("13_u142e")]
 position = Vector2(-272, 235)
 
+[node name="Cloud13" parent="CloudManager" instance=ExtResource("13_u142e")]
+position = Vector2(1027, 277)
+
+[node name="Cloud9" parent="CloudManager" instance=ExtResource("13_u142e")]
+position = Vector2(71, -46)
+
 [node name="Cloud4" parent="CloudManager" instance=ExtResource("14_rujjp")]
 position = Vector2(-428, -93)
+
+[node name="Cloud14" parent="CloudManager" instance=ExtResource("14_rujjp")]
+position = Vector2(422, 129)
 
 [node name="Cloud6" parent="CloudManager" instance=ExtResource("13_u142e")]
 position = Vector2(-2351, -616)
@@ -97,6 +104,15 @@ position = Vector2(-2507, -944)
 
 [node name="Cloud1" parent="CloudManager" instance=ExtResource("15_eeb53")]
 position = Vector2(-1211, -736)
+
+[node name="Cloud10" parent="CloudManager" instance=ExtResource("15_eeb53")]
+position = Vector2(-931, 37)
+
+[node name="Cloud11" parent="CloudManager" instance=ExtResource("15_eeb53")]
+position = Vector2(755, -148)
+
+[node name="Cloud12" parent="CloudManager" instance=ExtResource("15_eeb53")]
+position = Vector2(294, 493)
 
 [node name="Cloud2" parent="CloudManager" instance=ExtResource("14_rujjp")]
 position = Vector2(-1756, 667)
@@ -112,6 +128,9 @@ position = Vector2(-1675, -522)
 [node name="Dirt2" parent="." instance=ExtResource("3_uvf08")]
 position = Vector2(-475, -102)
 
+[node name="Dirt17" parent="." instance=ExtResource("3_uvf08")]
+position = Vector2(-475, -102)
+
 [node name="Dirt3" parent="." instance=ExtResource("4_w83yb")]
 position = Vector2(-703, 131)
 
@@ -122,7 +141,7 @@ position = Vector2(-717, -199)
 position = Vector2(-1509, -226)
 
 [node name="Dirt16" parent="." instance=ExtResource("6_qk0cv")]
-position = Vector2(-835, -708)
+position = Vector2(1918, -88)
 
 [node name="Dirt7" parent="." instance=ExtResource("7_l5fn5")]
 position = Vector2(-971, 263)

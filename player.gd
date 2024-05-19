@@ -225,7 +225,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 
-	var can_broadcast = player_broadcast_ready and \
+	var can_broadcast := player_broadcast_ready and \
 				not player_last_broadcast.is_equal_approx(position)
 
 	if not is_remote_player and (player_needs_action_broadcast or can_broadcast):
@@ -494,6 +494,9 @@ func _on_power_up_entered(body: Area2D) -> void:
 			unused_flasks,
 			total_flasks
 		)
+		WorldManager.player_upgraded.emit(
+			Playroom.UPGRADE_FLASK
+		)
 		var buffed := FLASK_ADDED_BUFF.instantiate()
 		buffed.position = buff_start.position
 		add_child(buffed)
@@ -733,7 +736,7 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 	position = new_desired_position
 	return position.direction_to(remote_active_action.position)
 
-func _on_server_connected(room: String) -> void:
+func _on_server_connected(_room: String) -> void:
 	if is_remote_player:
 		return
 	player_needs_action_broadcast = true

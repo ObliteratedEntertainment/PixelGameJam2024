@@ -222,10 +222,11 @@ label_settings = SubResource("LabelSettings_xpwmq")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_constants/separation = 32
+theme_override_constants/separation = 40
 script = ExtResource("6_uhwyv")
 
 [node name="DigHint" type="TextureRect" parent="UI/MarginContainer/ActionBar"]
+visible = false
 layout_mode = 2
 texture = ExtResource("7_536ju")
 stretch_mode = 2
@@ -240,6 +241,7 @@ text = "DIG"
 label_settings = SubResource("LabelSettings_xpwmq")
 
 [node name="DowseHint" type="TextureRect" parent="UI/MarginContainer/ActionBar"]
+visible = false
 layout_mode = 2
 texture = ExtResource("8_hc3cf")
 
@@ -258,12 +260,13 @@ texture = ExtResource("11_7p615")
 
 [node name="Label2" type="Label" parent="UI/MarginContainer/ActionBar/InscribeHint"]
 layout_mode = 0
-offset_left = -12.0
+offset_left = -38.0
 offset_top = 13.0
-offset_right = 36.0
+offset_right = 58.0
 offset_bottom = 36.0
-text = "TEXT"
+text = "WRITE"
 label_settings = SubResource("LabelSettings_xpwmq")
+horizontal_alignment = 1
 
 [node name="Settings" parent="." instance=ExtResource("12_sb374")]
 

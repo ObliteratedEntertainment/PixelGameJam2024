@@ -11,6 +11,7 @@ const ACTION_DIED    = "D"
 const ACTION_RESPAWN = "R"
 
 const UPGRADE_SHOVEL = "SHOVEL"
+const UPGRADE_FLASK  = "FLASK"
 
 # Named callbacks
 const CB_INSERT_COIN = "on_insert_coin"
@@ -113,7 +114,7 @@ var death_offset := 0
 var _tracked_room_players := {}
 
 var first_action := true
-var stashed_actions := []
+var stashed_actions: Array[PlayerActionData] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -195,7 +196,7 @@ func get_other_player_position(player: String) -> Array[PlayerActionData]:
 	
 	var converted: Array[PlayerActionData] = []
 	
-	for action in parsed:
+	for action: Variant in parsed:
 		# Do data validation
 		if typeof(action) != TYPE_DICTIONARY:
 			continue
@@ -208,7 +209,7 @@ func get_other_player_position(player: String) -> Array[PlayerActionData]:
 		elif typeof(action["p"][0]) != TYPE_FLOAT or typeof(action["p"][1]) != TYPE_FLOAT:
 			continue
 		
-		var action_data = PlayerActionData.new()
+		var action_data := PlayerActionData.new()
 		action_data.action = action["a"]
 		action_data.position = Vector2(action["p"][0], action["p"][1])
 		converted.push_back(action_data)
@@ -341,7 +342,7 @@ func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
 	)
 
 # Called when the player has connected to a room successfully
-func _on_insert_coin(args: Variant) -> void:
+func _on_insert_coin(_args: Variant) -> void:
 	print("[Playroom] Connected to room: ", _playroom.getRoomCode())
 	connected = true
 	_current_room = _playroom.getRoomCode()
