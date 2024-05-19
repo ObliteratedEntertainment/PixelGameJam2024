@@ -625,21 +625,24 @@ func _anim_player_dowsing_started() -> void:
 		ripple.position = global_position
 		get_parent().add_child(ripple)
 
+func _anim_start_writing() -> void:
+	write.play()
+
 func _anim_place_comment() -> void:
 	if not is_remote_player:
 		WorldManager.player_started_writing.emit()
 
-func _finish_writing_comment(template: int, noun: int) -> void:
+func _finish_writing_comment(phrase: int, word: int) -> void:
 	if recent_comment != null:
 		recent_comment.clear_out()
 		
 	recent_comment = COMMENT.instantiate()
-	recent_comment.comment_template = template
-	recent_comment.comment_noun = noun
+	recent_comment.phrase = phrase
+	recent_comment.word = word
 	recent_comment.position = comment_place.global_position
 	get_parent().add_child(recent_comment)
 	
-	# TODO: tell playroom comment was written
+	Playroom.add_inscription(comment_place.global_position, phrase, word)
 
 func _show_shovel() -> void:
 	has_shovel = true

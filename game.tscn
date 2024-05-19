@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dg685leglcy4e"]
+[gd_scene load_steps=32 format=3 uid="uid://dg685leglcy4e"]
 
 [ext_resource type="PackedScene" uid="uid://50v8sxikq02p" path="res://ui/water_gauge.tscn" id="1_qrhh3"]
 [ext_resource type="PackedScene" uid="uid://dic8xj22l5wul" path="res://world.tscn" id="1_w7p1e"]
@@ -18,8 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://b2avf7hr2rk04" path="res://ui/comment_setup.png" id="15_k1706"]
 [ext_resource type="Script" path="res://ui/comment_setup.gd" id="15_rcuxb"]
 [ext_resource type="LabelSettings" uid="uid://cqgxpfvbk7622" path="res://ui/dialog_label_font.tres" id="16_quafi"]
-[ext_resource type="Texture2D" uid="uid://buummei26neld" path="res://ui/comment_button.png" id="17_nmk60"]
+[ext_resource type="PackedScene" uid="uid://bnls1g8atepgu" path="res://ui/word_button.tscn" id="18_dnsfe"]
 [ext_resource type="Texture2D" uid="uid://bu2b4b604iw82" path="res://ui/comment_template_button.png" id="20_iusmf"]
+[ext_resource type="Texture2D" uid="uid://bn007cyc112n2" path="res://ui/comment_full_select.png" id="21_uu4fx"]
 
 [sub_resource type="Gradient" id="Gradient_ldnr1"]
 interpolation_mode = 2
@@ -100,18 +101,6 @@ _data = {
 font = ExtResource("8_h2kua")
 font_color = Color(0, 0, 0, 1)
 outline_size = 4
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hk3rd"]
-atlas = ExtResource("17_nmk60")
-region = Rect2(0, 0, 54, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0lovc"]
-atlas = ExtResource("17_nmk60")
-region = Rect2(54, 0, 54, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6tyfd"]
-atlas = ExtResource("17_nmk60")
-region = Rect2(162, 0, 54, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ckpfm"]
 atlas = ExtResource("20_iusmf")
@@ -317,36 +306,11 @@ horizontal_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="StartCreation" type="TextureButton" parent="CommentSetup/Explanation"]
+[node name="StartCreation" parent="CommentSetup/Explanation" instance=ExtResource("18_dnsfe")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -27.0
-offset_top = -17.0
-offset_right = 27.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = SubResource("AtlasTexture_hk3rd")
-texture_pressed = SubResource("AtlasTexture_0lovc")
-texture_hover = SubResource("AtlasTexture_6tyfd")
-
-[node name="Label" type="Label" parent="CommentSetup/Explanation/StartCreation"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "CREATE"
-label_settings = ExtResource("16_quafi")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TemplateSelect" type="TextureRect" parent="CommentSetup"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -367,6 +331,10 @@ offset_left = 6.0
 offset_top = 6.0
 offset_right = 60.0
 offset_bottom = 27.0
+focus_neighbor_right = NodePath("../TemplateOption2")
+focus_neighbor_bottom = NodePath("../TemplateOption3")
+focus_next = NodePath("../TemplateOption2")
+focus_previous = NodePath("../TemplateOption4")
 texture_normal = SubResource("AtlasTexture_ckpfm")
 texture_pressed = SubResource("AtlasTexture_qvqpk")
 texture_hover = SubResource("AtlasTexture_8v0eh")
@@ -389,6 +357,10 @@ offset_left = 64.0
 offset_top = 6.0
 offset_right = 118.0
 offset_bottom = 27.0
+focus_neighbor_left = NodePath("../TemplateOption1")
+focus_neighbor_bottom = NodePath("../TemplateOption4")
+focus_next = NodePath("../TemplateOption3")
+focus_previous = NodePath("../TemplateOption1")
 texture_normal = SubResource("AtlasTexture_ckpfm")
 texture_pressed = SubResource("AtlasTexture_qvqpk")
 texture_hover = SubResource("AtlasTexture_8v0eh")
@@ -411,6 +383,10 @@ offset_left = 6.0
 offset_top = 31.0
 offset_right = 60.0
 offset_bottom = 52.0
+focus_neighbor_top = NodePath("../TemplateOption1")
+focus_neighbor_right = NodePath("../TemplateOption4")
+focus_next = NodePath("../TemplateOption4")
+focus_previous = NodePath("../TemplateOption2")
 texture_normal = SubResource("AtlasTexture_ckpfm")
 texture_pressed = SubResource("AtlasTexture_qvqpk")
 texture_hover = SubResource("AtlasTexture_8v0eh")
@@ -433,6 +409,10 @@ offset_left = 64.0
 offset_top = 31.0
 offset_right = 118.0
 offset_bottom = 52.0
+focus_neighbor_left = NodePath("../TemplateOption3")
+focus_neighbor_top = NodePath("../TemplateOption2")
+focus_next = NodePath("../TemplateOption1")
+focus_previous = NodePath("../TemplateOption3")
 texture_normal = SubResource("AtlasTexture_ckpfm")
 texture_pressed = SubResource("AtlasTexture_qvqpk")
 texture_hover = SubResource("AtlasTexture_8v0eh")
@@ -444,13 +424,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "GO"
+text = "NEED"
 label_settings = ExtResource("16_quafi")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NounSelect" type="TextureRect" parent="CommentSetup"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -462,52 +441,21 @@ offset_right = 62.0
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("15_k1706")
+texture = ExtResource("21_uu4fx")
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="CommentSetup/NounSelect"]
-layout_mode = 0
-offset_left = 6.0
+[node name="NounContainer" type="HFlowContainer" parent="CommentSetup/NounSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
 offset_top = 7.0
-offset_right = 36.0
-offset_bottom = 17.0
-text = "NORTH"
-label_settings = ExtResource("16_quafi")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="CommentSetup/NounSelect"]
-layout_mode = 0
-offset_left = 38.0
-offset_top = 7.0
-offset_right = 68.0
-offset_bottom = 17.0
-text = "SOUTH"
-label_settings = ExtResource("16_quafi")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label4" type="Label" parent="CommentSetup/NounSelect"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 7.0
-offset_right = 120.0
-offset_bottom = 17.0
-text = "WEST"
-label_settings = ExtResource("16_quafi")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="CommentSetup/NounSelect"]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 7.0
-offset_right = 94.0
-offset_bottom = 17.0
-text = "EAST"
-label_settings = ExtResource("16_quafi")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_right = -9.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
 [node name="Preview" type="TextureRect" parent="CommentSetup"]
 visible = false
@@ -524,48 +472,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_5q61w")
 
-[node name="Label5" type="Label" parent="CommentSetup/Preview"]
+[node name="PreviewComment" type="Label" parent="CommentSetup/Preview"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -6.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Guide other players with a simple phrase."
-label_settings = ExtResource("16_quafi")
-horizontal_alignment = 1
-autowrap_mode = 2
-clip_text = true
-
-[node name="FinishCreation" type="TextureButton" parent="CommentSetup/Preview"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -27.0
-offset_top = -17.0
-offset_right = 27.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = SubResource("AtlasTexture_hk3rd")
-texture_pressed = SubResource("AtlasTexture_0lovc")
-texture_hover = SubResource("AtlasTexture_6tyfd")
-
-[node name="Label" type="Label" parent="CommentSetup/Preview/FinishCreation"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "CREATE"
+text = "PRAISE AQUA"
 label_settings = ExtResource("16_quafi")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="FinishCreate" parent="CommentSetup/Preview" instance=ExtResource("18_dnsfe")]
+layout_mode = 1

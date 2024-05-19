@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5dge2u66uuau"]
+
+[ext_resource type="Texture2D" uid="uid://d0o60vohrv5gn" path="res://ui/comment_noun_button.png" id="1_7841b"]
+[ext_resource type="Script" path="res://ui/comment_word_button.gd" id="2_ur37m"]
+[ext_resource type="LabelSettings" uid="uid://cqgxpfvbk7622" path="res://ui/dialog_label_font.tres" id="3_d7km3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0po4"]
+atlas = ExtResource("1_7841b")
+region = Rect2(0, 0, 44, 10)
+
+[node name="CommentNoun" type="TextureButton"]
+texture_normal = SubResource("AtlasTexture_l0po4")
+script = ExtResource("2_ur37m")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "FRIEND"
+label_settings = ExtResource("3_d7km3")
+horizontal_alignment = 1
+vertical_alignment = 1

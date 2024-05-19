@@ -22,7 +22,7 @@ signal player_flask_changed(available_flasks: int, total_flasks: int)
 signal player_upgraded(upgrade: String)
 
 signal player_started_writing()
-signal player_finished_writing(template: int, noun: int)
+signal player_finished_writing(phrase: int, word: int)
 
 var current_zone := ""
 

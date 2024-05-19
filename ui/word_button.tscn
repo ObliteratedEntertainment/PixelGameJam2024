@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnls1g8atepgu"]
+
+[ext_resource type="Texture2D" uid="uid://buummei26neld" path="res://ui/comment_button.png" id="1_cymvp"]
+[ext_resource type="LabelSettings" uid="uid://cqgxpfvbk7622" path="res://ui/dialog_label_font.tres" id="2_y5wsq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk3rd"]
+atlas = ExtResource("1_cymvp")
+region = Rect2(0, 0, 54, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lovc"]
+atlas = ExtResource("1_cymvp")
+region = Rect2(54, 0, 54, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tyfd"]
+atlas = ExtResource("1_cymvp")
+region = Rect2(108, 0, 54, 10)
+
+[node name="StartCreation" type="TextureButton"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = -17.0
+offset_right = 27.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_hk3rd")
+texture_pressed = SubResource("AtlasTexture_0lovc")
+texture_hover = SubResource("AtlasTexture_6tyfd")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CREATE"
+label_settings = ExtResource("2_y5wsq")
+horizontal_alignment = 1
+vertical_alignment = 1

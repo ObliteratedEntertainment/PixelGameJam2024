@@ -6,11 +6,14 @@ var known_deaths := {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Playroom.server_connected.connect(_on_server_connected)
 	Playroom.deaths_updated.connect(_on_deaths_updated)
 	Playroom.death_load_failed.connect(_on_death_load_failed)
 	Playroom.death_loaded.connect(_on_death_loaded)
 
-
+func _on_server_connected(room: String) -> void:
+	# TODO: consider periodically re-requesting this data
+	Playroom.request_death_list()
 
 func _on_deaths_updated(room: String, death_list: Array[String]) -> void:
 	print("Death list received by manager: ", death_list)
@@ -19,9 +22,12 @@ func _on_deaths_updated(room: String, death_list: Array[String]) -> void:
 		if name not in known_deaths:
 			known_deaths[name] = false
 	
-	
-	# TODO: remove, this is test data
-	Playroom.request_death_data("profour")
+	# TODO: Find one for now
+	for name in known_deaths.keys():
+		if not known_deaths[name]:
+			known_deaths[name] = true
+			Playroom.request_inscription_data(name)
+			break
 
 func _on_death_load_failed(room: String, player: String) -> void:
 	print("failed to load death for ", room, " and player ", player)
