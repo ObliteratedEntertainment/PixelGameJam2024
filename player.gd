@@ -98,7 +98,8 @@ var in_shade := 0 # Needs to be a counter because there may be overlaps
 
 var recent_oasis: Oasis = null
 
-var recent_comment: Comment = null
+var recent_comments: Array[Comment] = []
+var recent_comment_idx: int = -1
 
 var recent_footprints: Array[Vector2] = []
 
@@ -633,14 +634,21 @@ func _anim_place_comment() -> void:
 		WorldManager.player_started_writing.emit()
 
 func _finish_writing_comment(phrase: int, word: int) -> void:
-	if recent_comment != null:
-		recent_comment.clear_out()
+	recent_comment_idx = (recent_comment_idx + 1) % Playroom.MAX_PLAYER_INSCRIPTIONS
+	
+	if recent_comment_idx < len(recent_comments):
+		recent_comments[recent_comment_idx].clear_out()
 		
-	recent_comment = COMMENT.instantiate()
-	recent_comment.phrase = phrase
-	recent_comment.word = word
-	recent_comment.position = comment_place.global_position
-	get_parent().add_child(recent_comment)
+	var comment = COMMENT.instantiate()
+	comment.phrase = phrase
+	comment.word = word
+	comment.position = comment_place.global_position
+	get_parent().add_child(comment)
+	
+	if recent_comment_idx < len(recent_comments):
+		recent_comments[recent_comment_idx] = comment
+	else:
+		recent_comments.push_back(comment)
 	
 	Playroom.add_inscription(comment_place.global_position, phrase, word)
 

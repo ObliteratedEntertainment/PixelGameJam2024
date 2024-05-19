@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5dge2u66uuau"]
+[gd_scene load_steps=7 format=3 uid="uid://c5dge2u66uuau"]
 
 [ext_resource type="Texture2D" uid="uid://d0o60vohrv5gn" path="res://ui/comment_noun_button.png" id="1_7841b"]
 [ext_resource type="Script" path="res://ui/comment_word_button.gd" id="2_ur37m"]
@@ -8,8 +8,18 @@
 atlas = ExtResource("1_7841b")
 region = Rect2(0, 0, 44, 10)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2b3m"]
+atlas = ExtResource("1_7841b")
+region = Rect2(44, 0, 44, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu4ry"]
+atlas = ExtResource("1_7841b")
+region = Rect2(88, 0, 44, 11)
+
 [node name="CommentNoun" type="TextureButton"]
 texture_normal = SubResource("AtlasTexture_l0po4")
+texture_pressed = SubResource("AtlasTexture_q2b3m")
+texture_hover = SubResource("AtlasTexture_mu4ry")
 script = ExtResource("2_ur37m")
 
 [node name="Label" type="Label" parent="."]
