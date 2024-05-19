@@ -54,16 +54,16 @@ func _on_deaths_updated(_room: String, death_list: Array[String]) -> void:
 	# From the list of all players, select out a 100 unique deaths
 	# Only one death per player
 	while len(queued_requests) < MAX_DEATHS_LOADED:
-		var players: Array[String] = per_player_deaths.keys()
+		var players: Array = per_player_deaths.keys()
 		if len(players) == 0:
 			break
 		
 		var player_idx := randi_range(0, len(players)-1)
-		var player_key := players[player_idx]
+		var player_key: String = players[player_idx]
 		
-		var player_deaths: Array[String] = per_player_deaths[player_key].keys()
+		var player_deaths: Array = per_player_deaths[player_key].keys()
 		var death_idx := randi_range(0, len(player_deaths)-1)
-		var death_key := player_deaths[death_idx]
+		var death_key: String = player_deaths[death_idx]
 		
 		per_player_deaths.erase(player_key)
 		

@@ -19,14 +19,17 @@ const MAX_SPEED := 80.0
 @export var is_remote_player := false
 @export var remote_player_id := ""
 var remote_old_position := Vector2.ZERO
-var remote_new_position := Vector2.ZERO
-var remote_pos_interp := 0.0
+var remote_pos_interp := 1.0
 var remote_time_normalization := 1.0
 var remote_just_respawned := false
 var remote_tweener: Tween = null
+var remote_queued_actions: Array[Playroom.PlayerActionData] = []
+var remote_active_action: Playroom.PlayerActionData = null
+var remote_perform_task: String = ""
 
 # indicator if the player's position should be sent out
 @export var player_broadcast_ready := true
+@export var player_first_broadcast := true
 @export var player_last_broadcast := Vector2(-99999, -99999)
 
 @onready var zone_detector: Area2D = $ZoneDetector
@@ -215,9 +218,13 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 
-	if not is_remote_player and \
-			player_broadcast_ready and \
-			not player_last_broadcast.is_equal_approx(position):
+	var can_broadcast = player_first_broadcast or \
+		not is_remote_player and \
+				player_broadcast_ready and \
+				not player_last_broadcast.is_equal_approx(position)
+
+	if can_broadcast:
+		player_first_broadcast = false
 		player_broadcast_ready = false
 		player_last_broadcast = position
 		Playroom.update_my_pos(position)
@@ -225,48 +232,7 @@ func _physics_process(delta: float) -> void:
 
 func _get_player_movement_input(delta: float) -> Vector2:
 	if is_remote_player:
-		var current_pos := Playroom.get_other_player_position(remote_player_id)
-	
-		# If we got a real position update
-		# start interpolating from the last known spot to this new spot
-		if not current_pos.is_equal_approx(remote_new_position):
-			player_broadcast_ready = false
-			remote_old_position = remote_new_position
-			remote_new_position = current_pos
-			remote_pos_interp = 0.0
-			
-			# How long in seconds to get from one spot to the next based on a player's MAX_SPEED
-			# delta should be normalized by this to get the right speed
-			# normal updates should arrive once a second
-			remote_time_normalization = min(1.0, (remote_new_position.distance_to(remote_old_position)) / (MAX_SPEED*0.9))
-			
-			# if we are too far behind, 
-			# snap our position to the beginning of the interp
-			if remote_just_respawned:
-				position = remote_new_position
-				remote_old_position = remote_new_position
-				remote_pos_interp = 1.0
-				remote_just_respawned = false
-				return Vector2.ZERO
-			elif position.distance_squared_to(remote_old_position) > (10.0 * 10.0):
-				position = remote_old_position
-			
-		
-		
-		var new_desired_position: Vector2 = lerp(remote_old_position, remote_new_position, remote_pos_interp)
-		remote_pos_interp += delta / remote_time_normalization
-		remote_pos_interp = minf(remote_pos_interp, 1.0)
-		
-		# Stop the player's movement (animation)
-		# only if they have reached the destination and we know
-		# their broadcast should have occurred already
-		if position.is_equal_approx(remote_new_position) \
-				and player_broadcast_ready:
-			return Vector2.ZERO
-
-		# Otherwise update position and point the player in that animated direction
-		position = new_desired_position
-		return position.direction_to(remote_new_position)
+		return _handle_remote_player_actions(delta)
 	else:
 		var player_input := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		
@@ -280,10 +246,10 @@ func _check_player_actions() -> void:
 		if not has_shovel and \
 				Playroom.get_player_upgrade(remote_player_id, Playroom.UPGRADE_SHOVEL):
 			_show_shovel()
-		
-		# TODO: Update actions to have a location attached to them
-		# so we can replay more accurately
-		var action := Playroom.get_other_player_action(remote_player_id)
+			
+		# Perform task will only be set for a moment, and then is cleared after this check
+		var action := remote_perform_task
+		remote_perform_task = Playroom.ACTION_NONE
 		
 		if action == Playroom.ACTION_DIGGING:
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
@@ -301,7 +267,6 @@ func _check_player_actions() -> void:
 			remote_tweener.tween_property(self, "modulate:a", 0.0, 0.8)
 			return
 		elif action == Playroom.ACTION_RESPAWN and dead:
-			remote_just_respawned = true
 			dead = false
 			
 			# Fade back in with the respawn
@@ -553,8 +518,6 @@ func _on_ui_active(showing: bool) -> void:
 	invulnerable = showing
 
 func _anim_dig_hole(spawn_west: bool) -> void:
-	if not is_remote_player:
-		Playroom.set_player_action(Playroom.ACTION_NONE, Vector2.ZERO)
 	
 	if in_oasis > 0:
 		grass_digging.play()
@@ -615,7 +578,6 @@ func _anim_player_death_finished() -> void:
 
 func _anim_player_dowsing_started() -> void:
 	if not is_remote_player:
-		Playroom.set_player_action(Playroom.ACTION_NONE, Vector2.ZERO)
 		sfx_dowsing.play()
 		
 		var ripple := DOWSING_RIPPLE.instantiate()
@@ -654,3 +616,89 @@ func _show_shovel() -> void:
 	
 	if not is_remote_player:
 		WorldManager.player_upgraded.emit(Playroom.UPGRADE_SHOVEL)
+
+func _consume_remote_action() -> void:
+	if not remote_active_action.action_consumed:
+		remote_perform_task = remote_active_action.action
+		print("Remote action activated: ", remote_active_action.action)
+		remote_active_action.action_consumed = true
+	
+func _handle_remote_player_actions(delta: float) -> Vector2:
+	
+	# Try to fetch more actions if we have flushed our current queue
+	if len(remote_queued_actions) == 0:
+		# this always represents 1 second of queued actions 
+		var new_remote_actions = Playroom.get_other_player_position(remote_player_id)
+		
+		# double check that this "update" isnt what we already handled
+		var fresh_actions = true
+		if len(new_remote_actions) > 0:
+			var last_action = new_remote_actions[len(new_remote_actions)-1]
+			if remote_active_action != null and \
+					remote_active_action.position.is_equal_approx(last_action.position) and \
+					remote_active_action.action == last_action.action:
+				fresh_actions = false
+			
+					
+		if fresh_actions:
+			for action in new_remote_actions:
+				remote_queued_actions.push_back(action)
+	
+	# If we have finished processing all active actions
+	# and dont have anything else to do, just sit still
+	if len(remote_queued_actions) == 0 and is_equal_approx(remote_pos_interp, 1.0):
+		return Vector2.ZERO
+	elif remote_active_action == null and len(remote_queued_actions) == 0:
+		return Vector2.ZERO
+
+	# If we have finished the previous action
+	# pop a new action off the queue and start handling it
+	if is_equal_approx(remote_pos_interp, 1.0):
+		if remote_active_action != null:
+			remote_old_position = remote_active_action.position
+			_consume_remote_action()
+		
+		remote_active_action = remote_queued_actions.pop_front()
+		
+		# reset our interpolation
+		remote_pos_interp = 0.0
+		
+		# How long in seconds to get from one spot to the next based on a player's MAX_SPEED
+		# delta should be normalized by this to get the right speed
+		# normal updates should arrive once a second
+		remote_time_normalization = min(1.0, (remote_active_action.position.distance_to(remote_old_position)) / (MAX_SPEED*0.9))
+		
+		# Check if a respawn happened, we need to handle that immediately
+		if remote_active_action.action == Playroom.ACTION_RESPAWN:
+			position = remote_active_action.position
+			remote_old_position = remote_active_action.position
+			remote_pos_interp = 1.0
+			_consume_remote_action() 
+			return Vector2.ZERO
+
+		# if we are too far behind, 
+		# snap our position to the beginning of the interp
+		if position.distance_squared_to(remote_old_position) > (10.0 * 10.0):
+			position = remote_old_position
+
+	var new_desired_position: Vector2 = \
+		lerp(remote_old_position, remote_active_action.position, remote_pos_interp)
+	remote_pos_interp += delta / remote_time_normalization
+	remote_pos_interp = minf(remote_pos_interp, 1.0)
+	
+	# If we reached the end of the segment, activate the action that
+	# was suppose to occur there
+	if is_equal_approx(remote_pos_interp, 1.0) and \
+			not remote_active_action.action_consumed:
+		_consume_remote_action()
+	
+	# Stop the player's movement (animation)
+	# only if they have reached the destination and we know
+	# their broadcast should have occurred already
+	if (position.is_equal_approx(remote_active_action.position) \
+				and player_broadcast_ready):
+		return Vector2.ZERO
+
+	# Otherwise update position and point the player in that animated direction
+	position = new_desired_position
+	return position.direction_to(remote_active_action.position)

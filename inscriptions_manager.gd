@@ -54,14 +54,14 @@ func _on_inscriptions_updated(_room: String, inscription_list: Array[String]) ->
 	# From the list of all players, select out a 100 unique comments
 	# Only one comments per player
 	while len(queued_requests) < MAX_COMMENTS_LOADED:
-		var players: Array[String] = per_player_comments.keys()
+		var players: Array = per_player_comments.keys()
 		if len(players) == 0:
 			break
 		
 		var player_idx := randi_range(0, len(players)-1)
-		var player_key := players[player_idx]
+		var player_key: String = players[player_idx]
 		
-		var player_comments: Array[String] = per_player_comments[player_key].keys()
+		var player_comments: Array = per_player_comments[player_key].keys()
 		var comment_idx := randi_range(0, len(player_comments)-1)
 		var comment_key: String = player_comments[comment_idx]
 		

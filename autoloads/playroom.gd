@@ -3,6 +3,7 @@ extends Node
 const MAX_FOOTPRINTS_STORED = 30
 
 const ACTION_NONE    = ""
+const ACTION_MOVE    = "M"
 const ACTION_DIGGING = "G"
 const ACTION_DOWSING = "W"
 const ACTION_WRITING = "T"
@@ -24,6 +25,12 @@ const CB_DYNAMIC_PLAYER_INSCRIPTION = "player_inscription_"
 
 const PLAYROOM_PERSIST_DEATH_LIST = "deaths"
 const PLAYROOM_PERSIST_INSCRIPTIONS_LIST = "comments"
+
+class PlayerActionData:
+	var action: String
+	var position: Vector2
+	var action_consumed: bool = false
+
 # To Test with Playroom connectivity
 # In the upper-right, click the "Remote Debug" option and
 # select "Run in Browser". 
@@ -106,6 +113,9 @@ var death_offset := 0
 # Values are state objects that you can call .getState(...) on
 var _tracked_room_players := {}
 
+var first_action := true
+var stashed_actions := []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_my_user_id = "profour" # TODO: enable for prod -> _random_player_name()
@@ -150,35 +160,71 @@ func whoami() -> String:
 # Update the player's position so others can see them
 func update_my_pos(pos: Vector2) -> void:
 	if connected:
-		_playroom.myPlayer().setState("pos", JSON.stringify([pos.x, pos.y]))
+		var actions := []
+		
+		# Inject all of the waiting actions
+		for action in stashed_actions:
+			actions.push_back(action)
+		stashed_actions.clear()
+		
+		# then cap it with the movement
+		actions.push_back({
+			"a": ACTION_RESPAWN if first_action else ACTION_MOVE,
+			"p": [pos.x, pos.y]
+		})
+		first_action = false
+		
+		_playroom.myPlayer().setState("actions", JSON.stringify(actions))
 
 # Ask for the current position of other players we know of
-func get_other_player_position(player: String) -> Vector2:
+func get_other_player_position(player: String) -> Array[PlayerActionData]:
 	if _current_room not in _tracked_room_players:
-		return Vector2.ZERO
+		return []
 	
 	if player not in _tracked_room_players[_current_room]:
-		return Vector2.ZERO
+		return []
 	
-	var json_data: Variant = _tracked_room_players[_current_room][player].getState("pos")
+	var json_data: Variant = _tracked_room_players[_current_room][player].getState("actions")
 	
 	if json_data == null:
-		return Vector2.ZERO
+		return []
 	
 	var parsed: Variant = JSON.parse_string(json_data)
 	
 	if parsed == null:
-		return Vector2.ZERO
+		return []
 	
-	if typeof(parsed) != TYPE_ARRAY or len(parsed) != 2:
-		return Vector2.ZERO
+	if typeof(parsed) != TYPE_ARRAY:
+		return []
 	
-	return Vector2(parsed[0], parsed[1])
+	var converted: Array[PlayerActionData] = []
+	
+	for action in parsed:
+		# Do data validation
+		if typeof(action) != TYPE_DICTIONARY:
+			continue
+		elif "a" not in action or "p" not in action:
+			continue
+		elif typeof(action["a"]) != TYPE_STRING:
+			continue
+		elif typeof(action["p"]) != TYPE_ARRAY or len(action["p"]) != 2:
+			continue
+		elif typeof(action["p"][0]) != TYPE_FLOAT or typeof(action["p"][1]) != TYPE_FLOAT:
+			continue
+		
+		var action_data = PlayerActionData.new()
+		action_data.action = action["a"]
+		action_data.position = Vector2(action["p"][0], action["p"][1])
+		converted.push_back(action_data)
+	
+	return converted
 
-func set_player_action(action: String, _position: Vector2) -> void:
-	# TODO: Inject into periodic position sync data
+func set_player_action(action: String, pos: Vector2) -> void:
 	if connected:
-		_playroom.myPlayer().setState("action", action)
+		stashed_actions.push_back({
+			"a": action,
+			"p": [pos.x, pos.y]
+		})
 
 func set_player_upgrade(upgrade: String) -> void:
 	if connected:
@@ -304,6 +350,9 @@ func _on_insert_coin(args: Variant) -> void:
 	print("Room claims to be: ", _playroom.getRoomCode())
 	connected = true
 	_current_room = _playroom.getRoomCode()
+	
+	stashed_actions.clear() # clear anything so we don't flood the server we just joined
+	first_action = true
 	server_connected.emit(_current_room)
 	
 	# Start with fresh room player tracking on new connections
@@ -357,6 +406,7 @@ func _on_player_join(args: Variant) -> void:
 	
 	# Send out that the player joined
 	player_joined.emit(_current_room, player_name)
+	print("[Playroom] Player joined the server:", player_name)
 
 # Called when a player quits
 func _on_player_quit(_args: Variant, room_name: String, player_name: String) -> void:
