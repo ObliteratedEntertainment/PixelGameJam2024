@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=138 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="2_qte35"]
@@ -51,6 +51,12 @@
 [ext_resource type="AudioStream" uid="uid://bumu2uonsr8tp" path="res://sfx/pickup_4.wav" id="49_xbi2y"]
 [ext_resource type="AudioStream" uid="uid://dokk75uow1kxo" path="res://sfx/pickup_5.wav" id="50_hqidm"]
 [ext_resource type="AudioStream" uid="uid://cf7l78pvxnenj" path="res://sfx/pickup_6.wav" id="51_b78q5"]
+[ext_resource type="AudioStream" uid="uid://bfsscio8eqmg1" path="res://sfx/writing_1.wav" id="52_dbsl2"]
+[ext_resource type="AudioStream" uid="uid://d0t10qe3tlh7i" path="res://sfx/writing_2.wav" id="53_qq8er"]
+[ext_resource type="AudioStream" uid="uid://c73c77o282tnq" path="res://sfx/writing_3.wav" id="54_tuhry"]
+[ext_resource type="AudioStream" uid="uid://bca4jfw3bjuyn" path="res://sfx/writing_4.wav" id="55_kwsco"]
+[ext_resource type="AudioStream" uid="uid://m3r4d6telhoq" path="res://sfx/writing_5.wav" id="56_di1p8"]
+[ext_resource type="AudioStream" uid="uid://cowa0k35nbtpk" path="res://sfx/writing_6.wav" id="57_o2ylp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njm32"]
 radius = 5.0
@@ -866,6 +872,15 @@ stream_3/stream = ExtResource("49_xbi2y")
 stream_4/stream = ExtResource("50_hqidm")
 stream_5/stream = ExtResource("51_b78q5")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cg3kn"]
+streams_count = 6
+stream_0/stream = ExtResource("52_dbsl2")
+stream_1/stream = ExtResource("53_qq8er")
+stream_2/stream = ExtResource("54_tuhry")
+stream_3/stream = ExtResource("55_kwsco")
+stream_4/stream = ExtResource("56_di1p8")
+stream_5/stream = ExtResource("57_o2ylp")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
 digging = true
@@ -1068,3 +1083,6 @@ stream = SubResource("AudioStreamRandomizer_ptgdn")
 
 [node name="Pickup" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_20vsm")
+
+[node name="Writing" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_cg3kn")
