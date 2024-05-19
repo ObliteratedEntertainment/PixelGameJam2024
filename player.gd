@@ -25,11 +25,12 @@ var remote_first_move := true
 var remote_tweener: Tween = null
 var remote_queued_actions: Array[Playroom.PlayerActionData] = []
 var remote_active_action: Playroom.PlayerActionData = null
-var remote_perform_task: String = ""
+var remote_perform_task: Array[String] = []
+var last_received_bundle: Array[Playroom.PlayerActionData] = []
 
 # indicator if the player's position should be sent out
 @export var player_broadcast_ready := true
-@export var player_first_broadcast := true
+@export var player_needs_action_broadcast := true
 @export var player_last_broadcast := Vector2(-99999, -99999)
 
 @onready var zone_detector: Area2D = $ZoneDetector
@@ -169,7 +170,12 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		# Check to see if the remote player has revived
 		if is_remote_player:
+			# get input data from their state
+			_get_player_movement_input(delta)
+			# check if they have any actions
 			_check_player_actions()
+			# TODO: consider using movement as a sign they are respawned anyways
+			# TODO: may have missed an update
 		return
 
 	# Always calculate water drain while we are alive
@@ -222,8 +228,8 @@ func _physics_process(delta: float) -> void:
 	var can_broadcast = player_broadcast_ready and \
 				not player_last_broadcast.is_equal_approx(position)
 
-	if not is_remote_player and (player_first_broadcast or can_broadcast):
-		player_first_broadcast = false
+	if not is_remote_player and (player_needs_action_broadcast or can_broadcast):
+		player_needs_action_broadcast = false
 		player_broadcast_ready = false
 		player_last_broadcast = position
 		Playroom.update_my_pos(position)
@@ -247,8 +253,11 @@ func _check_player_actions() -> void:
 			_show_shovel()
 			
 		# Perform task will only be set for a moment, and then is cleared after this check
-		var action := remote_perform_task
-		remote_perform_task = Playroom.ACTION_NONE
+		var action: Variant = remote_perform_task.pop_front()
+		if action == null or action == Playroom.ACTION_NONE:
+			return
+		
+		print("[Player] Remote player performing: ", action)
 		
 		if action == Playroom.ACTION_DIGGING:
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
@@ -260,7 +269,7 @@ func _check_player_actions() -> void:
 		elif action == Playroom.ACTION_DOWSING:
 			dowsing = true
 			return
-		elif action == Playroom.ACTION_DIED and not dead:
+		elif action == Playroom.ACTION_DIED:
 			die()
 			if remote_tweener != null:
 				remote_tweener.kill()
@@ -268,7 +277,7 @@ func _check_player_actions() -> void:
 			# Fade out at the same rate the death animation occurs
 			remote_tweener.tween_property(self, "modulate:a", 0.0, 0.8)
 			return
-		elif action == Playroom.ACTION_RESPAWN and dead:
+		elif action == Playroom.ACTION_RESPAWN:
 			dead = false
 			
 			# Fade back in with the respawn
@@ -286,14 +295,17 @@ func _check_player_actions() -> void:
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
 			Playroom.set_player_action(Playroom.ACTION_DIGGING, global_position)
+			player_needs_action_broadcast = true
 			return
 		elif has_shovel and Input.is_action_just_pressed("player_dowse"):
 			dowsing = true
 			Playroom.set_player_action(Playroom.ACTION_DOWSING, global_position)
+			player_needs_action_broadcast = true
 			return
 		elif Input.is_action_just_pressed("player_write"):
 			writing = true
 			Playroom.set_player_action(Playroom.ACTION_WRITING, global_position)
+			player_needs_action_broadcast = true
 			return
 
 func die() -> void:
@@ -423,8 +435,6 @@ func _on_broadcast_timeout() -> void:
 func _on_zone_entered(body: Area2D) -> void:
 	if is_remote_player:
 		return
-		
-	print("Entered zone: ", body)
 	
 	if body is Oasis:
 		if in_oasis == 0:
@@ -444,8 +454,6 @@ func _on_zone_entered(body: Area2D) -> void:
 func _on_zone_exited(body: Area2D) -> void:
 	if is_remote_player:
 		return
-	
-	print("Exited zone: ", body)
 	
 	if body is Oasis:
 		in_oasis -= 1
@@ -515,6 +523,8 @@ func _on_respawn_requested() -> void:
 		reset_state()
 		dead = false
 		Playroom.set_player_action(Playroom.ACTION_RESPAWN, global_position)
+		# force a resend
+		player_needs_action_broadcast = true
 
 func _on_ui_active(showing: bool) -> void:
 	invulnerable = showing
@@ -621,9 +631,20 @@ func _show_shovel() -> void:
 
 func _consume_remote_action() -> void:
 	if not remote_active_action.action_consumed:
-		remote_perform_task = remote_active_action.action
-		print("Remote action activated: ", remote_active_action.action)
 		remote_active_action.action_consumed = true
+		
+		# these are noop actions, don't bother pushing into the action queue
+		if remote_active_action.action == Playroom.ACTION_NONE:
+			return
+		elif remote_active_action.action == Playroom.ACTION_MOVE:
+			
+			# If we see movement while dead, assume they respawned as a safety measure
+			if dead and len(remote_perform_task) == 0:
+				remote_perform_task.push_back(Playroom.ACTION_RESPAWN)
+			
+			return
+		
+		remote_perform_task.push_back(remote_active_action.action)
 	
 func _handle_remote_player_actions(delta: float) -> Vector2:
 	
@@ -631,22 +652,23 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 	if len(remote_queued_actions) == 0:
 		# this always represents 1 second of queued actions 
 		# If the player isn't moving, this will be unchanged
-		var new_remote_actions = Playroom.get_other_player_position(remote_player_id)
+		var new_remote_actions := Playroom.get_other_player_position(remote_player_id)
 		
-		# double check that this "update" isnt what we already handled
-		# this isn't perfect, but should be close enough
-		# the reason being the current processed bundle's active action might
-		# be lagging behind and not on the last action yet, which is what we are comparing
-		# for bundle equality
-		# TODO: if time, hash the entire incoming action bundle and compare hashes of bundles
-		var fresh_actions = true
-		if len(new_remote_actions) > 0 and remote_active_action != null:
-			var last_action = new_remote_actions[len(new_remote_actions)-1]
-			if remote_active_action.position.is_equal_approx(last_action.position) and \
-					remote_active_action.action == last_action.action:
-				fresh_actions = false
+		var fresh_actions := true
+		# If the bundles are the same size, check if they have the same content
+		# it is possible new state hasn't arrived yet
+		if len(new_remote_actions) == len(last_received_bundle):
+			var unique_actions := 0
+			for i in range(len(new_remote_actions)):
+				var last_action := last_received_bundle[i]
+				var new_action  := new_remote_actions[i]
+				if new_action.action != last_action.action or \
+						not new_action.position.is_equal_approx(last_action.position):
+					unique_actions += 1
+			fresh_actions = unique_actions > 0
 			
 		if fresh_actions:
+			last_received_bundle = new_remote_actions
 			for action in new_remote_actions:
 				remote_queued_actions.push_back(action)
 	
@@ -714,4 +736,4 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 func _on_server_connected(room: String) -> void:
 	if is_remote_player:
 		return
-	player_first_broadcast = true
+	player_needs_action_broadcast = true

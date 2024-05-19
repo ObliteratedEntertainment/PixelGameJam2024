@@ -344,8 +344,7 @@ func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
 
 # Called when the player has connected to a room successfully
 func _on_insert_coin(args: Variant) -> void:
-	print("Joined room successfully: ", _current_room, " Args: ", args)
-	print("Room claims to be: ", _playroom.getRoomCode())
+	print("[Playroom] Connected to room: ", _playroom.getRoomCode())
 	connected = true
 	_current_room = _playroom.getRoomCode()
 	_my_user_id = whoami()
@@ -364,7 +363,7 @@ func _on_insert_coin(args: Variant) -> void:
 
 # Called when we lose our connection to the room
 func _on_disconnected(args: Variant) -> void:
-	print("Disconnected from room. Args: ", args)
+	print("[Playroom] Disconnected from room. Args: ", args)
 	server_disconnected.emit(_current_room)
 	
 	# Clear out all player tracked info since we left the room
@@ -419,8 +418,6 @@ func _on_player_quit(_args: Variant, room_name: String, player_name: String) -> 
 # Callback for the list of valid keys we can use for the persisted deaths
 func _receive_death_list(args: Variant) -> void:
 	if args != null and args[0] != null and "length" in args[0]:
-		print("Death Map Length: ", args[0].length)
-		
 		var player_names: Array[String] = []
 		
 		for i in range(args[0].length):
@@ -428,16 +425,12 @@ func _receive_death_list(args: Variant) -> void:
 		
 		deaths_updated.emit(_current_room, player_names)
 	else:
-		print("Death list came back null or non-array.")
+		print("[Playroom] Error. Death list came back null or non-array.")
 
 	# Don't need to delete the CB as it will be overwritten
 
 func _receive_player_death(args: Variant, death_key: String) -> void:
-	print("Received player death data: ", death_key)
-	print("With args: ", args[0])
 	var death_data: Variant = JSON.parse_string(args[0])
-	
-	print("JSON Parsed object: ", death_data)
 	
 	# Cleanup the callback as it has completed
 	var cb_name := CB_DYNAMIC_PLAYER_DEATH + death_key
@@ -447,13 +440,13 @@ func _receive_player_death(args: Variant, death_key: String) -> void:
 	if "p" in death_data and "f" in death_data:
 		var raw_position: Variant = death_data["p"]
 		if typeof(raw_position) != TYPE_ARRAY or len(raw_position) != 2:
-			print("Death's position field failed to validate: " + str(typeof(raw_position)))
+			print("[Playroom] Death's position field failed to validate: " + str(typeof(raw_position)))
 			death_load_failed.emit(_current_room, death_key)
 			return
 		
 		var raw_footprints: Variant = death_data["f"]
 		if typeof(raw_footprints) != TYPE_ARRAY:
-			print("Death's footprint field failed to validate: " + str(typeof(raw_footprints)))
+			print("[Playroom] Death's footprint field failed to validate: " + str(typeof(raw_footprints)))
 			death_load_failed.emit(_current_room, death_key)
 			return
 			
@@ -464,7 +457,7 @@ func _receive_player_death(args: Variant, death_key: String) -> void:
 		for i in range(min(len(raw_footprints), MAX_FOOTPRINTS_STORED)):
 			var raw_coord: Variant = raw_footprints[i]
 			if typeof(raw_coord) != TYPE_ARRAY or len(raw_coord) != 2:
-				print("Death's footprint coord field failed to validate: " + str(typeof(raw_coord)))
+				print("[Playroom] Death's footprint coord field failed to validate: " + str(typeof(raw_coord)))
 				death_load_failed.emit(_current_room, death_key)
 				return
 			
@@ -473,11 +466,7 @@ func _receive_player_death(args: Variant, death_key: String) -> void:
 		death_loaded.emit(_current_room, death_key, pos, fp)
 
 func _receive_player_inscription(args: Variant, inscription_key: String) -> void:
-	print("Received inscription data: ", inscription_key)
-	print("With args: ", args[0])
 	var data: Variant = JSON.parse_string(args[0])
-	
-	print("JSON Parsed object: ", data)
 	
 	# Cleanup the callback as it has completed
 	var cb_name := CB_DYNAMIC_PLAYER_INSCRIPTION + inscription_key
@@ -487,19 +476,19 @@ func _receive_player_inscription(args: Variant, inscription_key: String) -> void
 	if "p" in data and "t" in data and "w" in data:
 		var raw_position: Variant = data["p"]
 		if typeof(raw_position) != TYPE_ARRAY or len(raw_position) != 2:
-			print("Inscription's position field failed to validate: " + str(typeof(raw_position)))
+			print("[Playroom] Inscription's position field failed to validate: " + str(typeof(raw_position)))
 			inscription_load_failed.emit(_current_room, inscription_key)
 			return
 		
 		var raw_phrase: Variant = data["t"]
 		if typeof(raw_phrase) != TYPE_FLOAT: # javascript always comes through as floats
-			print("Inscription's phrase field failed to validate: " + str(typeof(raw_phrase)))
+			print("[Playroom] Inscription's phrase field failed to validate: " + str(typeof(raw_phrase)))
 			death_load_failed.emit(_current_room, inscription_key)
 			return
 		
 		var raw_word: Variant = data["w"]
 		if typeof(raw_word) != TYPE_FLOAT: # javascript always comes through as floats
-			print("Inscription's word field failed to validate: " + str(typeof(raw_word)))
+			print("[Playroom] Inscription's word field failed to validate: " + str(typeof(raw_word)))
 			death_load_failed.emit(_current_room, inscription_key)
 			return
 			
@@ -510,8 +499,6 @@ func _receive_player_inscription(args: Variant, inscription_key: String) -> void
 # Callback for the list of valid keys for persisted inscriptions
 func _receive_inscription_list(args: Variant) -> void:
 	if args != null and args[0] != null and "length" in args[0]:
-		print("Inscriptions Map Length: ", args[0].length)
-		
 		var inscription_keys: Array[String] = []
 		
 		for i in range(args[0].length):
@@ -519,18 +506,7 @@ func _receive_inscription_list(args: Variant) -> void:
 			
 		inscriptions_updated.emit(_current_room, inscription_keys)
 	else:
-		print("Inscription list came back null or non-array.")
-
-
-# Generate a random player name that can be used across rooms/sessions
-func _random_player_name() -> String:
-	const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
-	var output_string := ""
-
-	for i in range(16):
-		output_string += chars[randi() % chars.length()]
-
-	return output_string
+		print("[Playroom] Error. Inscription list came back null or non-array.")
 
 func _create_player_death_key(player: String, index: int) -> String:
 	return "D_%s[%d]" % [player, index]
