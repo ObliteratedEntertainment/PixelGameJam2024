@@ -111,6 +111,7 @@ func _ready() -> void:
 	if not is_remote_player:
 		WorldManager.player_respawn.connect(_on_respawn_requested)
 		WorldManager.ui_active.connect(_on_ui_active)
+		WorldManager.player_finished_writing.connect(_finish_writing_comment)
 	
 	broadcast_position_timer.timeout.connect(_on_broadcast_timeout)
 	
@@ -622,12 +623,20 @@ func _anim_player_dowsing_started() -> void:
 		get_parent().add_child(ripple)
 
 func _anim_place_comment() -> void:
+	if not is_remote_player:
+		WorldManager.player_started_writing.emit()
+
+func _finish_writing_comment(template: int, noun: int) -> void:
 	if recent_comment != null:
 		recent_comment.clear_out()
 		
 	recent_comment = COMMENT.instantiate()
+	recent_comment.comment_template = template
+	recent_comment.comment_noun = noun
 	recent_comment.position = comment_place.global_position
 	get_parent().add_child(recent_comment)
+	
+	# TODO: tell playroom comment was written
 
 func _show_shovel() -> void:
 	has_shovel = true

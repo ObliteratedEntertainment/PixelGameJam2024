@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfd4dfkvg2iuu"]
+[gd_scene load_steps=7 format=3 uid="uid://cfd4dfkvg2iuu"]
 
 [ext_resource type="Script" path="res://utils/cactus.gd" id="1_c80ko"]
 [ext_resource type="Texture2D" uid="uid://cky7767p3hcsn" path="res://sprites/plants/cactus_3.png" id="2_5qs80"]
 [ext_resource type="Texture2D" uid="uid://bn2n2ppk7mg18" path="res://sprites/plants/cactus_3_shadow.png" id="3_thckm"]
+[ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="4_vbnwp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d7n53"]
 radius = 3.0
@@ -42,3 +43,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupDetector"]
 shape = SubResource("CircleShape2D_pj46n")
+
+[node name="MaxDistanceHelper" parent="." instance=ExtResource("4_vbnwp")]
+include_base_water = 0.0
+used_cactus_flowers = 2

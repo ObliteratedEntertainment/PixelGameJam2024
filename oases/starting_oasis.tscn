@@ -520,12 +520,12 @@ position = Vector2(-23, -52)
 position = Vector2(196, -79)
 
 [node name="Cactus1" parent="." instance=ExtResource("30_rbb51")]
-position = Vector2(-4, 493)
+position = Vector2(-4, 637)
 
 [node name="Cactus3" parent="." instance=ExtResource("32_lnsp4")]
 position = Vector2(-6, 307)
 
 [node name="Cactus2" parent="." instance=ExtResource("31_eof6k")]
-position = Vector2(-3, 680)
+position = Vector2(0, 974)
 
 [editable path="OldMan/Speech Detector"]

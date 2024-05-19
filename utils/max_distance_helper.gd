@@ -3,7 +3,8 @@ extends Node2D
 
 @export var include_base_water := 100.0 : set = _base_set
 @export var used_flasks := 0 : set = _flask_set
-@export var used_cactus_digs := 0 : set = _cactus_set
+@export var used_cactus_flowers := 0 : set = _cactus_set
+@export var used_digs := 0 : set = _dig_set
 
 @export var display_color := Color.RED : set = _change_color
 
@@ -17,7 +18,11 @@ func _ready() -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	var circle_size = 80.0 * 20.0 * ((include_base_water/100.0) + used_flasks + 0.5 * used_cactus_digs)
+	var circle_size = 80.0 * 20.0 * \
+		((include_base_water/100.0) + \
+		used_flasks + \
+		0.5 * used_digs + \
+		0.1 * used_cactus_flowers)
 	draw_arc(Vector2.ZERO, circle_size, 0.0, 2*PI, 64, display_color, 8.0)
 	
 	queue_redraw()
@@ -35,5 +40,9 @@ func _flask_set(val: int):
 	queue_redraw()
 
 func _cactus_set(val: int):
-	used_cactus_digs = val
+	used_cactus_flowers = val
+	queue_redraw()
+
+func _dig_set(val: int):
+	used_digs = val
 	queue_redraw()
