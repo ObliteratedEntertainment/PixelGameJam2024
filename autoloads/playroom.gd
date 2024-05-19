@@ -118,8 +118,6 @@ var stashed_actions := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_my_user_id = "profour" # TODO: enable for prod -> _random_player_name()
-	
 	_playroom = JavaScriptBridge.get_interface("Playroom")
 	_console = JavaScriptBridge.get_interface("console")
  
@@ -350,6 +348,7 @@ func _on_insert_coin(args: Variant) -> void:
 	print("Room claims to be: ", _playroom.getRoomCode())
 	connected = true
 	_current_room = _playroom.getRoomCode()
+	_my_user_id = whoami()
 	
 	stashed_actions.clear() # clear anything so we don't flood the server we just joined
 	first_action = true
@@ -361,9 +360,7 @@ func _on_insert_coin(args: Variant) -> void:
 	# Attach the callback to get information when players join
 	_playroom.onPlayerJoin(_bridgeToJS(_on_player_join, CB_PLAYER_JOINED))
 	
-	#add_death_location(Vector2(0,0), [Vector2.ZERO, Vector2.ONE])
-	
-	_console.log("Joined as player: ", _playroom.me())
+	_console.log("Joined as player: ", _my_user_id)
 
 # Called when we lose our connection to the room
 func _on_disconnected(args: Variant) -> void:
