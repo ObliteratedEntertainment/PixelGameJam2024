@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed = 100.0
+@export var speed := 100.0
 @export var followers: Array[PathFollow2D] = []
 
 

@@ -18,8 +18,7 @@ func _ready() -> void:
 	settings.switch_menu.connect(_on_settings_leave)
 	comment_setup.switch_menu.connect(_on_comment_finished)
 
-func _process(delta: float) -> void:
-	var comment_setup_active = comment_setup.visible
+func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("escape_menu"):
 		

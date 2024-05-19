@@ -21,9 +21,9 @@ func _on_flasks_changed(unused_flasks: int, total_flasks: int) -> void:
 		child.queue_free()
 	
 	for i in range(unused_flasks):
-		var full_flask = FULL_FLASK.instantiate()
+		var full_flask := FULL_FLASK.instantiate()
 		add_child(full_flask)
 	
 	for i in range(total_flasks - unused_flasks):
-		var empty_flask = EMPTY_FLASK.instantiate()
+		var empty_flask := EMPTY_FLASK.instantiate()
 		add_child(empty_flask)

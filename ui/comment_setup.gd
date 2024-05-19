@@ -77,7 +77,7 @@ func _on_word_selected(word_idx: int) -> void:
 	preview.visible = true
 
 func _on_preview_visible() -> void:
-	var comment = Comment.create_comment_string(
+	var comment := Comment.create_comment_string(
 		current_phrase_idx, 
 		current_word_idx
 	)

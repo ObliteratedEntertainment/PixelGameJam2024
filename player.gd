@@ -90,7 +90,7 @@ var has_shovel := false
 
 # Water system
 var current_water := 100.0
-var water_buffs := 0
+var water_buffs := 0.0
 var unused_flasks := 0
 var total_flasks := 0
 var in_oasis := 0
@@ -161,9 +161,6 @@ func reset_state() -> void:
 		WorldManager.player_idle.emit(false)
 
 func _physics_process(delta: float) -> void:
-
-	if Input.is_action_just_pressed("dev_death"):
-		die()
 	
 	if dead:
 		# Check to see if the remote player has revived
@@ -256,7 +253,7 @@ func _get_player_movement_input(delta: float) -> Vector2:
 			
 		
 		
-		var new_desired_position = lerp(remote_old_position, remote_new_position, remote_pos_interp)
+		var new_desired_position: Vector2 = lerp(remote_old_position, remote_new_position, remote_pos_interp)
 		remote_pos_interp += delta / remote_time_normalization
 		remote_pos_interp = minf(remote_pos_interp, 1.0)
 		
@@ -276,7 +273,7 @@ func _get_player_movement_input(delta: float) -> Vector2:
 		player_input = player_input.normalized()
 		return player_input
 
-func _check_player_actions():
+func _check_player_actions() -> void:
 	if is_remote_player:
 		
 		# Check to see if they got the shovel upgrade
@@ -286,7 +283,7 @@ func _check_player_actions():
 		
 		# TODO: Update actions to have a location attached to them
 		# so we can replay more accurately
-		var action = Playroom.get_other_player_action(remote_player_id)
+		var action := Playroom.get_other_player_action(remote_player_id)
 		
 		if action == Playroom.ACTION_DIGGING:
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
@@ -329,7 +326,6 @@ func _check_player_actions():
 			return
 		elif Input.is_action_just_pressed("player_write"):
 			writing = true
-			write.play()
 			Playroom.set_player_action(Playroom.ACTION_WRITING, global_position)
 			return
 
@@ -367,7 +363,7 @@ func _process_water_drain(delta: float) -> void:
 		return
 	
 	# Start with a base of -3 for the heat burning you
-	var intensity = -3
+	var intensity := -3
 	
 	if in_oasis > 0:
 		intensity = 3
@@ -387,7 +383,7 @@ func _process_water_drain(delta: float) -> void:
 	# One flask (100.0) should equal roughly 20 seconds of -3 drain
 	const DRAIN_TIME_PER_FLASK = 100.0 / (20.0 * 3)
 	
-	var water_change = delta * DRAIN_TIME_PER_FLASK * intensity
+	var water_change := delta * DRAIN_TIME_PER_FLASK * intensity
 	
 	# if we ate cactus flowers or tapped a water hole
 	# add in those buffs now
@@ -395,7 +391,7 @@ func _process_water_drain(delta: float) -> void:
 		water_change += water_buffs
 		water_buffs = 0
 		
-		var buffed = WATER_ADDED_BUFF.instantiate()
+		var buffed := WATER_ADDED_BUFF.instantiate()
 		buffed.position = buff_start.position
 		add_child(buffed)
 	
@@ -412,13 +408,13 @@ func _process_water_drain(delta: float) -> void:
 			total_flasks
 		)
 		
-		var buffed = FLASK_USED_BUFF.instantiate()
+		var buffed := FLASK_USED_BUFF.instantiate()
 		buffed.position = buff_start.position
 		add_child(buffed)
 		
 	
 	# Check if we can recharge flasks while in an oasis
-	var empty_flasks = total_flasks - unused_flasks
+	var empty_flasks := total_flasks - unused_flasks
 	if in_oasis > 0 and \
 			current_water >= (100.0 + FLASK_RECHARGE_TIME) and \
 			empty_flasks > 0:
@@ -430,7 +426,7 @@ func _process_water_drain(delta: float) -> void:
 			total_flasks
 		)
 		
-		var buffed = FLASK_ADDED_BUFF.instantiate()
+		var buffed := FLASK_ADDED_BUFF.instantiate()
 		buffed.position = buff_start.position
 		add_child(buffed)
 	elif empty_flasks == 0:
@@ -523,7 +519,7 @@ func _on_power_up_entered(body: Area2D) -> void:
 			unused_flasks,
 			total_flasks
 		)
-		var buffed = FLASK_ADDED_BUFF.instantiate()
+		var buffed := FLASK_ADDED_BUFF.instantiate()
 		buffed.position = buff_start.position
 		add_child(buffed)
 		
@@ -534,14 +530,14 @@ func _on_power_up_entered(body: Area2D) -> void:
 		_show_shovel()
 		body.consume()
 	else:
-		var parent = body.get_parent()
+		var parent := body.get_parent()
 		if parent is Cactus and not parent.consumed:
 			gulping.play()
 			var flowers: int = parent.consume()
-			var buffed = WATER_ADDED_BUFF.instantiate()
+			var buffed := WATER_ADDED_BUFF.instantiate()
 			buffed.position = buff_start.position
 			add_child(buffed)
-			water_buffs += flowers * 10.0
+			water_buffs += float(flowers) * 10.0
 
 func _on_respawn_requested() -> void:
 	if is_remote_player:
@@ -556,7 +552,7 @@ func _on_respawn_requested() -> void:
 func _on_ui_active(showing: bool) -> void:
 	invulnerable = showing
 
-func _anim_dig_hole(spawn_west: bool):
+func _anim_dig_hole(spawn_west: bool) -> void:
 	if not is_remote_player:
 		Playroom.set_player_action(Playroom.ACTION_NONE, Vector2.ZERO)
 	
@@ -565,7 +561,7 @@ func _anim_dig_hole(spawn_west: bool):
 	else:
 		sand_digging.play()
 		
-	var hole = DUG_HOLE.instantiate()
+	var hole := DUG_HOLE.instantiate()
 	if spawn_west:
 		hole.global_position = west_dig.global_position
 	else:
@@ -585,8 +581,8 @@ func _anim_dig_hole(spawn_west: bool):
 			water_refill.play()
 			 
 
-func _anim_place_footprint(spawn_west: bool):
-	var spawn_point = Vector2.ZERO
+func _anim_place_footprint(spawn_west: bool) -> void:
+	var spawn_point := Vector2.ZERO
 	if spawn_west:
 		spawn_point = west_side.global_position
 	else:
@@ -598,7 +594,7 @@ func _anim_place_footprint(spawn_west: bool):
 			spawn_point.distance_to(recent_footprints.back()) < TOO_CLOSE_FOOTPRINT:
 		return
 	
-	var footprint = FOOTPRINT.instantiate()
+	var footprint := FOOTPRINT.instantiate()
 	footprint.global_position = spawn_point
 	get_parent().add_child(footprint)
 	
@@ -622,7 +618,7 @@ func _anim_player_dowsing_started() -> void:
 		Playroom.set_player_action(Playroom.ACTION_NONE, Vector2.ZERO)
 		sfx_dowsing.play()
 		
-		var ripple = DOWSING_RIPPLE.instantiate()
+		var ripple := DOWSING_RIPPLE.instantiate()
 		ripple.position = global_position
 		get_parent().add_child(ripple)
 
@@ -639,7 +635,7 @@ func _finish_writing_comment(phrase: int, word: int) -> void:
 	if recent_comment_idx < len(recent_comments):
 		recent_comments[recent_comment_idx].clear_out()
 		
-	var comment = COMMENT.instantiate()
+	var comment := COMMENT.instantiate()
 	comment.phrase = phrase
 	comment.word = word
 	comment.position = comment_place.global_position

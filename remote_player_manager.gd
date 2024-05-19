@@ -11,7 +11,7 @@ func _ready() -> void:
 	Playroom.player_joined.connect(_on_player_joined)
 	Playroom.player_left.connect(_on_player_left)
 
-func _on_player_joined(room: String, player: String) -> void:
+func _on_player_joined(_room: String, player: String) -> void:
 	if player == Playroom.whoami():
 		return
 	
@@ -24,7 +24,7 @@ func _on_player_joined(room: String, player: String) -> void:
 		
 		player_lookups[player] = spawn
 
-func _on_player_left(room: String, player: String) -> void:
+func _on_player_left(_room: String, player: String) -> void:
 	
 	if player in player_lookups:
 		print("Player left the game: ", player)

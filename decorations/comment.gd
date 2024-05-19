@@ -73,17 +73,17 @@ func _ready() -> void:
 	area_2d.body_entered.connect(_on_body_entered)
 	area_2d.body_exited.connect(_on_body_exited)
 
-static func create_comment_string(phrase: int, word: int) -> String:
+static func create_comment_string(comment_phrase: int, comment_word: int) -> String:
 	return "%s %s" % [
-		PHRASE_LIST[phrase],
-		WORD_LIST[word]
+		PHRASE_LIST[comment_phrase],
+		WORD_LIST[comment_word]
 	]
 
 func clear_out() -> void:
 	if tweener != null:
 		tweener.kill()
 	
-	var tweener = create_tween()
+	tweener = create_tween()
 	tweener.tween_property(self, "modulate:a", 0.0, 0.5)
 	tweener.tween_callback(queue_free)
 

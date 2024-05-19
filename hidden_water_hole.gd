@@ -8,7 +8,7 @@ var consumed := false
 
 var tweener: Tween = null
 
-var original_collision_layer = 0
+var original_collision_layer := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +19,7 @@ func _ready() -> void:
 	WorldManager.player_respawn.connect(_on_player_respawn)
 
 
-func consume():
+func consume() -> void:
 	if consumed:
 		return
 	

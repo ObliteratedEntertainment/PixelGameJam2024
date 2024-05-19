@@ -18,7 +18,7 @@ func _ready() -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	var circle_size = 80.0 * 20.0 * \
+	var circle_size := 80.0 * 20.0 * \
 		((include_base_water/100.0) + \
 		used_flasks + \
 		0.5 * used_digs + \
@@ -27,7 +27,7 @@ func _draw() -> void:
 	
 	queue_redraw()
 
-func _change_color(val: Color):
+func _change_color(val: Color) -> void:
 	display_color = val
 	queue_redraw()
 
@@ -35,14 +35,14 @@ func _base_set(val: float) -> void:
 	include_base_water = minf(val, 100.0)
 	queue_redraw()
 
-func _flask_set(val: int):
+func _flask_set(val: int) -> void:
 	used_flasks = val
 	queue_redraw()
 
-func _cactus_set(val: int):
+func _cactus_set(val: int) -> void:
 	used_cactus_flowers = val
 	queue_redraw()
 
-func _dig_set(val: int):
+func _dig_set(val: int) -> void:
 	used_digs = val
 	queue_redraw()

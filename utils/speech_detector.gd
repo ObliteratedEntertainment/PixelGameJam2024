@@ -5,8 +5,8 @@ extends Area2D
 
 @onready var mumblings: AudioStreamPlayer2D = get_node_or_null("../Mumblings")
 
-var dialog_offset = 0
-var seen_all_dialogs = false
+var dialog_offset := 0
+var seen_all_dialogs := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +19,7 @@ func _ready() -> void:
 	for lbl in dialog_box.get_children():
 		lbl.visible = false
 
-func _on_body_entered(body: Node2D):
+func _on_body_entered(body: Node2D) -> void:
 	if body is Player and not body.is_remote_player:
 		dialog_hint.visible = false
 		if dialog_box.visible == false and mumblings != null:
@@ -27,7 +27,7 @@ func _on_body_entered(body: Node2D):
 		dialog_box.visible = true
 		dialog_box.get_children()[dialog_offset].visible = true
 		
-func _on_body_exited(body: Node2D):
+func _on_body_exited(body: Node2D) -> void:
 	if body is Player and not body.is_remote_player:
 		dialog_box.visible = false
 		dialog_box.get_children()[dialog_offset].visible = false

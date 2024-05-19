@@ -1,7 +1,7 @@
 extends Sprite2D
 
-@export var travel_distance = 1600.0
-@export var travel_time = 120.0
+@export var travel_distance := 1600.0
+@export var travel_time := 120.0
 
 var initial_position: Vector2 = Vector2.ZERO
 
@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 	#reset()
 
-func reset():
+func reset() -> void:
 	if tween != null:
 		tween.kill()
 	

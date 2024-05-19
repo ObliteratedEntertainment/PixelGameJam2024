@@ -792,7 +792,7 @@ states/WaterDowsing/position = Vector2(685, -183.5)
 states/Writing/node = SubResource("AnimationNodeAnimation_kvr0h")
 states/Writing/position = Vector2(124, 40)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276"), "DeathDown", "Respawn", SubResource("AnimationNodeStateMachineTransition_u1k1f"), "Respawn", "Idle", SubResource("AnimationNodeStateMachineTransition_fvhtm"), "Movement", "Digging", SubResource("AnimationNodeStateMachineTransition_cdqte"), "Idle", "Digging", SubResource("AnimationNodeStateMachineTransition_rcmg5"), "Digging", "Movement", SubResource("AnimationNodeStateMachineTransition_xi86q"), "Digging", "Idle", SubResource("AnimationNodeStateMachineTransition_w8mc7"), "Digging", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yq3k2"), "Movement", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_yt8sh"), "WaterDowsing", "Movement", SubResource("AnimationNodeStateMachineTransition_cq8q7"), "Idle", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_n8b16"), "WaterDowsing", "Idle", SubResource("AnimationNodeStateMachineTransition_tys7o"), "WaterDowsing", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fi42o"), "Movement", "Writing", SubResource("AnimationNodeStateMachineTransition_dc84x"), "Writing", "Movement", SubResource("AnimationNodeStateMachineTransition_rpp7b"), "Idle", "Writing", SubResource("AnimationNodeStateMachineTransition_d8i8o"), "Writing", "Idle", SubResource("AnimationNodeStateMachineTransition_wgngb"), "Writing", "DeathDown", SubResource("AnimationNodeStateMachineTransition_v7jj4")]
-graph_offset = Vector2(6, -60)
+graph_offset = Vector2(140, -100)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i4c62"]
 radius = 7.0
@@ -887,7 +887,6 @@ stream_5/stream = ExtResource("57_o2ylp")
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
 digging = true
-writing = true
 exhausted = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

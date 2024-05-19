@@ -27,7 +27,7 @@ signal player_finished_writing(phrase: int, word: int)
 var current_zone := ""
 
 # Stats for reporting at the end of the game
-var total_water_consumed := 0
+var total_water_consumed := 0.0
 var total_deaths := 0
 var game_start_time := 0
 var game_end_time := 0
@@ -54,7 +54,7 @@ func _on_water_consumed(_total: float, delta: float, _intensity: int) -> void:
 	# consuming water is a negative value
 	# regen is positive
 	if delta < 0.0:
-		total_water_consumed += -1 * delta
+		total_water_consumed += -1.0 * delta
 
 func _on_zone_entered(zone: String) -> void:
 	if current_zone != "":

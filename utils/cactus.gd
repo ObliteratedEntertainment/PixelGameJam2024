@@ -31,6 +31,6 @@ func _respawn_flowers() -> void:
 		if spot.get_child_count() > 0:
 			continue
 		
-		var flower = CACTUS_FLOWER.instantiate()
+		var flower := CACTUS_FLOWER.instantiate()
 		spot.add_child(flower)
 		flowers.push_back(flower)

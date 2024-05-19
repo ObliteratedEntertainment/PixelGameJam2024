@@ -9,7 +9,7 @@ var consumed := false
 
 var tweener: Tween = null
 
-func consume(): 
+func consume() -> void: 
 	if consumed:
 		return
 	

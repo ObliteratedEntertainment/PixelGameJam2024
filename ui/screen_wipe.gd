@@ -7,7 +7,7 @@ func _ready() -> void:
 	WorldManager.player_waiting_respawn.connect(_on_player_died)
 	
 
-func _on_player_died(position: Vector2) -> void:
+func _on_player_died(_pos: Vector2) -> void:
 	animation_player.play("FadeOut")
 
 func _anim_fade_out_completed() -> void:
