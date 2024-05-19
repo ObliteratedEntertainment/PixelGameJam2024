@@ -30,7 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://ukd6vweylb6" path="res://sfx/ui_button_1.wav" id="28_477in"]
 [ext_resource type="AudioStream" uid="uid://bxx5ixjmn4226" path="res://sfx/ui_button_2.wav" id="29_7gkm3"]
 [ext_resource type="AudioStream" uid="uid://s446am1odksh" path="res://sfx/ui_button_3.wav" id="30_3yglh"]
-[ext_resource type="Texture2D" uid="uid://v362oj1or0oj" path="res://playroom_logo_1.png" id="32_fhul8"]
+[ext_resource type="Texture2D" uid="uid://bdkyk4c3h13v5" path="res://playroom_logo_pixelated.png" id="31_75ssh"]
 [ext_resource type="PackedScene" uid="uid://cqtqx0vslyudt" path="res://ui/settings.tscn" id="33_x0rmv"]
 
 [sub_resource type="Curve2D" id="Curve2D_ujgx0"]
@@ -410,12 +410,11 @@ libraries = {
 autoplay = "idle"
 
 [node name="TextureRect" type="TextureRect" parent="Menu"]
-texture_filter = 1
 offset_left = 3.0
-offset_top = 317.0
-offset_right = 183.0
+offset_top = 329.0
+offset_right = 190.0
 offset_bottom = 357.0
-texture = ExtResource("32_fhul8")
+texture = ExtResource("31_75ssh")
 stretch_mode = 2
 
 [node name="Settings" parent="." instance=ExtResource("33_x0rmv")]
