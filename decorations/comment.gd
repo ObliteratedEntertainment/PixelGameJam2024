@@ -58,6 +58,11 @@ func _ready() -> void:
 	if word >= len(WORD_LIST):
 		word = 0
 	
+	# Loaded objects fade into existence rather than popping in
+	modulate.a = 0.0
+	tweener = create_tween()
+	tweener.tween_property(self, "modulate:a", 1.0, 0.5)
+	
 	# Comment phrase determines the appearance
 	sprite_2d.texture = COMMENTS[phrase]
 	

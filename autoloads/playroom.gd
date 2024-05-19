@@ -21,6 +21,9 @@ const CB_DYNAMIC_PLAYER_QUIT = "player_quit_"
 const CB_DYNAMIC_PLAYER_DEATH = "player_death_"
 const CB_DYNAMIC_PLAYER_INSCRIPTION = "player_inscription_"
 
+
+const PLAYROOM_PERSIST_DEATH_LIST = "deaths"
+const PLAYROOM_PERSIST_INSCRIPTIONS_LIST = "comments"
 # To Test with Playroom connectivity
 # In the upper-right, click the "Remote Debug" option and
 # select "Run in Browser". 
@@ -96,6 +99,8 @@ var _my_user_id = ""
 # overwrite their old ones if they try to do more
 const MAX_PLAYER_INSCRIPTIONS = 4
 var inscription_offset := 0
+const MAX_PLAYER_DEATHS = 1
+var death_offset := 0
 
 # Tracked state for all players. 
 # Dict -> Dict -> PlayerState
@@ -222,8 +227,7 @@ func get_other_player_action(player: String) -> String:
 # This will get the list of all playernames with deaths
 # and the start the individual requests for each playername death info
 func request_death_list() -> void:
-	# TODO: break this into parts by zone
-	_playroom.getPersistentData("deaths") \
+	_playroom.getPersistentData(PLAYROOM_PERSIST_DEATH_LIST) \
 		.then(_bridgeToJS(_receive_death_list, CB_RECEIVE_DEATH_LIST))
 
 
@@ -232,13 +236,13 @@ func request_death_list() -> void:
 # and the start the individual requests for each playername inscription info
 func request_inscriptions_list() -> void:
 	# TODO: break this into parts by zone
-	_playroom.getPersistentData("comments") \
+	_playroom.getPersistentData(PLAYROOM_PERSIST_INSCRIPTIONS_LIST) \
 		.then(_bridgeToJS(_receive_inscription_list, CB_RECEIVE_INSCRIPTION_LIST))
 
-func request_death_data(player_name: String) -> void:
-	_playroom.getPersistentData("deaths_%s" % [player_name]) \
-		.then(_bridgeToJS(_receive_player_death.bind(player_name), 
-			CB_DYNAMIC_PLAYER_DEATH + player_name))
+func request_death_data(death_key: String) -> void:
+	_playroom.getPersistentData(death_key) \
+		.then(_bridgeToJS(_receive_player_death.bind(death_key), 
+			CB_DYNAMIC_PLAYER_DEATH + death_key))
 		
 func request_inscription_data(inscription_key: String) -> void:
 	_playroom.getPersistentData(inscription_key) \
@@ -249,17 +253,16 @@ func add_inscription(position: Vector2, phrase: int, word: int) -> void:
 	if not connected:
 		return
 	
-	var player_key: String = "comments_%s[%d]" % [_my_user_id, inscription_offset]
+	var player_key: String = _create_inscription_key(_my_user_id, inscription_offset)
 	inscription_offset = (inscription_offset+1) % MAX_PLAYER_INSCRIPTIONS
 	
 	if not _created_comment_tracker.has(player_key):
 		_created_comment_tracker[player_key] = true
-		var key = "comments"
 		
 		# Add the player's comment key into the inscription tracker
 		# so other players know the key exists
 		await _playroom.insertPersistentData(
-			key,
+			PLAYROOM_PERSIST_INSCRIPTIONS_LIST,
 			player_key
 		)
 	
@@ -280,18 +283,17 @@ func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
 	if _current_room == "":
 		return
 	
-	var player_key := "deaths_%s" % [_my_user_id]
+	var death_key = _create_player_death_key(_my_user_id, death_offset)
+	death_offset = (death_offset + 1) % MAX_PLAYER_DEATHS
 	
-	# TODO: Shard the death tracker by zone since we cant change rooms
-	if not _created_death_tracker.has(player_key):
-		_created_death_tracker[player_key] = true
-		var key = "deaths"
+	if not _created_death_tracker.has(death_key):
+		_created_death_tracker[death_key] = true
 		
 		# Add the player's ID into the death track 
 		# so other players know the key exists
 		await _playroom.insertPersistentData(
-			key,
-			player_key
+			PLAYROOM_PERSIST_DEATH_LIST,
+			death_key
 		)
 	
 	var trail: Array[Array] = []
@@ -299,7 +301,7 @@ func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
 		trail.append([v.x, v.y])
 	
 	_playroom.setPersistentData(
-		player_key,
+		death_key,
 		JSON.stringify({
 			"p": [position.x, position.y],
 			"f": trail
@@ -393,15 +395,15 @@ func _receive_death_list(args: Variant) -> void:
 
 	# Don't need to delete the CB as it will be overwritten
 
-func _receive_player_death(args: Variant, player_name: String) -> void:
-	print("Received player death data: ", player_name)
+func _receive_player_death(args: Variant, death_key: String) -> void:
+	print("Received player death data: ", death_key)
 	print("With args: ", args[0])
 	var death_data = JSON.parse_string(args[0])
 	
 	print("JSON Parsed object: ", death_data)
 	
 	# Cleanup the callback as it has completed
-	var cb_name = CB_DYNAMIC_PLAYER_DEATH + player_name
+	var cb_name = CB_DYNAMIC_PLAYER_DEATH + death_key
 	if cb_name in namedReferences:
 		namedReferences.erase(cb_name)
 	
@@ -409,13 +411,13 @@ func _receive_player_death(args: Variant, player_name: String) -> void:
 		var raw_position = death_data["p"]
 		if typeof(raw_position) != TYPE_ARRAY or len(raw_position) != 2:
 			print("Death's position field failed to validate: " + str(typeof(raw_position)))
-			death_load_failed.emit(_current_room, player_name)
+			death_load_failed.emit(_current_room, death_key)
 			return
 		
 		var raw_footprints = death_data["f"]
 		if typeof(raw_footprints) != TYPE_ARRAY:
 			print("Death's footprint field failed to validate: " + str(typeof(raw_footprints)))
-			death_load_failed.emit(_current_room, player_name)
+			death_load_failed.emit(_current_room, death_key)
 			return
 			
 		
@@ -426,12 +428,12 @@ func _receive_player_death(args: Variant, player_name: String) -> void:
 			var raw_coord = raw_footprints[i]
 			if typeof(raw_coord) != TYPE_ARRAY or len(raw_coord) != 2:
 				print("Death's footprint coord field failed to validate: " + str(typeof(raw_coord)))
-				death_load_failed.emit(_current_room, player_name)
+				death_load_failed.emit(_current_room, death_key)
 				return
 			
 			fp.push_back(Vector2(raw_coord[0], raw_coord[1]))
 		
-		death_loaded.emit(_current_room, player_name, pos, fp)
+		death_loaded.emit(_current_room, death_key, pos, fp)
 
 func _receive_player_inscription(args: Variant, inscription_key: String) -> void:
 	print("Received inscription data: ", inscription_key)
@@ -493,6 +495,11 @@ func _random_player_name() -> String:
 
 	return output_string
 
+func _create_player_death_key(player: String, index: int) -> String:
+	return "D_%s[%d]" % [player, index]
+
+func _create_inscription_key(player: String, index: int) -> String:
+	return "C_%s[%d]" % [player, index]
 
 # Wrapper function to generate the javascript callback binding
 func _bridgeToJS(cb, named_cb: String):

@@ -187,9 +187,24 @@ script = ExtResource("1_gjvwk")
 y_sort_enabled = true
 script = ExtResource("19_dbppj")
 
+[node name="PlayerDeathFrequency" type="Timer" parent="PlayerDeathsManager"]
+wait_time = 3.0
+autostart = true
+
+[node name="DeathListFrequency" type="Timer" parent="PlayerDeathsManager"]
+wait_time = 300.0
+autostart = true
+
 [node name="InscriptionsManager" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("3_4jj40")
+
+[node name="InscriptionFrequency" type="Timer" parent="InscriptionsManager"]
+autostart = true
+
+[node name="InscriptionListFrequency" type="Timer" parent="InscriptionsManager"]
+wait_time = 420.0
+autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
 position = Vector2(23, 72)
