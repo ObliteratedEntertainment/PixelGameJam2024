@@ -14,10 +14,11 @@ func _display_when_idle(is_idle: bool) -> void:
 		if tweener != null:
 			tweener.kill()
 		tweener = create_tween()
-		tweener.tween_property(self, "modulate:a", 1.0, 0.5)
+		tweener.tween_interval(1.5)
+		tweener.tween_property(self, "modulate:a", 1.0, 2.5)
 	
 	else:
 		if tweener != null:
 			tweener.kill()
 		tweener = create_tween()
-		tweener.tween_property(self, "modulate:a", 0.0, 0.5)
+		tweener.tween_property(self, "modulate:a", 0.0, 0.1)

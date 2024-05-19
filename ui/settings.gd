@@ -19,6 +19,12 @@ func _ready() -> void:
 
 	accept.pressed.connect(_on_accept)
 	
+	# Initialize with the default settings
+	bgm_level.value = SoundManager.bgm_level
+	sfx_level.value = SoundManager.sfx_level
+	_on_volume_changed(bgm_level.value, "BGM")
+	_on_volume_changed(sfx_level.value, "SFX")
+	
 	bgm_level.value_changed.connect(_on_volume_changed.bind("BGM"))
 	sfx_level.value_changed.connect(_on_volume_changed.bind("SFX"))
 
@@ -39,6 +45,11 @@ func _on_volume_changed(value: float, bus: String) -> void:
 	AudioServer.set_bus_volume_db(bgm_index, linear_to_db(value))
 
 	sfx_ui.play()
+	
+	if bus == "BGM":
+		SoundManager.bgm_level = value
+	elif bus == "SFX":
+		SoundManager.sfx_level = value
 
 func _on_accept() -> void:
 	sfx_ui.play()

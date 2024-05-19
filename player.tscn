@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://dgvotwqi8xwg"]
+[gd_scene load_steps=131 format=3 uid="uid://dgvotwqi8xwg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_e1cfo"]
 [ext_resource type="Texture2D" uid="uid://c7si1eqlcmbpp" path="res://sprites/player/player_notool.png" id="2_qte35"]
@@ -476,6 +476,49 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_hi03k"]
+resource_name = "inscribing"
+length = 0.70001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 11), Vector2i(1, 11), Vector2i(2, 11), Vector2i(3, 11), Vector2i(4, 11), Vector2i(5, 11), Vector2i(6, 11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:writing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_place_comment"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_djc75"]
 _data = {
 "DeathDown": SubResource("Animation_jjatk"),
@@ -490,7 +533,8 @@ _data = {
 "RunUp": SubResource("Animation_1algh"),
 "WaterDowsing": SubResource("Animation_0wqry"),
 "dig_left": SubResource("Animation_36c2p"),
-"dig_right": SubResource("Animation_72aof")
+"dig_right": SubResource("Animation_72aof"),
+"inscribing": SubResource("Animation_hi03k")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ntqn"]
@@ -621,6 +665,9 @@ play_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tpwa6"]
 animation = &"WaterDowsing"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvr0h"]
+animation = &"inscribing"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ipq5o"]
 advance_mode = 2
 
@@ -696,6 +743,28 @@ advance_expression = "idling"
 advance_mode = 2
 advance_expression = "dead"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dc84x"]
+advance_mode = 2
+advance_expression = "writing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rpp7b"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "not idling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d8i8o"]
+advance_mode = 2
+advance_expression = "writing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wgngb"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "idling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v7jj4"]
+advance_mode = 2
+advance_expression = "dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rg5it"]
 states/DeathDown/node = SubResource("AnimationNodeAnimation_3ntqn")
 states/DeathDown/position = Vector2(802.625, 210.062)
@@ -711,8 +780,10 @@ states/Respawn/position = Vector2(792.25, 399.5)
 states/Start/position = Vector2(12.5, 157.75)
 states/WaterDowsing/node = SubResource("AnimationNodeAnimation_tpwa6")
 states/WaterDowsing/position = Vector2(685, -183.5)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276"), "DeathDown", "Respawn", SubResource("AnimationNodeStateMachineTransition_u1k1f"), "Respawn", "Idle", SubResource("AnimationNodeStateMachineTransition_fvhtm"), "Movement", "Digging", SubResource("AnimationNodeStateMachineTransition_cdqte"), "Idle", "Digging", SubResource("AnimationNodeStateMachineTransition_rcmg5"), "Digging", "Movement", SubResource("AnimationNodeStateMachineTransition_xi86q"), "Digging", "Idle", SubResource("AnimationNodeStateMachineTransition_w8mc7"), "Digging", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yq3k2"), "Movement", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_yt8sh"), "WaterDowsing", "Movement", SubResource("AnimationNodeStateMachineTransition_cq8q7"), "Idle", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_n8b16"), "WaterDowsing", "Idle", SubResource("AnimationNodeStateMachineTransition_tys7o"), "WaterDowsing", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fi42o")]
-graph_offset = Vector2(134, -258)
+states/Writing/node = SubResource("AnimationNodeAnimation_kvr0h")
+states/Writing/position = Vector2(124, 40)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ipq5o"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_bfe0n"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_2661l"), "Movement", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yrhxp"), "Idle", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fo276"), "DeathDown", "Respawn", SubResource("AnimationNodeStateMachineTransition_u1k1f"), "Respawn", "Idle", SubResource("AnimationNodeStateMachineTransition_fvhtm"), "Movement", "Digging", SubResource("AnimationNodeStateMachineTransition_cdqte"), "Idle", "Digging", SubResource("AnimationNodeStateMachineTransition_rcmg5"), "Digging", "Movement", SubResource("AnimationNodeStateMachineTransition_xi86q"), "Digging", "Idle", SubResource("AnimationNodeStateMachineTransition_w8mc7"), "Digging", "DeathDown", SubResource("AnimationNodeStateMachineTransition_yq3k2"), "Movement", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_yt8sh"), "WaterDowsing", "Movement", SubResource("AnimationNodeStateMachineTransition_cq8q7"), "Idle", "WaterDowsing", SubResource("AnimationNodeStateMachineTransition_n8b16"), "WaterDowsing", "Idle", SubResource("AnimationNodeStateMachineTransition_tys7o"), "WaterDowsing", "DeathDown", SubResource("AnimationNodeStateMachineTransition_fi42o"), "Movement", "Writing", SubResource("AnimationNodeStateMachineTransition_dc84x"), "Writing", "Movement", SubResource("AnimationNodeStateMachineTransition_rpp7b"), "Idle", "Writing", SubResource("AnimationNodeStateMachineTransition_d8i8o"), "Writing", "Idle", SubResource("AnimationNodeStateMachineTransition_wgngb"), "Writing", "DeathDown", SubResource("AnimationNodeStateMachineTransition_v7jj4")]
+graph_offset = Vector2(6, -60)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i4c62"]
 radius = 7.0
@@ -797,6 +868,8 @@ stream_5/stream = ExtResource("51_b78q5")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_e1cfo")
+digging = true
+writing = true
 exhausted = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -806,7 +879,7 @@ shape = SubResource("CapsuleShape2D_njm32")
 position = Vector2(0, -8)
 texture = ExtResource("2_qte35")
 hframes = 10
-vframes = 11
+vframes = 12
 frame = 100
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -816,13 +889,14 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 callback_mode_method = 1
 tree_root = SubResource("AnimationNodeStateMachine_rg5it")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.80001
-parameters/current_position = 0.294105
-parameters/current_delta = 0.015282
+parameters/current_position = 0.571226
+parameters/current_delta = 0.00833333
 parameters/DeathDown/current_length = 0.80001
 parameters/DeathDown/current_position = 0.0
 parameters/DeathDown/current_delta = 0.80001
@@ -881,21 +955,21 @@ parameters/Idle/Start/current_length = 0.0
 parameters/Idle/Start/current_position = 0.0
 parameters/Idle/Start/current_delta = 0.0
 parameters/Movement/current_length = 0.80001
-parameters/Movement/current_position = 0.294105
-parameters/Movement/current_delta = 0.015282
+parameters/Movement/current_position = 0.571226
+parameters/Movement/current_delta = 0.00833333
 parameters/Movement/blend_position = Vector2(-0.446187, 0.629956)
 parameters/Movement/0/current_length = 0.80001
-parameters/Movement/0/current_position = 0.294105
-parameters/Movement/0/current_delta = 0.015282
+parameters/Movement/0/current_position = 0.571226
+parameters/Movement/0/current_delta = 0.00833333
 parameters/Movement/1/current_length = 0.80001
-parameters/Movement/1/current_position = 0.294105
-parameters/Movement/1/current_delta = 0.015282
+parameters/Movement/1/current_position = 0.571226
+parameters/Movement/1/current_delta = 0.00833333
 parameters/Movement/2/current_length = 0.80001
-parameters/Movement/2/current_position = 0.294105
-parameters/Movement/2/current_delta = 0.015282
+parameters/Movement/2/current_position = 0.571226
+parameters/Movement/2/current_delta = 0.00833333
 parameters/Movement/3/current_length = 0.80001
-parameters/Movement/3/current_position = 0.294105
-parameters/Movement/3/current_delta = 0.015282
+parameters/Movement/3/current_position = 0.571226
+parameters/Movement/3/current_delta = 0.00833333
 parameters/Respawn/current_length = 0.80001
 parameters/Respawn/current_position = 0.80001
 parameters/Respawn/current_delta = 0.0115956
@@ -905,6 +979,9 @@ parameters/Start/current_delta = 0.0
 parameters/WaterDowsing/current_length = 1.0
 parameters/WaterDowsing/current_position = 1.0
 parameters/WaterDowsing/current_delta = 0.0126253
+parameters/Writing/current_length = null
+parameters/Writing/current_position = null
+parameters/Writing/current_delta = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -949,12 +1026,14 @@ position = Vector2(12, 3)
 [node name="BuffStart" type="Marker2D" parent="."]
 position = Vector2(0, -23)
 
+[node name="CommentPlace" type="Marker2D" parent="."]
+position = Vector2(-3, 2)
+
 [node name="BroadcastPositionTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="SandFootstep" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_i2k00")
-volume_db = -10.0
 bus = &"SFX"
 
 [node name="GrassFootstep" type="AudioStreamPlayer2D" parent="."]
@@ -963,7 +1042,6 @@ bus = &"SFX"
 
 [node name="SighAndBreath" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_o5336")
-volume_db = -4.952
 bus = &"SFX"
 
 [node name="LastSigh" type="AudioStreamPlayer2D" parent="."]

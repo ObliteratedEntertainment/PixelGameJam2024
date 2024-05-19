@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8erdhdt4nags"]
+
+[ext_resource type="Script" path="res://decorations/comment.gd" id="1_5oewe"]
+[ext_resource type="Texture2D" uid="uid://b86p444yppi31" path="res://sprites/comments/comment_1.png" id="1_dcv3k"]
+
+[node name="Comment" type="Node2D"]
+z_index = -2
+script = ExtResource("1_5oewe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dcv3k")

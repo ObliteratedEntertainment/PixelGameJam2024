@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://2otgb546q5w"]
+[gd_scene load_steps=6 format=3 uid="uid://2otgb546q5w"]
 
 [ext_resource type="Script" path="res://utils/cactus.gd" id="1_7dtxp"]
 [ext_resource type="Texture2D" uid="uid://dsy8x8ik8puo8" path="res://sprites/plants/cactus_2.png" id="2_fhg31"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d7n53"]
 radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nquep"]
+radius = 19.0
 
 [node name="Cactus2" type="StaticBody2D"]
 script = ExtResource("1_7dtxp")
@@ -31,3 +34,10 @@ position = Vector2(-4, -8)
 
 [node name="FlowerSpot2" type="Marker2D" parent="FlowerSpots"]
 position = Vector2(0, -11)
+
+[node name="PickupDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupDetector"]
+shape = SubResource("CircleShape2D_nquep")

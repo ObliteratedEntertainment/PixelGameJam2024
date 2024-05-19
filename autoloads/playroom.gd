@@ -164,7 +164,7 @@ func get_other_player_position(player: String) -> Vector2:
 	
 	return Vector2(parsed[0], parsed[1])
 
-func set_player_action(action: String):
+func set_player_action(action: String, position: Vector2):
 	if connected:
 		_playroom.myPlayer().setState("action", action)
 

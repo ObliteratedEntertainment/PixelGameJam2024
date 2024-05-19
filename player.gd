@@ -5,6 +5,7 @@ const WATER_ADDED_BUFF = preload("res://ui/water_added_buff.tscn")
 const FLASK_ADDED_BUFF = preload("res://ui/flask_added_buff.tscn")
 const FLASK_USED_BUFF = preload("res://ui/flask_used_buff.tscn")
 
+const COMMENT = preload("res://decorations/comment.tscn")
 const FOOTPRINT = preload("res://footprint.tscn")
 const DUG_HOLE = preload("res://dug_hole.tscn")
 const DOWSING_RIPPLE = preload("res://dowsing_ripple.tscn")
@@ -47,6 +48,10 @@ var remote_tweener: Tween = null
 
 #Where should we spawn buffs at above the player
 @onready var buff_start: Marker2D = $BuffStart
+
+#Where should the comment spawn at
+@onready var comment_place: Marker2D = $CommentPlace
+
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
@@ -91,9 +96,13 @@ var in_shade := 0 # Needs to be a counter because there may be overlaps
 
 var recent_oasis: Oasis = null
 
+var recent_comment: Comment = null
+
 var recent_footprints: Array[Vector2] = []
 
 func _ready() -> void:
+	animation_tree.active = true
+	
 	reset_state()
 	
 	if is_remote_player:
@@ -116,6 +125,10 @@ func _ready() -> void:
 func reset_state() -> void:
 	if is_remote_player:
 		modulate = Color(0.4, 0.4, 1.0, 0.8)
+		# Don't allow the main player to collide with
+		# the remote proxy players
+		collision_layer = 0
+		collision_mask = 0
 	
 	current_water = 100.0
 	unused_flasks = total_flasks
@@ -304,11 +317,15 @@ func _check_player_actions():
 		if has_shovel and Input.is_action_just_pressed("player_dig"):
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
-			Playroom.set_player_action(Playroom.ACTION_DIGGING)
+			Playroom.set_player_action(Playroom.ACTION_DIGGING, global_position)
 			return
 		elif has_shovel and Input.is_action_just_pressed("player_dowse"):
 			dowsing = true
-			Playroom.set_player_action(Playroom.ACTION_DOWSING)
+			Playroom.set_player_action(Playroom.ACTION_DOWSING, global_position)
+			return
+		elif Input.is_action_just_pressed("player_write"):
+			writing = true
+			Playroom.set_player_action(Playroom.ACTION_WRITING, global_position)
 			return
 
 func die() -> void:
@@ -318,7 +335,7 @@ func die() -> void:
 	
 	if not is_remote_player:
 		WorldManager.player_died.emit(position)
-		Playroom.set_player_action(Playroom.ACTION_DIED)
+		Playroom.set_player_action(Playroom.ACTION_DIED, global_position)
 		Playroom.add_death_location(position, recent_footprints)
 	else:
 		# do nothing for remote player until they respawn
@@ -511,6 +528,15 @@ func _on_power_up_entered(body: Area2D) -> void:
 		Playroom.set_player_upgrade(Playroom.UPGRADE_SHOVEL)
 		_show_shovel()
 		body.consume()
+	else:
+		var parent = body.get_parent()
+		if parent is Cactus and not parent.consumed:
+			gulping.play()
+			var flowers: int = parent.consume()
+			var buffed = WATER_ADDED_BUFF.instantiate()
+			buffed.position = buff_start.position
+			add_child(buffed)
+			water_buffs += flowers * 10.0
 
 func _on_respawn_requested() -> void:
 	if is_remote_player:
@@ -520,14 +546,14 @@ func _on_respawn_requested() -> void:
 		global_position = recent_oasis.player_respawn.global_position
 		reset_state()
 		dead = false
-		Playroom.set_player_action(Playroom.ACTION_RESPAWN)
+		Playroom.set_player_action(Playroom.ACTION_RESPAWN, global_position)
 
 func _on_ui_active(showing: bool) -> void:
 	invulnerable = showing
 
 func _anim_dig_hole(spawn_west: bool):
 	if not is_remote_player:
-		Playroom.set_player_action(Playroom.ACTION_NONE)
+		Playroom.set_player_action(Playroom.ACTION_NONE, Vector2.ZERO)
 	
 	if in_oasis > 0:
 		grass_digging.play()
@@ -588,13 +614,20 @@ func _anim_player_death_finished() -> void:
 
 func _anim_player_dowsing_started() -> void:
 	if not is_remote_player:
-		Playroom.set_player_action(Playroom.ACTION_NONE)
+		Playroom.set_player_action(Playroom.ACTION_NONE, Vector2.ZERO)
 		sfx_dowsing.play()
 		
 		var ripple = DOWSING_RIPPLE.instantiate()
 		ripple.position = global_position
 		get_parent().add_child(ripple)
 
+func _anim_place_comment() -> void:
+	if recent_comment != null:
+		recent_comment.clear_out()
+		
+	recent_comment = COMMENT.instantiate()
+	recent_comment.position = comment_place.global_position
+	get_parent().add_child(recent_comment)
 
 func _show_shovel() -> void:
 	has_shovel = true
