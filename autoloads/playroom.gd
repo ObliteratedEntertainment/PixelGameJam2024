@@ -74,7 +74,6 @@ const MAX_PLAYERS_ROOM := 20
 # References to the Javascript object connectors to communicate with
 # the web side
 var _playroom: JavaScriptObject = null
-var _console: JavaScriptObject = null
 
 # Keep a reference to the callback so it doesn't get garbage collected
 var named_cb_references := {}
@@ -119,7 +118,6 @@ var stashed_actions := []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_playroom = JavaScriptBridge.get_interface("Playroom")
-	_console = JavaScriptBridge.get_interface("console")
  
 ## Connect to a room (disconnect from the other if we were connected)
 func connect_room(room_name: String) -> void:
@@ -359,7 +357,7 @@ func _on_insert_coin(args: Variant) -> void:
 	# Attach the callback to get information when players join
 	_playroom.onPlayerJoin(_bridgeToJS(_on_player_join, CB_PLAYER_JOINED))
 	
-	_console.log("Joined as player: ", _my_user_id)
+	print("[Playroom] Joined as player: ", _my_user_id)
 
 # Called when we lose our connection to the room
 func _on_disconnected(args: Variant) -> void:
