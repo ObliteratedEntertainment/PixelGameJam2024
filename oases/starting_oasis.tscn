@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cmn5brqbir8ed"]
+[gd_scene load_steps=34 format=3 uid="uid://cmn5brqbir8ed"]
 
 [ext_resource type="Script" path="res://oases/oasis.gd" id="1_abcjj"]
 [ext_resource type="PackedScene" uid="uid://x6tgegp3hxrt" path="res://decorations/oasis_tall_grass_1.tscn" id="1_gkufe"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://bsppw1q10xcbh" path="res://sprites/borders/oasis_border_6.png" id="18_pg2bm"]
 [ext_resource type="Texture2D" uid="uid://bbrwiheu6jypx" path="res://sprites/borders/oasis_border_7.png" id="19_uaxkb"]
 [ext_resource type="Texture2D" uid="uid://si4b7qft3ryw" path="res://sprites/borders/oasis_border_8.png" id="20_lv4bl"]
+[ext_resource type="PackedScene" uid="uid://ddajcta8h71hu" path="res://decorations/palm_tree_1.tscn" id="20_vhofb"]
 [ext_resource type="Texture2D" uid="uid://buim2kc6vvm4d" path="res://sprites/borders/oasis_border_9.png" id="21_0otvv"]
 [ext_resource type="Texture2D" uid="uid://dws81xj2fq1xx" path="res://sprites/borders/oasis_mud_patch_1.png" id="22_somoh"]
 [ext_resource type="PackedScene" uid="uid://cn2vru4y6kgtk" path="res://old_man.tscn" id="25_50ayw"]
@@ -67,6 +68,7 @@ metadata/_edit_lock_ = true
 position = Vector2(196, -54)
 
 [node name="Speech Detector" parent="OldManCampaign" instance=ExtResource("4_wyaxv")]
+add_game_completion_info = true
 fixed_dialog = false
 
 [node name="IntroDialogs" type="Node2D" parent="OldManCampaign/Speech Detector/DialogBox" index="0"]
@@ -764,6 +766,27 @@ flip_v = true
 
 [node name="Folliage" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="PalmTree1" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(-38, 34)
+
+[node name="PalmTree2" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(52, -119)
+
+[node name="PalmTree3" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(163, 32)
+
+[node name="PalmTree4" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(61, 104)
+
+[node name="PalmTree5" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(36, 101)
+
+[node name="PalmTree6" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(-199, -57)
+
+[node name="PalmTree7" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(301, 52)
 
 [node name="OasisTallGrass1" parent="Folliage" instance=ExtResource("1_gkufe")]
 position = Vector2(111, -109)

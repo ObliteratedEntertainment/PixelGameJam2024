@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dic8xj22l5wul"]
+[gd_scene load_steps=16 format=3 uid="uid://dic8xj22l5wul"]
 
 [ext_resource type="PackedScene" uid="uid://dgvotwqi8xwg" path="res://player.tscn" id="1_e1qv5"]
 [ext_resource type="Script" path="res://remote_player_manager.gd" id="1_gjvwk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="4_fid62"]
 [ext_resource type="PackedScene" uid="uid://cvdplvil00qo2" path="res://desert_zones/starter_zone.tscn" id="5_hbtdc"]
 [ext_resource type="Script" path="res://utils/bgm_watcher.gd" id="7_i8uon"]
+[ext_resource type="PackedScene" uid="uid://b47olkh0unwmh" path="res://oases/end_oasis.tscn" id="7_j0w2a"]
 [ext_resource type="AudioStream" uid="uid://bmbs3bmb11vck" path="res://oasis-desert-zone-bgm.ogg" id="7_pdph2"]
 [ext_resource type="AudioStream" uid="uid://c8co5ocfqmtpt" path="res://oasis-safe-zone.ogg" id="8_843ex"]
 [ext_resource type="Script" path="res://player_deaths_manager.gd" id="19_dbppj"]
@@ -207,7 +208,7 @@ wait_time = 420.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
-position = Vector2(48, -10)
+position = Vector2(42, -27)
 motion_mode = 1
 idling = true
 exhausted = false
@@ -221,6 +222,9 @@ position = Vector2(-3, -2)
 [node name="MaxDistanceHelper2" parent="Oases/StartingOasis" instance=ExtResource("4_fid62")]
 position = Vector2(328, -15)
 display_color = Color(0.182124, 0.641811, 0, 1)
+
+[node name="EndOasis" parent="Oases" instance=ExtResource("7_j0w2a")]
+position = Vector2(47, 4336)
 
 [node name="DesertZones" type="Node2D" parent="."]
 y_sort_enabled = true

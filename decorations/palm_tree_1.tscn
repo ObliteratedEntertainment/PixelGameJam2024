@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddajcta8h71hu"]
+
+[ext_resource type="Texture2D" uid="uid://ck3kejqndwrq4" path="res://sprites/plants/palm_tree_1.png" id="1_ikvmy"]
+[ext_resource type="Texture2D" uid="uid://dxom25d6wtefu" path="res://sprites/plants/palm_tree_1_shadow.png" id="2_8hbno"]
+[ext_resource type="Script" path="res://utils/shade.gd" id="3_388s6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7n53"]
+radius = 6.0
+
+[node name="PalmTree1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, -31)
+texture = ExtResource("1_ikvmy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d7n53")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.392157)
+z_index = 1
+position = Vector2(22, 15)
+texture = ExtResource("2_8hbno")
+
+[node name="Shade" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_388s6")
+shade_value = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shade"]
+polygon = PackedVector2Array(5, -5, 28, 16, 39, 8, 49, 16, 50, 23, 44, 31, 35, 34, 25, 34, 19, 27, 24, 19, -1, 0)

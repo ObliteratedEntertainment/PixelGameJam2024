@@ -118,6 +118,8 @@ func _ready() -> void:
 	
 	if is_remote_player:
 		camera_2d.enabled = false
+	else:
+		WorldManager.game_started.emit()
 	
 	if not is_remote_player:
 		Playroom.server_connected.connect(_on_server_connected)

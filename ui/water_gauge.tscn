@@ -89,7 +89,7 @@ speed_scale = 0.25
 
 [node name="HeatIntensity" type="HBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 222.0
+offset_left = 160.0
 offset_top = 14.0
 offset_right = 290.0
 offset_bottom = 26.0
