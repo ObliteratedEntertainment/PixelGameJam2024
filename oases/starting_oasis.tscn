@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cmn5brqbir8ed"]
+[gd_scene load_steps=39 format=3 uid="uid://cmn5brqbir8ed"]
 
 [ext_resource type="Script" path="res://oases/oasis.gd" id="1_abcjj"]
 [ext_resource type="PackedScene" uid="uid://x6tgegp3hxrt" path="res://decorations/oasis_tall_grass_1.tscn" id="1_gkufe"]
@@ -32,7 +32,12 @@
 [ext_resource type="Texture2D" uid="uid://buim2kc6vvm4d" path="res://sprites/borders/oasis_border_9.png" id="21_0otvv"]
 [ext_resource type="Texture2D" uid="uid://dws81xj2fq1xx" path="res://sprites/borders/oasis_mud_patch_1.png" id="22_somoh"]
 [ext_resource type="PackedScene" uid="uid://cn2vru4y6kgtk" path="res://old_man.tscn" id="25_50ayw"]
+[ext_resource type="PackedScene" uid="uid://cn21muwisljbj" path="res://decorations/live_grass_1.tscn" id="29_7a5s2"]
 [ext_resource type="PackedScene" uid="uid://c8erdhdt4nags" path="res://decorations/comment.tscn" id="29_qs5sd"]
+[ext_resource type="PackedScene" uid="uid://jmeq17bwc0at" path="res://decorations/live_grass_2.tscn" id="30_uvyy7"]
+[ext_resource type="PackedScene" uid="uid://y4stip4dqwd6" path="res://decorations/live_grass_3.tscn" id="31_f2inl"]
+[ext_resource type="PackedScene" uid="uid://hq2o80c6as2v" path="res://decorations/live_grass_5.tscn" id="32_7gj08"]
+[ext_resource type="PackedScene" uid="uid://bnyk5570k6acm" path="res://decorations/live_grass_4.tscn" id="33_g0b4u"]
 
 [node name="StartingOasis" type="Area2D"]
 y_sort_enabled = true
@@ -186,7 +191,33 @@ offset_left = -58.0
 offset_top = -78.0
 offset_right = 58.0
 offset_bottom = -29.0
-text = "Extract the concealed aqua to lengthen your journey."
+text = "Aqua can be found in the desert where unusual green life exists."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Label9" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/Challenge1Done"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "You can use \"R\" to scan for hidden Aqua."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Label10" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/Challenge1Done"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "And then use \"E\" to extract the essence from the ground."
 label_settings = ExtResource("7_0mcqw")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -199,7 +230,7 @@ offset_left = -58.0
 offset_top = -78.0
 offset_right = 58.0
 offset_bottom = -29.0
-text = "Give it a try! The oasis has a bounty of Aqua."
+text = "Give it a try! The oasis has a bounty of Aqua to test your new skill."
 label_settings = ExtResource("7_0mcqw")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -780,13 +811,16 @@ position = Vector2(163, 32)
 position = Vector2(61, 104)
 
 [node name="PalmTree5" parent="Folliage" instance=ExtResource("20_vhofb")]
-position = Vector2(36, 101)
+position = Vector2(-8, 80)
 
 [node name="PalmTree6" parent="Folliage" instance=ExtResource("20_vhofb")]
 position = Vector2(-199, -57)
 
 [node name="PalmTree7" parent="Folliage" instance=ExtResource("20_vhofb")]
 position = Vector2(301, 52)
+
+[node name="PalmTree8" parent="Folliage" instance=ExtResource("20_vhofb")]
+position = Vector2(119, 80)
 
 [node name="OasisTallGrass1" parent="Folliage" instance=ExtResource("1_gkufe")]
 position = Vector2(111, -109)
@@ -1319,6 +1353,138 @@ position = Vector2(141, 78)
 [node name="OasisTallGrass52" parent="Folliage" instance=ExtResource("8_0l3c5")]
 position = Vector2(148, 65)
 
+[node name="LiveGrass1" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(134, -51)
+
+[node name="LiveGrass2" parent="Folliage" instance=ExtResource("30_uvyy7")]
+position = Vector2(127, -65)
+
+[node name="LiveGrass3" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(252, -15)
+
+[node name="LiveGrass4" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(241, -24)
+
+[node name="LiveGrass5" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(193, 10)
+
+[node name="LiveGrass6" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(369, -11)
+
+[node name="LiveGrass7" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(381, 0)
+
+[node name="LiveGrass8" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(286, 108)
+
+[node name="LiveGrass9" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(300, 110)
+
+[node name="LiveGrass10" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(266, 180)
+
+[node name="LiveGrass11" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(251, 172)
+
+[node name="LiveGrass12" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(262, 170)
+
+[node name="LiveGrass13" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(179, 72)
+
+[node name="LiveGrass14" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(171, 59)
+
+[node name="LiveGrass42" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(55, 208)
+
+[node name="LiveGrass43" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(62, 193)
+
+[node name="LiveGrass15" parent="Folliage" instance=ExtResource("30_uvyy7")]
+position = Vector2(71, 204)
+
+[node name="LiveGrass16" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(-7, 94)
+
+[node name="LiveGrass17" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(-21, 93)
+
+[node name="LiveGrass18" parent="Folliage" instance=ExtResource("30_uvyy7")]
+position = Vector2(-17, 83)
+
+[node name="LiveGrass19" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(-80, 147)
+
+[node name="LiveGrass20" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(-91, 135)
+
+[node name="LiveGrass21" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(-64, 77)
+
+[node name="LiveGrass22" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(-78, 70)
+
+[node name="LiveGrass23" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(79, 5)
+
+[node name="LiveGrass24" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(64, -2)
+
+[node name="LiveGrass40" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(-68, -180)
+
+[node name="LiveGrass39" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(-57, -169)
+
+[node name="LiveGrass41" parent="Folliage" instance=ExtResource("30_uvyy7")]
+position = Vector2(-52, -184)
+
+[node name="LiveGrass38" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(130, -116)
+
+[node name="LiveGrass37" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(136, -107)
+
+[node name="LiveGrass36" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(22, -76)
+
+[node name="LiveGrass25" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(16, -84)
+
+[node name="LiveGrass35" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(141, -189)
+
+[node name="LiveGrass26" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(129, -198)
+
+[node name="LiveGrass34" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(131, -189)
+
+[node name="LiveGrass33" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(231, -166)
+
+[node name="LiveGrass27" parent="Folliage" instance=ExtResource("32_7gj08")]
+position = Vector2(231, -179)
+
+[node name="LiveGrass28" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(242, -171)
+
+[node name="LiveGrass29" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(333, -110)
+
+[node name="LiveGrass30" parent="Folliage" instance=ExtResource("29_7a5s2")]
+position = Vector2(321, -109)
+
+[node name="LiveGrass31" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(326, -101)
+
+[node name="LiveGrass32" parent="Folliage" instance=ExtResource("31_f2inl")]
+position = Vector2(-228, -31)
+
+[node name="LiveGrass44" parent="Folliage" instance=ExtResource("33_g0b4u")]
+position = Vector2(-214, -27)
+
 [node name="Decorations" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -1358,67 +1524,67 @@ phrase = 3
 word = 18
 
 [node name="Shovel" parent="." instance=ExtResource("6_wx0xs")]
-position = Vector2(307, -32)
+position = Vector2(334, -23)
 
 [node name="HiddenWater" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="WateringHole" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(224, 121)
+position = Vector2(260, 176)
 
 [node name="WateringHole11" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(-183, -50)
+position = Vector2(-220, -26)
 
 [node name="WateringHole12" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(-5, 183)
+position = Vector2(63, 201)
 
 [node name="WateringHole13" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(309, 72)
+position = Vector2(293, 113)
 
 [node name="WateringHole14" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(208, -144)
+position = Vector2(237, -174)
 
 [node name="WateringHole15" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(301, -44)
+position = Vector2(247, -18)
 
 [node name="WateringHole16" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(125, -165)
+position = Vector2(136, -192)
 
 [node name="WateringHole2" parent="HiddenWater" instance=ExtResource("4_myd0c")]
 position = Vector2(178, 67)
 
 [node name="WateringHole17" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(173, 11)
+position = Vector2(188, 4)
 
 [node name="WateringHole18" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(323, -125)
+position = Vector2(329, -103)
 
 [node name="WateringHole19" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(-75, 54)
+position = Vector2(-70, 74)
 
 [node name="WateringHole3" parent="HiddenWater" instance=ExtResource("4_myd0c")]
 position = Vector2(-14, 91)
 
 [node name="WateringHole4" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(32, -119)
+position = Vector2(135, -111)
 
 [node name="WateringHole5" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(118, -82)
+position = Vector2(133, -59)
 
 [node name="WateringHole6" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(-134, 102)
+position = Vector2(-84, 141)
 
 [node name="WateringHole7" parent="HiddenWater" instance=ExtResource("4_myd0c")]
 position = Vector2(24, -81)
 
 [node name="WateringHole8" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(-3, -145)
+position = Vector2(-58, -177)
 
 [node name="WateringHole9" parent="HiddenWater" instance=ExtResource("4_myd0c")]
 position = Vector2(71, 2)
 
 [node name="WateringHole10" parent="HiddenWater" instance=ExtResource("4_myd0c")]
-position = Vector2(323, 46)
+position = Vector2(377, -5)
 
 [editable path="OldManCampaign/Speech Detector"]
 [editable path="OldManDeaths/Speech Detector"]

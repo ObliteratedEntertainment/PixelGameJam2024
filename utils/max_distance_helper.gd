@@ -15,17 +15,18 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	queue_redraw()
+	#queue_redraw()
 
 func _draw() -> void:
-	var circle_size := 80.0 * 20.0 * \
-		((include_base_water/100.0) + \
-		used_flasks + \
-		0.3 * used_digs + \
-		0.1 * used_cactus_flowers)
-	draw_arc(Vector2.ZERO, circle_size, 0.0, 2*PI, 64, display_color, 8.0)
-	
-	queue_redraw()
+	pass
+	#var circle_size := 80.0 * 20.0 * \
+		#((include_base_water/100.0) + \
+		#used_flasks + \
+		#0.3 * used_digs + \
+		#0.1 * used_cactus_flowers)
+	#draw_arc(Vector2.ZERO, circle_size, 0.0, 2*PI, 64, display_color, 8.0)
+	#
+	#queue_redraw()
 
 func _change_color(val: Color) -> void:
 	display_color = val

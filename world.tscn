@@ -208,7 +208,7 @@ wait_time = 420.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
-position = Vector2(42, -27)
+position = Vector2(69, -31)
 motion_mode = 1
 idling = true
 exhausted = false
