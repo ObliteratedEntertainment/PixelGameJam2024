@@ -115,7 +115,7 @@ var death_offset := 0
 var _tracked_room_players := {}
 
 var first_action := true
-var stashed_actions: Array[PlayerActionData] = []
+var stashed_actions: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -176,6 +176,9 @@ func update_my_pos(pos: Vector2) -> void:
 
 # Ask for the current position of other players we know of
 func get_other_player_position(player: String) -> Array[PlayerActionData]:
+	if not connected:
+		return []
+	
 	if _current_room not in _tracked_room_players:
 		return []
 	
@@ -229,6 +232,9 @@ func set_player_upgrade(upgrade: String) -> void:
 		_playroom.myPlayer().setState(upgrade, "T") # abbreviated True
 
 func get_player_upgrade(player: String, upgrade: String) -> bool:
+	if not connected:
+		return false
+	
 	if _current_room not in _tracked_room_players:
 		return false
 	
@@ -243,6 +249,9 @@ func get_player_upgrade(player: String, upgrade: String) -> bool:
 	return action_data == "T" # abbreviated true
 
 func get_other_player_action(player: String) -> String:
+	if not connected:
+		return ""
+	
 	if _current_room not in _tracked_room_players:
 		return ""
 	
@@ -261,24 +270,33 @@ func get_other_player_action(player: String) -> String:
 # This will get the list of all playernames with deaths
 # and the start the individual requests for each playername death info
 func request_death_list() -> void:
-	_playroom.getPersistentData(PLAYROOM_PERSIST_DEATH_LIST) \
-		.then(_bridgeToJS(_receive_death_list, CB_RECEIVE_DEATH_LIST))
+	if not connected:
+		return
+		_playroom.getPersistentData(PLAYROOM_PERSIST_DEATH_LIST) \
+			.then(_bridgeToJS(_receive_death_list, CB_RECEIVE_DEATH_LIST))
 
 
 # Request the list of inscriptions in the current room we are connected to
 # This will get the list of all playernames with inscriptions
 # and the start the individual requests for each playername inscription info
 func request_inscriptions_list() -> void:
+	if not connected:
+		return
+	
 	# TODO: break this into parts by zone
 	_playroom.getPersistentData(PLAYROOM_PERSIST_INSCRIPTIONS_LIST) \
 		.then(_bridgeToJS(_receive_inscription_list, CB_RECEIVE_INSCRIPTION_LIST))
 
 func request_death_data(death_key: String) -> void:
+	if not connected:
+		return
 	_playroom.getPersistentData(death_key) \
 		.then(_bridgeToJS(_receive_player_death.bind(death_key), 
 			CB_DYNAMIC_PLAYER_DEATH + death_key))
 		
 func request_inscription_data(inscription_key: String) -> void:
+	if not connected:
+		return
 	_playroom.getPersistentData(inscription_key) \
 		.then(_bridgeToJS(_receive_player_inscription.bind(inscription_key), 
 			CB_DYNAMIC_PLAYER_INSCRIPTION + inscription_key))
@@ -314,6 +332,8 @@ func add_inscription(position: Vector2, phrase: int, word: int) -> void:
 # Register where the player died
 # And include some of their footprints up to the point they died
 func add_death_location(position: Vector2, footprints: Array[Vector2]) -> void:
+	if not connected:
+		return
 	if _current_room == "":
 		return
 	

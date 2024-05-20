@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cmn5brqbir8ed"]
+[gd_scene load_steps=37 format=3 uid="uid://cmn5brqbir8ed"]
 
 [ext_resource type="Script" path="res://oases/oasis.gd" id="1_abcjj"]
 [ext_resource type="PackedScene" uid="uid://x6tgegp3hxrt" path="res://decorations/oasis_tall_grass_1.tscn" id="1_gkufe"]
@@ -13,10 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cijeuqu5rln8c" path="res://ui/dialog_display.tscn" id="4_wyaxv"]
 [ext_resource type="PackedScene" uid="uid://cxsar58se20fq" path="res://decorations/oasis_grass_4.tscn" id="5_vlik5"]
 [ext_resource type="PackedScene" uid="uid://dvbuofno6ykdg" path="res://decorations/oasis_grass_3.tscn" id="6_8ghxb"]
-[ext_resource type="PackedScene" uid="uid://c7vk6o7s20pvm" path="res://shovel_power_up.tscn" id="6_wx0xs"]
 [ext_resource type="PackedScene" uid="uid://c4asfhjvn7tsu" path="res://decorations/oasis_grass_2.tscn" id="7_0f7qv"]
 [ext_resource type="LabelSettings" uid="uid://cqgxpfvbk7622" path="res://ui/dialog_label_font.tres" id="7_0mcqw"]
-[ext_resource type="PackedScene" uid="uid://dq3wbxcbjbjlu" path="res://flask_power_up.tscn" id="7_2ayrh"]
 [ext_resource type="PackedScene" uid="uid://0g5mw0uwkabr" path="res://decorations/oasis_tall_grass_2.tscn" id="8_0l3c5"]
 [ext_resource type="Texture2D" uid="uid://lcqgyypo4ciu" path="res://sprites/borders/oasis_border_1.png" id="10_6yeh4"]
 [ext_resource type="Texture2D" uid="uid://dsflw36w3dvyi" path="res://sprites/borders/oasis_border_2.png" id="11_uyp0n"]
@@ -418,9 +416,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="Flask" parent="OldManDeaths/Speech Detector" instance=ExtResource("7_2ayrh")]
-position = Vector2(406, 105)
-
 [node name="OldManComments" parent="." instance=ExtResource("25_50ayw")]
 position = Vector2(124, 142)
 
@@ -462,7 +457,7 @@ offset_left = -58.0
 offset_top = -78.0
 offset_right = 58.0
 offset_bottom = -29.0
-text = "Use the \"T\" key to give it a try."
+text = "Use \"T\" to give it a try."
 label_settings = ExtResource("7_0mcqw")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1522,9 +1517,6 @@ word = 9
 position = Vector2(169, 165)
 phrase = 3
 word = 18
-
-[node name="Shovel" parent="." instance=ExtResource("6_wx0xs")]
-position = Vector2(334, -23)
 
 [node name="HiddenWater" type="Node2D" parent="."]
 y_sort_enabled = true

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c34libx0k6gf3"]
+
+[ext_resource type="Texture2D" uid="uid://da6jqprjlyf8e" path="res://sprites/plants/giant_tree.png" id="1_e2isu"]
+[ext_resource type="Texture2D" uid="uid://b1ud813jp5suj" path="res://sprites/plants/giant_tree_shadow.png" id="2_hcx0p"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pgkq4"]
+height = 52.0
+
+[node name="GiantTree" type="StaticBody2D"]
+position = Vector2(-7, -2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -22)
+texture = ExtResource("1_e2isu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pgkq4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(51, 54)
+texture = ExtResource("2_hcx0p")

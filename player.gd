@@ -665,6 +665,8 @@ func _consume_remote_action() -> void:
 	if not remote_active_action.action_consumed:
 		remote_active_action.action_consumed = true
 		
+		print("Consuming action: ", remote_active_action.action)
+		
 		# these are noop actions, don't bother pushing into the action queue
 		if remote_active_action.action == Playroom.ACTION_NONE:
 			return
@@ -675,6 +677,7 @@ func _consume_remote_action() -> void:
 				remote_perform_task.push_back(Playroom.ACTION_RESPAWN)
 			
 			return
+		
 		
 		remote_perform_task.push_back(remote_active_action.action)
 	
@@ -702,6 +705,7 @@ func _handle_remote_player_actions(delta: float) -> Vector2:
 		if fresh_actions:
 			last_received_bundle = new_remote_actions
 			for action in new_remote_actions:
+				print("Recv: ", action.action, " @ ", action.position)
 				remote_queued_actions.push_back(action)
 	
 	# If we have finished processing all active actions

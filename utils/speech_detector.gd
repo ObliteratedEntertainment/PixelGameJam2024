@@ -99,7 +99,7 @@ func _on_game_complete() -> void:
 		]
 		
 		var time_label := DIALOG_LABEL.instantiate()
-		time_label.text = "Time: %s\nDeaths: %d\nWater: %s" % [
+		time_label.text = "Time: %s\nDeaths: %d\nAqua Used: %s" % [
 			time_str,
 			deaths_total,
 			"%0.2f" % [water_consumed / 100.0]
@@ -110,6 +110,10 @@ func _on_game_complete() -> void:
 
 func _on_player_upgrade(upgrade: String) -> void:
 	if fixed_dialog:
+		return
+	
+	# only the first flask should affect us
+	if upgrade == Playroom.UPGRADE_FLASK and WorldManager.player_total_flasks > 1:
 		return
 	
 	if upgrade == Playroom.UPGRADE_SHOVEL and not challenge_1_disabled:

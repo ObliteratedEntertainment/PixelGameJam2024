@@ -36,6 +36,7 @@ var game_end_time := 0
 var player_has_shovel := false
 var player_has_flask := false
 var player_completed_game := false
+var player_total_flasks := 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -64,6 +65,7 @@ func _on_game_ended() -> void:
 func _on_player_upgrade(upgrade: String) -> void:
 	if upgrade == Playroom.UPGRADE_FLASK:
 		player_has_flask = true
+		player_total_flasks += 1
 	elif upgrade == Playroom.UPGRADE_SHOVEL:
 		player_has_shovel = true
 
