@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://n1r1g817woap" path="res://decorations/cloud_1.tscn" id="15_eeb53"]
 [ext_resource type="Script" path="res://utils/cloud_manager.gd" id="18_i6fwy"]
 
-[node name="StarterZone" type="Area2D"]
+[node name="StarterZone" type="Node2D"]
 y_sort_enabled = true
 
 [node name="EditingHelpers" type="Node2D" parent="."]

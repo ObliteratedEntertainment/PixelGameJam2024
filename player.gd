@@ -36,6 +36,7 @@ var last_received_bundle: Array[Playroom.PlayerActionData] = []
 @onready var zone_detector: Area2D = $ZoneDetector
 @onready var shade_detector: Area2D = $ShadeDetector
 @onready var power_up_detector: Area2D = $PowerUpDetector
+@onready var dialog_detector: Area2D = $DialogDetector
 @onready var broadcast_position_timer: Timer = $BroadcastPositionTimer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var camera_2d: Camera2D = $Camera2D
@@ -100,6 +101,8 @@ var total_flasks := 0
 var in_oasis := 0
 var in_shade := 0 # Needs to be a counter because there may be overlaps
 
+var current_dialog: SpeechDetector = null
+
 var recent_oasis: Oasis = null
 
 var recent_comments: Array[Comment] = []
@@ -128,6 +131,9 @@ func _ready() -> void:
 	
 	shade_detector.area_entered.connect(_on_shade_entered)
 	shade_detector.area_exited.connect(_on_shade_exited)
+	
+	dialog_detector.area_entered.connect(_on_dialog_entered)
+	dialog_detector.area_exited.connect(_on_dialog_exited)
 	
 	power_up_detector.area_entered.connect(_on_power_up_entered)
 
@@ -290,8 +296,11 @@ func _check_player_actions() -> void:
 			return
 		
 	else:
-		
-		if has_shovel and Input.is_action_just_pressed("player_dig"):
+		# if in a dialog zone, "E" is overridden to advance dialog
+		if current_dialog != null and Input.is_action_just_pressed("player_dig"):
+			current_dialog.advance()
+			return
+		elif has_shovel and Input.is_action_just_pressed("player_dig"):
 			animation_tree["parameters/Digging/blend_position"] = last_active_direction.x
 			digging = true
 			Playroom.set_player_action(Playroom.ACTION_DIGGING, global_position)
@@ -481,6 +490,23 @@ func _on_shade_exited(body: Area2D) -> void:
 		in_shade -= 1
 		
 	in_shade = maxi(in_shade, 0)
+
+func _on_dialog_entered(body: Area2D) -> void:
+	if is_remote_player:
+		return
+	
+	if body is SpeechDetector:
+		current_dialog = body
+	WorldManager.player_dialog.emit(true)
+	
+	
+func _on_dialog_exited(body: Area2D) -> void:
+	if is_remote_player:
+		return
+	
+	if body is SpeechDetector:
+		current_dialog = null
+	WorldManager.player_dialog.emit(false)
 
 func _on_power_up_entered(body: Area2D) -> void:
 	if is_remote_player:

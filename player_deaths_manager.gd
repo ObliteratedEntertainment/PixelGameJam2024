@@ -79,6 +79,10 @@ func _on_death_loaded(_room: String, death_key: String, pos: Vector2, footprints
 	print("[DeathManager] Death successfully loaded for ", death_key)
 	
 	var body := DEAD_PLAYER.instantiate()
+	if death_key.contains("[") and death_key.begins_with("D_"):
+		body.player_name = death_key.replace("D_", "").split("[")[0]
+	else:
+		body.player_name = "Unknown Novice"
 	body.footprints = footprints
 	body.offset = pos
 	body.position = pos

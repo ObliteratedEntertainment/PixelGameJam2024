@@ -207,7 +207,7 @@ wait_time = 420.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_e1qv5")]
-position = Vector2(23, 72)
+position = Vector2(48, -10)
 motion_mode = 1
 idling = true
 exhausted = false
@@ -229,26 +229,6 @@ position = Vector2(-3, -2)
 
 [node name="MaxDistanceHelper2" parent="Oases/StartingOasis" instance=ExtResource("4_fid62")]
 position = Vector2(328, -15)
-display_color = Color(0.182124, 0.641811, 0, 1)
-
-[node name="MaxDistanceHelper3" parent="Oases" instance=ExtResource("4_fid62")]
-position = Vector2(3503, -435)
-used_flasks = 1
-display_color = Color(0.33048, 0.51667, 0.910691, 1)
-
-[node name="MaxDistanceHelper4" parent="Oases" instance=ExtResource("4_fid62")]
-position = Vector2(5458, -4816)
-used_flasks = 2
-display_color = Color(0.182124, 0.641811, 0, 1)
-
-[node name="MaxDistanceHelper5" parent="Oases" instance=ExtResource("4_fid62")]
-position = Vector2(8265, -942)
-used_flasks = 2
-display_color = Color(0.182124, 0.641811, 0, 1)
-
-[node name="MaxDistanceHelper6" parent="Oases" instance=ExtResource("4_fid62")]
-position = Vector2(6354, 3471)
-used_flasks = 2
 display_color = Color(0.182124, 0.641811, 0, 1)
 
 [node name="DesertZones" type="Node2D" parent="."]

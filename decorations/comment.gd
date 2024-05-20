@@ -46,8 +46,8 @@ const COMMENTS = [
 @onready var area_2d: Area2D = $Area2D
 @onready var popup: Sprite2D = $Popup
 
-var phrase := 0
-var word := 0
+@export var phrase := 0
+@export var word := 0
 
 var tweener: Tween = null
 

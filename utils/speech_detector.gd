@@ -1,4 +1,7 @@
 extends Area2D
+class_name SpeechDetector
+
+@export var fixed_dialog := true
 
 @onready var dialog_hint: Sprite2D = $DialogHint
 @onready var dialog_box: Sprite2D = $DialogBox
@@ -30,6 +33,17 @@ func _ready() -> void:
 	active_dialog_tree = intro_dialogs
 	active_dialog_tree.visible = true
 
+func advance() -> void:
+	active_dialog_tree.get_children()[dialog_offset].visible = false
+	
+	dialog_offset += 1
+	
+	if dialog_offset >= len(active_dialog_tree.get_children()):
+		seen_all_dialogs = true
+		dialog_offset = 0
+	
+	active_dialog_tree.get_children()[dialog_offset].visible = true
+
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player and not body.is_remote_player:
 		dialog_hint.visible = false
@@ -41,17 +55,15 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body is Player and not body.is_remote_player:
 		dialog_box.visible = false
-		active_dialog_tree.get_children()[dialog_offset].visible = false
 		
-		dialog_offset += 1
-		
-		if dialog_offset >= len(active_dialog_tree.get_children()):
-			seen_all_dialogs = true
-			dialog_offset = 0
+		advance()
 		
 		dialog_hint.visible = not seen_all_dialogs
 		
 func _on_player_upgrade(upgrade: String) -> void:
+	if fixed_dialog:
+		return
+	
 	if upgrade == Playroom.UPGRADE_SHOVEL:
 		active_dialog_tree = challenge_1_done
 		dialog_offset = 0

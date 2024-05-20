@@ -1034,6 +1034,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUpDetector"]
 shape = SubResource("CircleShape2D_i4c62")
 
+[node name="DialogDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogDetector"]
+shape = SubResource("CircleShape2D_i4c62")
+
 [node name="WestDig" type="Marker2D" parent="."]
 position = Vector2(-9, 3)
 

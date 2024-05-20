@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6337ix4gewji"]
+[gd_scene load_steps=7 format=3 uid="uid://b6337ix4gewji"]
 
 [ext_resource type="Script" path="res://decorations/dead_player.gd" id="1_gb8v4"]
 [ext_resource type="Texture2D" uid="uid://dgn21ewf4a77k" path="res://sprites/player/player.png" id="1_uwj86"]
 [ext_resource type="Texture2D" uid="uid://o4nkn2fbx3ly" path="res://sprites/player/player_shadow.png" id="3_a51mu"]
+[ext_resource type="Texture2D" uid="uid://bkxlkux6uu3xk" path="res://ui/comment_popup.png" id="4_478ef"]
+[ext_resource type="LabelSettings" uid="uid://cqgxpfvbk7622" path="res://ui/dialog_label_font.tres" id="5_gpx7a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hedfi"]
+radius = 12.0
 
 [node name="DeadPlayer" type="Node2D"]
 script = ExtResource("1_gb8v4")
@@ -17,3 +22,26 @@ region_rect = Rect2(224, 336, 32, 32)
 self_modulate = Color(1, 1, 1, 0.392157)
 z_index = -1
 texture = ExtResource("3_a51mu")
+
+[node name="Popup" type="Sprite2D" parent="."]
+z_index = 40
+position = Vector2(0, -17)
+texture = ExtResource("4_478ef")
+
+[node name="Label" type="Label" parent="Popup"]
+offset_left = -41.0
+offset_top = -8.0
+offset_right = 41.0
+offset_bottom = 3.0
+text = "PROFOUR"
+label_settings = ExtResource("5_gpx7a")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -6)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hedfi")

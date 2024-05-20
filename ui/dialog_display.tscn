@@ -8,7 +8,7 @@
 radius = 31.0161
 
 [node name="Speech Detector" type="Area2D"]
-collision_layer = 0
+collision_layer = 16
 script = ExtResource("1_v3dkw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

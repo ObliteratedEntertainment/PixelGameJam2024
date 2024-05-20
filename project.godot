@@ -102,6 +102,7 @@ escape_menu={
 2d_physics/layer_2="ItemLayer"
 2d_physics/layer_3="ShadeLayer"
 2d_physics/layer_4="ZoneLayer"
+2d_physics/layer_5="DialogLayer"
 
 [rendering]
 

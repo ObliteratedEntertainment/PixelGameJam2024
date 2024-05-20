@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://cmn5brqbir8ed"]
+[gd_scene load_steps=30 format=3 uid="uid://cmn5brqbir8ed"]
 
 [ext_resource type="Script" path="res://oases/oasis.gd" id="1_abcjj"]
 [ext_resource type="PackedScene" uid="uid://x6tgegp3hxrt" path="res://decorations/oasis_tall_grass_1.tscn" id="1_gkufe"]
 [ext_resource type="PackedScene" uid="uid://b3vufesco82sw" path="res://decorations/oasis_1.tscn" id="1_npltt"]
 [ext_resource type="PackedScene" uid="uid://b6337ix4gewji" path="res://decorations/dead_player.tscn" id="2_tsfh8"]
+[ext_resource type="PackedScene" uid="uid://ddy61e5a50pon" path="res://decorations/oasis_2.tscn" id="3_aspma"]
 [ext_resource type="PackedScene" uid="uid://dm0r81fuhxww7" path="res://decorations/oasis_grass_1.tscn" id="3_jdqkw"]
 [ext_resource type="Texture2D" uid="uid://dox1m5b1c4cdg" path="res://sprites/borders/oasis_sand_patch_1.png" id="3_l3n71"]
 [ext_resource type="Texture2D" uid="uid://c5kgf3rnvgkes" path="res://sprites/borders/oasis_border_3.png" id="3_m6vf1"]
@@ -27,9 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://buim2kc6vvm4d" path="res://sprites/borders/oasis_border_9.png" id="21_0otvv"]
 [ext_resource type="Texture2D" uid="uid://dws81xj2fq1xx" path="res://sprites/borders/oasis_mud_patch_1.png" id="22_somoh"]
 [ext_resource type="PackedScene" uid="uid://cn2vru4y6kgtk" path="res://old_man.tscn" id="25_50ayw"]
-[ext_resource type="PackedScene" uid="uid://bsqdtsq6dfs36" path="res://decorations/cactus_1.tscn" id="30_rbb51"]
-[ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="31_eof6k"]
-[ext_resource type="PackedScene" uid="uid://cfd4dfkvg2iuu" path="res://decorations/cactus_3.tscn" id="32_lnsp4"]
+[ext_resource type="PackedScene" uid="uid://c8erdhdt4nags" path="res://decorations/comment.tscn" id="29_qs5sd"]
 
 [node name="StartingOasis" type="Area2D"]
 y_sort_enabled = true
@@ -39,96 +38,219 @@ script = ExtResource("1_abcjj")
 
 [node name="ZoneExtents" type="CollisionPolygon2D" parent="."]
 modulate = Color(1, 1, 1, 0.243137)
-polygon = PackedVector2Array(-198, -18, -209, 21, -120, 97, -6, 124, 218, 122, 307, 104, 338.342, 2.90623, 366, -19, 334.446, -40.2985, 305, -74, 174, -182, 92, -185, 11, -177, -96, -91)
+polygon = PackedVector2Array(-382, -39, -355, -1, -81, 231, 37, 250, 269, 264, 414, 239, 449, 83, 458, 21, 504, 2, 455, -24, 449, -111, 328, -207, -179, -207)
 metadata/_edit_lock_ = true
 
 [node name="PlayerRespawn" type="Marker2D" parent="."]
-position = Vector2(46, -23)
+position = Vector2(61, -27)
 
 [node name="GrassBase" type="Polygon2D" parent="."]
 z_index = -9
 y_sort_enabled = true
 position = Vector2(111, -422)
 color = Color(0.6, 0.898039, 0.313726, 1)
-polygon = PackedVector2Array(-306, 462, -205, 529, 106, 548, 206, 513, 217, 370, 62, 242, -97, 241, -322, 420)
+polygon = PackedVector2Array(-475, 414, -256, 598, -174, 662, 220, 681, 309, 657, 331, 555, 331, 468, 340, 314, 216, 218, -294, 216, -491, 380)
 metadata/_edit_lock_ = true
 
 [node name="Oasis1" parent="." instance=ExtResource("1_npltt")]
+position = Vector2(73, -101)
+metadata/_edit_lock_ = true
 
-[node name="OldMan" parent="." instance=ExtResource("25_50ayw")]
+[node name="Oasis2" parent="." instance=ExtResource("3_aspma")]
+position = Vector2(67, 51)
+metadata/_edit_lock_ = true
+
+[node name="OldManCampaign" parent="." instance=ExtResource("25_50ayw")]
 position = Vector2(196, -54)
 
-[node name="Speech Detector" parent="OldMan" instance=ExtResource("4_wyaxv")]
+[node name="Speech Detector" parent="OldManCampaign" instance=ExtResource("4_wyaxv")]
+collision_layer = 16
+fixed_dialog = false
 
-[node name="IntroDialogs" type="Node2D" parent="OldMan/Speech Detector/DialogBox" index="0"]
+[node name="IntroDialogs" type="Node2D" parent="OldManCampaign/Speech Detector/DialogBox" index="0"]
 position = Vector2(0, 51)
 
-[node name="Label" type="Label" parent="OldMan/Speech Detector/DialogBox/IntroDialogs"]
-visible = false
+[node name="Label" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/IntroDialogs"]
 offset_left = -58.0
 offset_top = -78.0
 offset_right = 58.0
 offset_bottom = -29.0
-text = "Seek the vessel of purest aqua."
+text = "The rite of Aqua is a storied tradition of our people."
 label_settings = ExtResource("7_0mcqw")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Label3" type="Label" parent="OldMan/Speech Detector/DialogBox/IntroDialogs"]
+[node name="Label3" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/IntroDialogs"]
 visible = false
 offset_left = -58.0
 offset_top = -78.0
 offset_right = 58.0
 offset_bottom = -29.0
-text = "The Desert is paved with the footsteps of the curious."
-label_settings = ExtResource("7_0mcqw")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-clip_text = true
-
-[node name="Label2" type="Label" parent="OldMan/Speech Detector/DialogBox/IntroDialogs"]
-visible = false
-offset_left = -58.0
-offset_top = -78.0
-offset_right = 58.0
-offset_bottom = -29.0
-text = "Only then may you begin your oases communitas."
+text = "And the Desert is paved with the footsteps of the curious."
 label_settings = ExtResource("7_0mcqw")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="Challenge1Done" type="Node2D" parent="OldMan/Speech Detector/DialogBox" index="1"]
-position = Vector2(0, 51)
-
-[node name="Label4" type="Label" parent="OldMan/Speech Detector/DialogBox/Challenge1Done"]
+[node name="Label2" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/IntroDialogs"]
 visible = false
 offset_left = -58.0
 offset_top = -78.0
 offset_right = 58.0
 offset_bottom = -29.0
-text = "Shovel!"
+text = "Follow the way of our ancestors and prove your mastery."
 label_settings = ExtResource("7_0mcqw")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="Challenge2Done" type="Node2D" parent="OldMan/Speech Detector/DialogBox" index="2"]
+[node name="Label4" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/IntroDialogs"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "Seek the shade to gain protection from the sun."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Label5" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/IntroDialogs"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "Consume cactus fruit to replenish the Aqua within."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Label6" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/IntroDialogs"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "Only then can you gain the sacred tool to further your enlightenment."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Challenge1Done" type="Node2D" parent="OldManCampaign/Speech Detector/DialogBox" index="1"]
 position = Vector2(0, 51)
 
-[node name="GameComplete" type="Node2D" parent="OldMan/Speech Detector/DialogBox" index="3"]
+[node name="Label4" type="Label" parent="OldManCampaign/Speech Detector/DialogBox/Challenge1Done"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "Next, seek the vessel of purest aqua."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Challenge2Done" type="Node2D" parent="OldManCampaign/Speech Detector/DialogBox" index="2"]
 position = Vector2(0, 51)
+
+[node name="GameComplete" type="Node2D" parent="OldManCampaign/Speech Detector/DialogBox" index="3"]
+position = Vector2(0, 51)
+
+[node name="OldManDeaths" parent="." instance=ExtResource("25_50ayw")]
+position = Vector2(-82, -112)
+
+[node name="Speech Detector" parent="OldManDeaths" instance=ExtResource("4_wyaxv")]
+
+[node name="IntroDialogs" type="Node2D" parent="OldManDeaths/Speech Detector/DialogBox" index="0"]
+position = Vector2(0, 51)
+
+[node name="Label" type="Label" parent="OldManDeaths/Speech Detector/DialogBox/IntroDialogs"]
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "The Desert is a harsh teacher, but offers valuable lessons."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="OldManDeaths/Speech Detector/DialogBox/IntroDialogs"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "These mounds represent hard lessons learned by other novices."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="OldManComments" parent="." instance=ExtResource("25_50ayw")]
+position = Vector2(124, 142)
+
+[node name="Speech Detector" parent="OldManComments" instance=ExtResource("4_wyaxv")]
+
+[node name="IntroDialogs" type="Node2D" parent="OldManComments/Speech Detector/DialogBox" index="0"]
+position = Vector2(0, 51)
+
+[node name="Label" type="Label" parent="OldManComments/Speech Detector/DialogBox/IntroDialogs"]
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "The rite of Aqua has been the way of our people for ages."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="OldManComments/Speech Detector/DialogBox/IntroDialogs"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "Leave your wisdom etched in the sand, guiding those who follow."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Label2" type="Label" parent="OldManComments/Speech Detector/DialogBox/IntroDialogs"]
+visible = false
+offset_left = -58.0
+offset_top = -78.0
+offset_right = 58.0
+offset_bottom = -29.0
+text = "Use the \"T\" key to give it a try."
+label_settings = ExtResource("7_0mcqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
 
 [node name="Borders" type="Node2D" parent="."]
 z_index = -8
 metadata/_edit_lock_ = true
 
 [node name="OasisExit" type="Sprite2D" parent="Borders"]
-position = Vector2(353, -21)
+position = Vector2(478, -0.999887)
 rotation = 1.5708
 texture = ExtResource("17_6v5mr")
 
@@ -138,136 +260,195 @@ texture = ExtResource("3_l3n71")
 flip_h = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Borders"]
-position = Vector2(-126, -56)
+position = Vector2(-289, -106)
 texture = ExtResource("10_6yeh4")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Borders"]
-position = Vector2(-156, -33)
+position = Vector2(-321, -80)
 texture = ExtResource("10_6yeh4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Borders"]
-position = Vector2(-96, -83)
+position = Vector2(-258, -133)
 texture = ExtResource("10_6yeh4")
 
 [node name="OasisBorder6" type="Sprite2D" parent="Borders"]
-position = Vector2(-197, -4)
+position = Vector2(-365, -46)
 texture = ExtResource("3_m6vf1")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Borders"]
-position = Vector2(266, -90)
+position = Vector2(400, -135)
+texture = ExtResource("10_6yeh4")
+flip_h = true
+
+[node name="Sprite2D16" type="Sprite2D" parent="Borders"]
+position = Vector2(370, -161)
+texture = ExtResource("10_6yeh4")
+flip_h = true
+
+[node name="Sprite2D20" type="Sprite2D" parent="Borders"]
+position = Vector2(340, -187)
 texture = ExtResource("10_6yeh4")
 flip_h = true
 
 [node name="Sprite2D9" type="Sprite2D" parent="Borders"]
-position = Vector2(-187, 33)
+position = Vector2(-202, 117)
 texture = ExtResource("10_6yeh4")
 flip_v = true
 
 [node name="Sprite2D12" type="Sprite2D" parent="Borders"]
-position = Vector2(-187, 33)
+position = Vector2(-234, 91)
 texture = ExtResource("10_6yeh4")
 flip_v = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Borders"]
-position = Vector2(-156, 59)
+position = Vector2(-173, 143)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D14" type="Sprite2D" parent="Borders"]
+position = Vector2(-141, 169)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D15" type="Sprite2D" parent="Borders"]
+position = Vector2(-110, 196)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D21" type="Sprite2D" parent="Borders"]
+position = Vector2(-110, 196)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D11" type="Sprite2D" parent="Borders"]
+position = Vector2(-356, -12)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D17" type="Sprite2D" parent="Borders"]
+position = Vector2(-327, 14)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D18" type="Sprite2D" parent="Borders"]
+position = Vector2(-295, 40)
+texture = ExtResource("10_6yeh4")
+flip_v = true
+
+[node name="Sprite2D19" type="Sprite2D" parent="Borders"]
+position = Vector2(-264, 67)
 texture = ExtResource("10_6yeh4")
 flip_v = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Borders"]
-position = Vector2(-32, -134)
-texture = ExtResource("10_6yeh4")
-
-[node name="Sprite2D11" type="Sprite2D" parent="Borders"]
-position = Vector2(-64, -111)
+position = Vector2(-229, -159)
 texture = ExtResource("10_6yeh4")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Borders"]
-position = Vector2(-2, -160)
+position = Vector2(-197, -186)
 texture = ExtResource("10_6yeh4")
-
-[node name="Sprite2D5" type="Sprite2D" parent="Borders"]
-position = Vector2(214, -136)
-texture = ExtResource("10_6yeh4")
-flip_h = true
-
-[node name="Sprite2D7" type="Sprite2D" parent="Borders"]
-position = Vector2(237, -117)
-texture = ExtResource("10_6yeh4")
-flip_h = true
-
-[node name="Sprite2D6" type="Sprite2D" parent="Borders"]
-position = Vector2(183, -162)
-texture = ExtResource("10_6yeh4")
-flip_h = true
 
 [node name="OasisBorder2" type="Sprite2D" parent="Borders"]
-position = Vector2(43, -178)
+position = Vector2(-149, -204)
 texture = ExtResource("11_uyp0n")
 
 [node name="OasisBorder3" type="Sprite2D" parent="Borders"]
-position = Vector2(106, -178)
+position = Vector2(-86, -206)
 texture = ExtResource("11_uyp0n")
 
 [node name="OasisBorder4" type="Sprite2D" parent="Borders"]
-position = Vector2(106, -178)
+position = Vector2(-22, -206)
 texture = ExtResource("11_uyp0n")
 
 [node name="OasisBorder7" type="Sprite2D" parent="Borders"]
-position = Vector2(309, -58)
+position = Vector2(438, -106)
 texture = ExtResource("3_m6vf1")
 flip_h = true
 
 [node name="OasisBorder5" type="Sprite2D" parent="Borders"]
-position = Vector2(138, -180)
+position = Vector2(42, -206)
+texture = ExtResource("11_uyp0n")
+
+[node name="OasisBorder21" type="Sprite2D" parent="Borders"]
+position = Vector2(105, -206)
+texture = ExtResource("11_uyp0n")
+
+[node name="OasisBorder22" type="Sprite2D" parent="Borders"]
+position = Vector2(169, -206)
+texture = ExtResource("11_uyp0n")
+
+[node name="OasisBorder23" type="Sprite2D" parent="Borders"]
+position = Vector2(233, -206)
+texture = ExtResource("11_uyp0n")
+
+[node name="OasisBorder24" type="Sprite2D" parent="Borders"]
+position = Vector2(294, -205)
 texture = ExtResource("11_uyp0n")
 
 [node name="OasisBorder8" type="Sprite2D" parent="Borders"]
-position = Vector2(322, 5)
+position = Vector2(448, -43)
+texture = ExtResource("15_ckycd")
+
+[node name="OasisBorder18" type="Sprite2D" parent="Borders"]
+position = Vector2(440, 84)
 texture = ExtResource("15_ckycd")
 
 [node name="OasisBorder9" type="Sprite2D" parent="Borders"]
-position = Vector2(325, 63)
+position = Vector2(448, 21.0001)
+texture = ExtResource("16_kdqt8")
+
+[node name="OasisBorder19" type="Sprite2D" parent="Borders"]
+position = Vector2(442, 140)
+texture = ExtResource("16_kdqt8")
+
+[node name="OasisBorder20" type="Sprite2D" parent="Borders"]
+position = Vector2(431, 201)
 texture = ExtResource("16_kdqt8")
 
 [node name="OasisBorder10" type="Sprite2D" parent="Borders"]
-position = Vector2(28, 117)
+position = Vector2(129, 255)
 texture = ExtResource("18_pg2bm")
 
 [node name="OasisBorder11" type="Sprite2D" parent="Borders"]
-position = Vector2(-21, 112)
+position = Vector2(67, 252)
 texture = ExtResource("18_pg2bm")
 
 [node name="OasisBorder12" type="Sprite2D" parent="Borders"]
-position = Vector2(154, 123)
+position = Vector2(256, 261)
 texture = ExtResource("18_pg2bm")
 
 [node name="OasisBorder13" type="Sprite2D" parent="Borders"]
-position = Vector2(91, 118)
+position = Vector2(192, 256)
 texture = ExtResource("19_uaxkb")
 
 [node name="OasisBorder14" type="Sprite2D" parent="Borders"]
-position = Vector2(217, 116)
+position = Vector2(320, 255)
 texture = ExtResource("20_lv4bl")
 
 [node name="OasisBorder15" type="Sprite2D" parent="Borders"]
-position = Vector2(279, 103)
+position = Vector2(383, 242)
 texture = ExtResource("20_lv4bl")
 
 [node name="OasisBorder16" type="Sprite2D" parent="Borders"]
-position = Vector2(-81, 101)
+position = Vector2(4, 244)
+texture = ExtResource("20_lv4bl")
+flip_h = true
+
+[node name="OasisBorder25" type="Sprite2D" parent="Borders"]
+position = Vector2(-28, 236)
 texture = ExtResource("20_lv4bl")
 flip_h = true
 
 [node name="OasisBorder17" type="Sprite2D" parent="Borders"]
-position = Vector2(-117, 85)
+position = Vector2(-67, 226)
 texture = ExtResource("21_0otvv")
 
 [node name="OasisMudPatch1" type="Sprite2D" parent="Borders"]
-position = Vector2(313, 101)
+position = Vector2(417, 240)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch2" type="Sprite2D" parent="Borders"]
-position = Vector2(316, 95)
+position = Vector2(420, 234)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch3" type="Sprite2D" parent="Borders"]
@@ -275,28 +456,66 @@ position = Vector2(0, 123)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch4" type="Sprite2D" parent="Borders"]
-position = Vector2(64, 141)
+position = Vector2(-172, 185)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch13" type="Sprite2D" parent="Borders"]
+position = Vector2(-170, 178)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch14" type="Sprite2D" parent="Borders"]
+position = Vector2(-162, 175)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch15" type="Sprite2D" parent="Borders"]
+position = Vector2(-156, 178)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch16" type="Sprite2D" parent="Borders"]
+position = Vector2(-163, 182)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch17" type="Sprite2D" parent="Borders"]
+position = Vector2(-149, 181)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch18" type="Sprite2D" parent="Borders"]
+position = Vector2(-153, 184)
+texture = ExtResource("22_somoh")
+
+[node name="OasisMudPatch19" type="Sprite2D" parent="Borders"]
+position = Vector2(-141, 187)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch5" type="Sprite2D" parent="Borders"]
-position = Vector2(338, -4)
+position = Vector2(443, 55)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch10" type="Sprite2D" parent="Borders"]
-position = Vector2(338, 6)
+position = Vector2(439, 171)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch9" type="Sprite2D" parent="Borders"]
-position = Vector2(331, -42)
+position = Vector2(450, -73)
 texture = ExtResource("22_somoh")
 
 [node name="OasisMudPatch6" type="Sprite2D" parent="Borders"]
-position = Vector2(329, -86)
+position = Vector2(476, -71)
 texture = ExtResource("22_somoh")
 flip_h = true
 
 [node name="OasisMudPatch7" type="Sprite2D" parent="Borders"]
-position = Vector2(68, -194)
+position = Vector2(75, -229)
+texture = ExtResource("22_somoh")
+flip_v = true
+
+[node name="OasisMudPatch12" type="Sprite2D" parent="Borders"]
+position = Vector2(-181, -211)
+texture = ExtResource("22_somoh")
+flip_v = true
+
+[node name="OasisMudPatch11" type="Sprite2D" parent="Borders"]
+position = Vector2(353, -240)
 texture = ExtResource("22_somoh")
 flip_v = true
 
@@ -310,243 +529,505 @@ flip_v = true
 y_sort_enabled = true
 
 [node name="OasisTallGrass1" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(5, 23)
+position = Vector2(111, -109)
 
 [node name="OasisTallGrass2" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(21, 17)
+position = Vector2(87, -18)
 
 [node name="OasisTallGrass3" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(33, 8)
+position = Vector2(99, -27)
+
+[node name="OasisTallGrass69" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(24, -96)
+
+[node name="OasisTallGrass70" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(7, -96)
 
 [node name="OasisTallGrass4" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(0, -21)
+position = Vector2(50, -81)
 
 [node name="OasisTallGrass5" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(11, -17)
+position = Vector2(61, -77)
+
+[node name="OasisTallGrass26" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(95, -2)
+
+[node name="OasisTallGrass27" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(106, 2)
+
+[node name="OasisTallGrass45" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(95, 98)
+
+[node name="OasisTallGrass46" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(85, 104)
+
+[node name="OasisTallGrass61" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(9, 84)
+
+[node name="OasisTallGrass62" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(23, 86)
+
+[node name="OasisTallGrass63" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(29, 96)
+
+[node name="OasisTallGrass47" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(106, 88)
+
+[node name="OasisTallGrass48" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(120, 87)
+
+[node name="OasisTallGrass28" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(120, 0)
+
+[node name="OasisTallGrass29" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(131, 4)
+
+[node name="OasisTallGrass30" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(98, 13)
+
+[node name="OasisTallGrass32" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(144, 9)
+
+[node name="OasisTallGrass33" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(153, -13)
+
+[node name="OasisTallGrass34" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(97, -72)
+
+[node name="OasisTallGrass31" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(114, 8)
 
 [node name="OasisTallGrass16" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(139, 24)
+position = Vector2(43, -70)
 
 [node name="OasisTallGrass17" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(156, 43)
+position = Vector2(60, -51)
 
 [node name="OasisTallGrass18" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(124, 40)
+position = Vector2(28, -54)
 
 [node name="OasisTallGrass6" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(31, 24)
+position = Vector2(97, -11)
+
+[node name="OasisTallGrass57" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(187, 47)
+
+[node name="OasisTallGrass58" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(217, 49)
+
+[node name="OasisTallGrass59" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(200, 54)
+
+[node name="OasisTallGrass60" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(204, 31)
+
+[node name="OasisTallGrass55" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(172, 51)
+
+[node name="OasisTallGrass56" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(180, 37)
 
 [node name="OasisTallGrass7" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(44, -4)
+position = Vector2(110, -39)
 
 [node name="OasisTallGrass9" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(55, 5)
+position = Vector2(121, -30)
 
 [node name="OasisTallGrass10" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(74, 9)
+position = Vector2(140, -26)
 
 [node name="OasisTallGrass23" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(237, -52)
+position = Vector2(218, 24)
 
 [node name="OasisTallGrass24" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(248, -43)
+position = Vector2(229, 33)
 
 [node name="OasisTallGrass25" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(263, -47)
+position = Vector2(244, 29)
 
 [node name="OasisTallGrass11" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(56, 13)
+position = Vector2(122, -22)
 
 [node name="OasisTallGrass12" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(41, 16)
+position = Vector2(107, -19)
+
+[node name="OasisTallGrass65" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(-25, -72)
+
+[node name="OasisTallGrass66" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(-15, -65)
+
+[node name="OasisTallGrass67" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(-5, -90)
+
+[node name="OasisTallGrass68" parent="Folliage" instance=ExtResource("1_gkufe")]
+position = Vector2(-5, -90)
 
 [node name="OasisTallGrass13" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(66, 23)
+position = Vector2(132, -12)
 
 [node name="OasisTallGrass8" parent="Folliage" instance=ExtResource("1_gkufe")]
-position = Vector2(40, 3)
+position = Vector2(106, -32)
 
 [node name="OasisGrass1" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(60, -23)
+position = Vector2(-30, -8)
 
 [node name="OasisGrass27" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(145, -50)
+position = Vector2(301, -48)
+
+[node name="OasisGrass57" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(313, 75)
+
+[node name="OasisGrass58" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(289, 61)
+
+[node name="OasisGrass64" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(228, 121)
+
+[node name="OasisGrass65" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-116, 102)
+
+[node name="OasisGrass66" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-158, 104)
+
+[node name="OasisGrass67" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-134, 116)
+
+[node name="OasisGrass59" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(313, 49)
+
+[node name="OasisGrass60" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(348, 68)
+
+[node name="OasisGrass61" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(348, 68)
+
+[node name="OasisGrass62" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(367, 53)
+
+[node name="OasisGrass63" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(338, 34)
 
 [node name="OasisGrass12" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(-115, 31)
+position = Vector2(-4, -134)
+
+[node name="OasisGrass43" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-57, -142)
+
+[node name="OasisGrass44" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-126, -132)
 
 [node name="OasisGrass32" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(-91, 19)
+position = Vector2(20, -146)
+
+[node name="OasisGrass68" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(37, -160)
+
+[node name="OasisGrass69" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(93, -163)
+
+[node name="OasisGrass70" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(135, -148)
+
+[node name="OasisGrass71" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(182, -136)
+
+[node name="OasisGrass73" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(209, -152)
+
+[node name="OasisGrass75" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(210, -134)
+
+[node name="OasisGrass76" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(245, -141)
+
+[node name="OasisGrass74" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(137, -171)
+
+[node name="OasisGrass50" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-200, -56)
+
+[node name="OasisGrass51" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-170, -62)
+
+[node name="OasisGrass52" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-173, -41)
+
+[node name="OasisGrass53" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-139, 84)
+
+[node name="OasisGrass54" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(8, 189)
+
+[node name="OasisGrass55" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(-17, 171)
 
 [node name="OasisGrass33" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(-120, 5)
+position = Vector2(-9, -160)
 
 [node name="OasisGrass28" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(-79, -44)
+position = Vector2(-122, -111)
 
 [node name="OasisGrass13" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(32, -116)
+position = Vector2(188, -114)
 
 [node name="OasisGrass14" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(48, -100)
+position = Vector2(204, -98)
 
 [node name="OasisGrass15" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(84, -116)
+position = Vector2(240, -114)
 
 [node name="OasisGrass16" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(99, -96)
+position = Vector2(255, -94)
 
 [node name="OasisGrass17" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(75, -78)
+position = Vector2(231, -76)
 
 [node name="OasisGrass18" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(128, -75)
+position = Vector2(284, -73)
 
 [node name="OasisGrass8" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(81, 80)
+position = Vector2(7, 115)
 
 [node name="OasisGrass41" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(232, 36)
+position = Vector2(-19, -73)
 
 [node name="OasisGrass42" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(208, 73)
+position = Vector2(196, 42)
 
 [node name="OasisGrass36" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(253, -49)
+position = Vector2(234, 27)
+
+[node name="OasisGrass48" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(234, 27)
 
 [node name="OasisGrass26" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(159, 24)
+position = Vector2(63, -70)
 
 [node name="OasisGrass22" parent="Folliage" instance=ExtResource("3_jdqkw")]
-position = Vector2(144, 40)
+position = Vector2(48, -54)
+
+[node name="OasisGrass49" parent="Folliage" instance=ExtResource("3_jdqkw")]
+position = Vector2(48, -54)
 
 [node name="OasisGrass5" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(-16, 40)
+position = Vector2(-75, 52)
 
 [node name="OasisGrass38" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(243, 17)
+position = Vector2(-8, -92)
 
 [node name="OasisGrass34" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(167, -127)
+position = Vector2(323, -125)
+
+[node name="OasisGrass72" parent="Folliage" instance=ExtResource("4_m1dnx")]
+position = Vector2(255, -125)
 
 [node name="OasisGrass35" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(-137, 19)
+position = Vector2(-26, -146)
 
 [node name="OasisGrass30" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(-38, -93)
+position = Vector2(137, -79)
 
 [node name="OasisGrass31" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(-120, -39)
+position = Vector2(-163, -106)
 
 [node name="OasisGrass19" parent="Folliage" instance=ExtResource("4_m1dnx")]
-position = Vector2(37, -84)
+position = Vector2(193, -82)
 
 [node name="OasisGrass4" parent="Folliage" instance=ExtResource("5_vlik5")]
-position = Vector2(52, 28)
+position = Vector2(118, -7)
 
 [node name="OasisGrass6" parent="Folliage" instance=ExtResource("5_vlik5")]
-position = Vector2(72, 32)
+position = Vector2(138, -3)
+
+[node name="OasisGrass47" parent="Folliage" instance=ExtResource("5_vlik5")]
+position = Vector2(146, 76)
+
+[node name="OasisGrass46" parent="Folliage" instance=ExtResource("5_vlik5")]
+position = Vector2(159, 73)
 
 [node name="OasisGrass3" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(-35, 23)
+position = Vector2(-94, 35)
+
+[node name="OasisGrass56" parent="Folliage" instance=ExtResource("6_8ghxb")]
+position = Vector2(19, 175)
 
 [node name="OasisGrass40" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(265, 14)
+position = Vector2(14, -95)
 
 [node name="OasisGrass29" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(-40, -36)
+position = Vector2(-83, -103)
 
 [node name="OasisGrass11" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(121, 81)
+position = Vector2(47, 116)
 
 [node name="OasisGrass7" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(48, 36)
+position = Vector2(114, 1)
+
+[node name="OasisGrass45" parent="Folliage" instance=ExtResource("6_8ghxb")]
+position = Vector2(84, 105)
 
 [node name="OasisGrass2" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(24, 54)
+position = Vector2(-35, 66)
 
 [node name="OasisGrass39" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(239, 26)
+position = Vector2(-12, -83)
 
 [node name="OasisGrass23" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(158, 54)
+position = Vector2(62, -40)
 
 [node name="OasisGrass24" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(140, 56)
+position = Vector2(44, -38)
 
 [node name="OasisGrass25" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(119, 54)
+position = Vector2(23, -40)
 
 [node name="OasisGrass20" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(134, -88)
+position = Vector2(290, -86)
 
 [node name="OasisGrass10" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(134, 73)
+position = Vector2(60, 108)
 
 [node name="OasisGrass21" parent="Folliage" instance=ExtResource("7_0f7qv")]
-position = Vector2(134, 73)
+position = Vector2(60, 108)
 
 [node name="OasisTallGrass14" parent="Folliage" instance=ExtResource("8_0l3c5")]
-position = Vector2(156, 32)
+position = Vector2(60, -62)
 
 [node name="OasisTallGrass15" parent="Folliage" instance=ExtResource("8_0l3c5")]
-position = Vector2(138, 35)
+position = Vector2(42, -59)
 
 [node name="OasisTallGrass19" parent="Folliage" instance=ExtResource("8_0l3c5")]
-position = Vector2(131, 49)
+position = Vector2(35, -45)
 
 [node name="OasisTallGrass20" parent="Folliage" instance=ExtResource("8_0l3c5")]
-position = Vector2(150, 52)
+position = Vector2(54, -42)
 
 [node name="OasisTallGrass21" parent="Folliage" instance=ExtResource("8_0l3c5")]
-position = Vector2(178, 26)
+position = Vector2(82, -68)
+
+[node name="OasisTallGrass35" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(92, -87)
+
+[node name="OasisTallGrass36" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(83, -81)
+
+[node name="OasisTallGrass37" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(113, -100)
+
+[node name="OasisTallGrass38" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(39, -90)
+
+[node name="OasisTallGrass39" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(48, 12)
+
+[node name="OasisTallGrass40" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(-17, 18)
+
+[node name="OasisTallGrass41" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(-45, -9)
+
+[node name="OasisTallGrass42" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(-36, -4)
+
+[node name="OasisTallGrass43" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(-33, -13)
+
+[node name="OasisTallGrass44" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(115, -11)
+
+[node name="OasisTallGrass53" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(162, 43)
+
+[node name="OasisTallGrass54" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(200, 43)
 
 [node name="OasisGrass9" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(109, 72)
+position = Vector2(253, -41)
 
 [node name="OasisGrass37" parent="Folliage" instance=ExtResource("6_8ghxb")]
-position = Vector2(225, -37)
+position = Vector2(154, -30)
 
 [node name="Bush1" parent="Folliage" instance=ExtResource("13_wfdl1")]
-position = Vector2(133, -45)
+position = Vector2(70, -120)
+
+[node name="Bush4" parent="Folliage" instance=ExtResource("13_wfdl1")]
+position = Vector2(-9, 10)
+
+[node name="Bush5" parent="Folliage" instance=ExtResource("13_wfdl1")]
+position = Vector2(8, 0)
+
+[node name="Bush8" parent="Folliage" instance=ExtResource("13_wfdl1")]
+position = Vector2(-2, 118)
+
+[node name="Bush6" parent="Folliage" instance=ExtResource("13_wfdl1")]
+position = Vector2(21, 2)
+
+[node name="Bush7" parent="Folliage" instance=ExtResource("13_wfdl1")]
+position = Vector2(33, 10)
 
 [node name="Bush2" parent="Folliage" instance=ExtResource("13_wfdl1")]
-position = Vector2(148, -50)
+position = Vector2(85, -125)
 
 [node name="Bush3" parent="Folliage" instance=ExtResource("13_wfdl1")]
-position = Vector2(161, -42)
+position = Vector2(98, -117)
 
 [node name="OasisTallGrass22" parent="Folliage" instance=ExtResource("8_0l3c5")]
 position = Vector2(155, 19)
+
+[node name="OasisTallGrass49" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(132, 90)
+
+[node name="OasisTallGrass50" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(129, 75)
+
+[node name="OasisTallGrass64" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(11, 95)
+
+[node name="OasisTallGrass51" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(141, 78)
+
+[node name="OasisTallGrass52" parent="Folliage" instance=ExtResource("8_0l3c5")]
+position = Vector2(148, 65)
 
 [node name="Decorations" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="DeadPlayer" parent="Decorations" instance=ExtResource("2_tsfh8")]
-position = Vector2(80, -116)
-
-[node name="DeadPlayer2" parent="Decorations" instance=ExtResource("2_tsfh8")]
-position = Vector2(99, -96)
-
-[node name="DeadPlayer3" parent="Decorations" instance=ExtResource("2_tsfh8")]
-position = Vector2(74, -72)
+position = Vector2(-118, -105)
+player_name = "Profour"
 
 [node name="DeadPlayer4" parent="Decorations" instance=ExtResource("2_tsfh8")]
-position = Vector2(71, -96)
+position = Vector2(-135, -127)
+player_name = "ImAPerson100"
 
 [node name="Tent1" parent="Decorations" instance=ExtResource("12_ilaq6")]
-position = Vector2(-23, -52)
+position = Vector2(-83, -125)
+
+[node name="Tent3" parent="Decorations" instance=ExtResource("12_ilaq6")]
+position = Vector2(124, 132)
 
 [node name="Tent2" parent="Decorations" instance=ExtResource("12_ilaq6")]
 position = Vector2(196, -79)
 
-[node name="Cactus1" parent="." instance=ExtResource("30_rbb51")]
-position = Vector2(-4, 637)
+[node name="Comment" parent="." instance=ExtResource("29_qs5sd")]
+position = Vector2(80, 165)
 
-[node name="Cactus3" parent="." instance=ExtResource("32_lnsp4")]
-position = Vector2(-6, 307)
+[node name="Comment2" parent="." instance=ExtResource("29_qs5sd")]
+position = Vector2(110, 165)
+phrase = 1
+word = 11
 
-[node name="Cactus2" parent="." instance=ExtResource("31_eof6k")]
-position = Vector2(0, 974)
+[node name="Comment3" parent="." instance=ExtResource("29_qs5sd")]
+position = Vector2(138, 165)
+phrase = 2
+word = 9
 
-[editable path="OldMan/Speech Detector"]
+[node name="Comment4" parent="." instance=ExtResource("29_qs5sd")]
+position = Vector2(169, 165)
+phrase = 3
+word = 18
+
+[editable path="OldManCampaign/Speech Detector"]
+[editable path="OldManDeaths/Speech Detector"]
+[editable path="OldManComments/Speech Detector"]
