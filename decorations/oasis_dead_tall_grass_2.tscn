@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://x1bxob2667up"]
+
+[ext_resource type="Texture2D" uid="uid://lk21j18e47fw" path="res://sprites/plants/oasis_dead_tall_grass_1.png" id="1_3jipn"]
+[ext_resource type="Texture2D" uid="uid://cs0a3t11etc4f" path="res://sprites/plants/oasis_tall_grass_1_shadow.png" id="2_w6qc4"]
+
+[node name="OasisDeadTallGrass1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -5)
+texture = ExtResource("1_3jipn")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(2, -5)
+texture = ExtResource("2_w6qc4")

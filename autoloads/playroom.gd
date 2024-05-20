@@ -12,6 +12,7 @@ const ACTION_RESPAWN = "R"
 
 const UPGRADE_SHOVEL = "SHOVEL"
 const UPGRADE_FLASK  = "FLASK"
+const UPGRADE_WINNER = "WON"
 
 # Named callbacks
 const CB_INSERT_COIN = "on_insert_coin"

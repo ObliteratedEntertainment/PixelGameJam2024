@@ -2,6 +2,8 @@ extends Area2D
 class_name SpeechDetector
 
 @export var fixed_dialog := true
+@export var challenge_1_disabled := false
+@export var challenge_2_disabled := false
 
 @onready var dialog_hint: Sprite2D = $DialogHint
 @onready var dialog_box: Sprite2D = $DialogBox
@@ -12,7 +14,9 @@ class_name SpeechDetector
 @onready var intro_dialogs: Node2D = $DialogBox/IntroDialogs
 @onready var challenge_1_done: Node2D = $DialogBox/Challenge1Done
 @onready var challenge_2_done: Node2D = $DialogBox/Challenge2Done
+@onready var game_complete: Node2D = $"../../OldManDeaths/Speech Detector/DialogBox/GameComplete"
 
+var seen_dialogs := {}
 
 var dialog_offset := 0
 var seen_all_dialogs := false
@@ -68,12 +72,25 @@ func _on_player_upgrade(upgrade: String) -> void:
 	if fixed_dialog:
 		return
 	
-	if upgrade == Playroom.UPGRADE_SHOVEL:
+	if upgrade == Playroom.UPGRADE_SHOVEL and not challenge_1_disabled:
+		active_dialog_tree.visible = false
 		active_dialog_tree = challenge_1_done
+		active_dialog_tree.visible = true
+		dialog_hint.visible = true
 		dialog_offset = 0
 		seen_all_dialogs = false
-	elif upgrade == Playroom.UPGRADE_FLASK:
+	elif upgrade == Playroom.UPGRADE_FLASK and not challenge_2_disabled:
+		active_dialog_tree.visible = false
 		active_dialog_tree = challenge_2_done
+		active_dialog_tree.visible = true
+		dialog_hint.visible = true
+		dialog_offset = 0
+		seen_all_dialogs = false
+	elif upgrade == Playroom.UPGRADE_WINNER:
+		active_dialog_tree.visible = false
+		active_dialog_tree = game_complete
+		active_dialog_tree.visible = true
+		dialog_hint.visible = true
 		dialog_offset = 0
 		seen_all_dialogs = false
 		

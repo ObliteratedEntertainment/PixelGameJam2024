@@ -90,6 +90,7 @@ var last_active_direction := Vector2.DOWN
 @export var dead := false
 @export var disconnected := false #only applies to remote players
 @export var invulnerable := false
+@export var infinite_water := false
 
 var has_shovel := false
 
@@ -347,7 +348,7 @@ func _process_water_drain(delta: float) -> void:
 	
 	# Useful when in escape menu or dialogs
 	# to prevent player water draining
-	if invulnerable:
+	if invulnerable or infinite_water:
 		return
 	
 	# Start with a base of -3 for the heat burning you
