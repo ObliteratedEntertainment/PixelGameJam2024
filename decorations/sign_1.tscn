@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c77v2jldiih0i"]
+
+[ext_resource type="Texture2D" uid="uid://8yd0u7ijo63r" path="res://sprites/signs/sign_1.png" id="1_k2waj"]
+[ext_resource type="Texture2D" uid="uid://dvrvk4cxpip3x" path="res://sprites/signs/sign_1_shadow.png" id="2_yq7a3"]
+
+[node name="Sign1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_k2waj")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(0, -9)
+texture = ExtResource("2_yq7a3")

@@ -21,7 +21,7 @@ func _draw() -> void:
 	var circle_size := 80.0 * 20.0 * \
 		((include_base_water/100.0) + \
 		used_flasks + \
-		0.5 * used_digs + \
+		0.3 * used_digs + \
 		0.1 * used_cactus_flowers)
 	draw_arc(Vector2.ZERO, circle_size, 0.0, 2*PI, 64, display_color, 8.0)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cvdplvil00qo2"]
+[gd_scene load_steps=40 format=3 uid="uid://cvdplvil00qo2"]
 
 [ext_resource type="PackedScene" uid="uid://cnmlij35vo4ia" path="res://utils/max_distance_helper.tscn" id="1_fda42"]
 [ext_resource type="Script" path="res://utils/editing_free.gd" id="1_qkgu3"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://bsqdtsq6dfs36" path="res://decorations/cactus_1.tscn" id="23_dfokq"]
 [ext_resource type="PackedScene" uid="uid://2otgb546q5w" path="res://decorations/cactus_2.tscn" id="24_vcx55"]
 [ext_resource type="PackedScene" uid="uid://c7vk6o7s20pvm" path="res://shovel_power_up.tscn" id="25_hdvt6"]
+[ext_resource type="PackedScene" uid="uid://c77v2jldiih0i" path="res://decorations/sign_1.tscn" id="25_huxso"]
 [ext_resource type="PackedScene" uid="uid://b8v1aiqlxfn7y" path="res://decorations/dead_grass_3.tscn" id="26_pkq87"]
 [ext_resource type="PackedScene" uid="uid://cilum5h5icmdo" path="res://decorations/dead_grass_1.tscn" id="27_5b8r7"]
 [ext_resource type="PackedScene" uid="uid://co0ex3jlm31c0" path="res://decorations/dead_grass_5.tscn" id="28_qqffy"]
@@ -51,6 +52,9 @@ offset_bottom = -49575.0
 scale = Vector2(1e+06, 1e+06)
 color = Color(0.901961, 0.901961, 0.627451, 1)
 metadata/_edit_lock_ = true
+
+[node name="Shovel" parent="." instance=ExtResource("25_hdvt6")]
+position = Vector2(1788, -156)
 
 [node name="EditingHelpers" type="Node2D" parent="."]
 script = ExtResource("1_qkgu3")
@@ -881,6 +885,24 @@ position = Vector2(-2608, -488)
 [node name="DeadTree45" parent="Trees" instance=ExtResource("1_xmtam")]
 position = Vector2(-2596, -628)
 
+[node name="DeadTree85" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(-2537, -1434)
+
+[node name="DeadTree86" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(-2157, -2088)
+
+[node name="DeadTree87" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(-2921, -2399)
+
+[node name="DeadTree88" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(-2489, -2939)
+
+[node name="DeadTree89" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(-273, -2736)
+
+[node name="DeadTree90" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(813, -1765)
+
 [node name="DeadTree46" parent="Trees" instance=ExtResource("1_xmtam")]
 position = Vector2(-3161, -259)
 
@@ -1008,10 +1030,13 @@ position = Vector2(-2062, -210)
 position = Vector2(-2217, -388)
 
 [node name="DeadTree83" parent="Trees" instance=ExtResource("1_xmtam")]
-position = Vector2(-1577, -1760)
+position = Vector2(-1189, -2100)
 
 [node name="DeadTree29" parent="Trees" instance=ExtResource("1_xmtam")]
 position = Vector2(-1907, -846)
+
+[node name="DeadTree84" parent="Trees" instance=ExtResource("1_xmtam")]
+position = Vector2(-2321, -1331)
 
 [node name="DeadTree30" parent="Trees" instance=ExtResource("1_xmtam")]
 position = Vector2(-1717, -718)
@@ -1020,7 +1045,7 @@ position = Vector2(-1717, -718)
 position = Vector2(-1310, -978)
 
 [node name="DeadTree32" parent="Trees" instance=ExtResource("1_xmtam")]
-position = Vector2(-1512, -681)
+position = Vector2(-1521, -686)
 
 [node name="DeadTree33" parent="Trees" instance=ExtResource("1_xmtam")]
 position = Vector2(-1471, -712)
@@ -1035,10 +1060,10 @@ position = Vector2(-724, 456)
 position = Vector2(-724, 456)
 
 [node name="TreeStump33" parent="Trees" instance=ExtResource("11_vb7pe")]
-position = Vector2(-1422, -1253)
+position = Vector2(-2044, -1242)
 
 [node name="TreeStump34" parent="Trees" instance=ExtResource("11_vb7pe")]
-position = Vector2(-1422, -1253)
+position = Vector2(-2044, -1242)
 
 [node name="TreeStump3" parent="Trees" instance=ExtResource("11_vb7pe")]
 position = Vector2(-1515, -223)
@@ -1130,9 +1155,6 @@ position = Vector2(-220, 325)
 [node name="TreeStump2" parent="Trees" instance=ExtResource("11_vb7pe")]
 position = Vector2(-2803, -395)
 
-[node name="Shovel" parent="." instance=ExtResource("25_hdvt6")]
-position = Vector2(1788, -156)
-
 [node name="Cactus" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -1161,10 +1183,10 @@ position = Vector2(-737, 462)
 position = Vector2(-737, 462)
 
 [node name="Cactus34" parent="Cactus" instance=ExtResource("24_vcx55")]
-position = Vector2(-1435, -1247)
+position = Vector2(-2057, -1236)
 
 [node name="Cactus35" parent="Cactus" instance=ExtResource("24_vcx55")]
-position = Vector2(-1435, -1247)
+position = Vector2(-2057, -1236)
 
 [node name="Cactus3" parent="Cactus" instance=ExtResource("15_ttcjo")]
 position = Vector2(-480, -100)
@@ -1244,8 +1266,11 @@ position = Vector2(1753, 1077)
 [node name="Cactus29" parent="Cactus" instance=ExtResource("23_dfokq")]
 position = Vector2(-588, 61)
 
-[node name="Cactus2" parent="." instance=ExtResource("24_vcx55")]
+[node name="Cactus37" parent="Cactus" instance=ExtResource("24_vcx55")]
 position = Vector2(13, 443)
+
+[node name="Cactus38" parent="Cactus" instance=ExtResource("23_dfokq")]
+position = Vector2(-2808, -1043)
 
 [node name="Dirt" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -1299,10 +1324,10 @@ position = Vector2(-727, 459)
 position = Vector2(-727, 459)
 
 [node name="Dirt49" parent="Dirt" instance=ExtResource("8_16u8o")]
-position = Vector2(-1425, -1250)
+position = Vector2(-2047, -1239)
 
 [node name="Dirt50" parent="Dirt" instance=ExtResource("8_16u8o")]
-position = Vector2(-1425, -1250)
+position = Vector2(-2047, -1239)
 
 [node name="Dirt21" parent="Dirt" instance=ExtResource("8_16u8o")]
 position = Vector2(-14, 450)
@@ -1367,6 +1392,24 @@ position = Vector2(-2806, -392)
 [node name="Dirt15" parent="Dirt" instance=ExtResource("9_wxd1l")]
 position = Vector2(-2598, -621)
 
+[node name="Dirt52" parent="Dirt" instance=ExtResource("9_wxd1l")]
+position = Vector2(-2539, -1427)
+
+[node name="Dirt53" parent="Dirt" instance=ExtResource("9_wxd1l")]
+position = Vector2(-2159, -2081)
+
+[node name="Dirt54" parent="Dirt" instance=ExtResource("9_wxd1l")]
+position = Vector2(-2923, -2392)
+
+[node name="Dirt55" parent="Dirt" instance=ExtResource("9_wxd1l")]
+position = Vector2(-2491, -2932)
+
+[node name="Dirt56" parent="Dirt" instance=ExtResource("9_wxd1l")]
+position = Vector2(-275, -2729)
+
+[node name="Dirt57" parent="Dirt" instance=ExtResource("9_wxd1l")]
+position = Vector2(811, -1758)
+
 [node name="Dirt18" parent="Dirt" instance=ExtResource("9_wxd1l")]
 position = Vector2(-13, -276)
 
@@ -1411,6 +1454,18 @@ position = Vector2(-1370, -456)
 
 [node name="WateringHole2" parent="WaterHoles" instance=ExtResource("9_w55pe")]
 position = Vector2(-1362, -1289)
+
+[node name="WateringHole6" parent="WaterHoles" instance=ExtResource("9_w55pe")]
+position = Vector2(-2065, -897)
+
+[node name="WateringHole13" parent="WaterHoles" instance=ExtResource("9_w55pe")]
+position = Vector2(-826, -2045)
+
+[node name="WateringHole14" parent="WaterHoles" instance=ExtResource("9_w55pe")]
+position = Vector2(-928, -2718)
+
+[node name="Sign1" parent="WaterHoles/WateringHole14" instance=ExtResource("25_huxso")]
+position = Vector2(-1924, 619)
 
 [node name="WateringHole3" parent="WaterHoles" instance=ExtResource("9_w55pe")]
 position = Vector2(-865, -811)
@@ -1483,11 +1538,6 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden2" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden2" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
-
 [node name="Hidden3" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
 position = Vector2(-381, 587)
@@ -1509,11 +1559,6 @@ position = Vector2(8, 4)
 
 [node name="DeadGrass70" parent="WaterHoles/Hidden3" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
-
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden3" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
 
 [node name="Hidden4" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
@@ -1537,11 +1582,6 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden4" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden4" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
-
 [node name="Hidden5" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
 position = Vector2(861, 1155)
@@ -1563,11 +1603,6 @@ position = Vector2(8, 4)
 
 [node name="DeadGrass70" parent="WaterHoles/Hidden5" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
-
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden5" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
 
 [node name="Hidden6" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
@@ -1591,11 +1626,6 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden6" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden6" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
-
 [node name="Hidden7" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
 position = Vector2(630, -864)
@@ -1617,11 +1647,6 @@ position = Vector2(8, 4)
 
 [node name="DeadGrass70" parent="WaterHoles/Hidden7" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
-
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden7" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
 
 [node name="Hidden8" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
@@ -1645,10 +1670,137 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden8" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden8" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
+[node name="Hidden14" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-2556, -1434)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden14" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden14" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden14" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden14" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden14" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden14" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
+
+[node name="Hidden15" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-2176, -2088)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden15" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden15" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden15" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden15" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden15" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden15" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
+
+[node name="Hidden16" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-2940, -2399)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden16" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden16" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden16" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden16" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden16" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden16" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
+
+[node name="Hidden17" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-2508, -2939)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden17" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden17" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden17" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden17" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden17" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden17" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
+
+[node name="Hidden18" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-292, -2736)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden18" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden18" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden18" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden18" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden18" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden18" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
+
+[node name="Hidden19" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(794, -1765)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden19" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden19" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden19" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden19" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden19" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden19" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
 
 [node name="Hidden9" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
@@ -1672,10 +1824,49 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden9" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden9" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
+[node name="Hidden20" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-1634, -2078)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden20" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden20" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden20" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden20" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden20" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden20" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
+
+[node name="Hidden21" type="Node2D" parent="WaterHoles"]
+y_sort_enabled = true
+position = Vector2(-1880, -2293)
+metadata/_edit_group_ = true
+
+[node name="WateringHole6" parent="WaterHoles/Hidden21" instance=ExtResource("9_w55pe")]
+
+[node name="DeadGrass66" parent="WaterHoles/Hidden21" instance=ExtResource("29_udmdw")]
+position = Vector2(-5, 3)
+
+[node name="DeadGrass67" parent="WaterHoles/Hidden21" instance=ExtResource("26_pkq87")]
+position = Vector2(0, -8)
+
+[node name="DeadGrass68" parent="WaterHoles/Hidden21" instance=ExtResource("29_udmdw")]
+position = Vector2(-7, -6)
+
+[node name="DeadGrass69" parent="WaterHoles/Hidden21" instance=ExtResource("28_qqffy")]
+position = Vector2(8, 4)
+
+[node name="DeadGrass70" parent="WaterHoles/Hidden21" instance=ExtResource("29_udmdw")]
+position = Vector2(6, -8)
 
 [node name="Hidden10" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
@@ -1699,11 +1890,6 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden10" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden10" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
-
 [node name="Hidden11" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
 position = Vector2(-236, -1946)
@@ -1725,11 +1911,6 @@ position = Vector2(8, 4)
 
 [node name="DeadGrass70" parent="WaterHoles/Hidden11" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
-
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden11" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
 
 [node name="Hidden12" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
@@ -1753,11 +1934,6 @@ position = Vector2(8, 4)
 [node name="DeadGrass70" parent="WaterHoles/Hidden12" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
 
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden12" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
-
 [node name="Hidden13" type="Node2D" parent="WaterHoles"]
 y_sort_enabled = true
 position = Vector2(-1259, -613)
@@ -1779,11 +1955,6 @@ position = Vector2(8, 4)
 
 [node name="DeadGrass70" parent="WaterHoles/Hidden13" instance=ExtResource("29_udmdw")]
 position = Vector2(6, -8)
-
-[node name="MaxDistanceHelper" parent="WaterHoles/Hidden13" instance=ExtResource("1_fda42")]
-include_base_water = 0.0
-used_digs = 1
-display_color = Color(0.107529, 0.646998, 0, 1)
 
 [node name="Rocks" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -2151,8 +2322,98 @@ position = Vector2(-1345, -1284)
 [node name="DeadGrass94" parent="DeadGrass" instance=ExtResource("26_pkq87")]
 position = Vector2(-1380, -1286)
 
+[node name="DeadGrass115" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-2048, -892)
+
+[node name="DeadGrass116" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-2083, -894)
+
+[node name="DeadGrass117" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-809, -2040)
+
+[node name="DeadGrass118" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-844, -2042)
+
+[node name="DeadGrass119" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-911, -2713)
+
+[node name="DeadGrass120" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-946, -2715)
+
 [node name="DeadGrass67" parent="DeadGrass" instance=ExtResource("26_pkq87")]
 position = Vector2(-1978, -352)
+
+[node name="DeadGrass95" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1959, -1232)
+
+[node name="DeadGrass96" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-1467, -843)
+
+[node name="DeadGrass97" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1971, -719)
+
+[node name="DeadGrass98" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-1595, -806)
+
+[node name="DeadGrass99" parent="DeadGrass" instance=ExtResource("30_416im")]
+position = Vector2(-1035, -1613)
+
+[node name="DeadGrass100" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-628, -1148)
+
+[node name="DeadGrass101" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-779, -1044)
+
+[node name="DeadGrass102" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-553, -825)
+
+[node name="DeadGrass103" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1129, -462)
+
+[node name="DeadGrass104" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-1483, -323)
+
+[node name="DeadGrass105" parent="DeadGrass" instance=ExtResource("30_416im")]
+position = Vector2(-1995, -104)
+
+[node name="DeadGrass106" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1890, -222)
+
+[node name="DeadGrass107" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-1633, -586)
+
+[node name="DeadGrass108" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1831, -961)
+
+[node name="DeadGrass109" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-2361, -915)
+
+[node name="DeadGrass110" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-2289, -1181)
+
+[node name="DeadGrass111" parent="DeadGrass" instance=ExtResource("28_qqffy")]
+position = Vector2(-1676, -384)
+
+[node name="DeadGrass122" parent="DeadGrass" instance=ExtResource("27_5b8r7")]
+position = Vector2(-2042, -1097)
+
+[node name="DeadGrass123" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-1973, -1208)
+
+[node name="DeadGrass124" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1474, -1025)
+
+[node name="DeadGrass112" parent="DeadGrass" instance=ExtResource("29_udmdw")]
+position = Vector2(-1677, -401)
+
+[node name="DeadGrass113" parent="DeadGrass" instance=ExtResource("26_pkq87")]
+position = Vector2(-1660, -387)
+
+[node name="DeadGrass114" parent="DeadGrass" instance=ExtResource("30_416im")]
+position = Vector2(-1666, -397)
+
+[node name="DeadGrass121" parent="DeadGrass" instance=ExtResource("27_5b8r7")]
+position = Vector2(-1818, -1539)
 
 [node name="Stains" type="Node2D" parent="."]
 
@@ -2180,165 +2441,9 @@ position = Vector2(416, -448)
 [node name="Stain3" parent="Stains" instance=ExtResource("32_tjlln")]
 position = Vector2(1258, 649)
 
-[node name="Dirt2" parent="." instance=ExtResource("3_uvf08")]
-position = Vector2(-2065, -210)
-
-[node name="Dirt4" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-2226, -384)
-
-[node name="Dirt6" parent="." instance=ExtResource("6_qk0cv")]
-position = Vector2(-1908, -607)
-
-[node name="Dirt5" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-1894, -838)
-
-[node name="Dirt1" parent="." instance=ExtResource("2_yer6a")]
-position = Vector2(-1714, -719)
-
-[node name="Dirt7" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-1506, -677)
-
-[node name="Dirt8" parent="." instance=ExtResource("6_qk0cv")]
-position = Vector2(-1461, -710)
-
-[node name="Dirt9" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-1305, -970)
-
-[node name="Stain2" parent="." instance=ExtResource("32_tjlln")]
-position = Vector2(-1211, -559)
-
-[node name="DeadGrass3" parent="." instance=ExtResource("26_pkq87")]
-position = Vector2(-1973, -1208)
-
-[node name="DeadGrass1" parent="DeadGrass3" instance=ExtResource("27_5b8r7")]
-position = Vector2(-69, 111)
-
-[node name="DeadGrass7" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-1474, -1025)
-
-[node name="Stain1" parent="." instance=ExtResource("31_5y388")]
-position = Vector2(-1620, -552)
-
-[node name="DeadGrass1" parent="." instance=ExtResource("27_5b8r7")]
-position = Vector2(-1521, -1043)
-
-[node name="Stain11" parent="." instance=ExtResource("31_5y388")]
-position = Vector2(-1503, -1000)
-
-[node name="Stain3" parent="." instance=ExtResource("32_tjlln")]
-position = Vector2(-2557, -410)
-
-[node name="Stain4" parent="." instance=ExtResource("31_5y388")]
-position = Vector2(-2681, -96)
-
-[node name="Stain5" parent="." instance=ExtResource("31_5y388")]
-position = Vector2(-1746, -118)
-
-[node name="Stain6" parent="." instance=ExtResource("32_tjlln")]
-position = Vector2(-1695, -178)
-
-[node name="Stain7" parent="." instance=ExtResource("31_5y388")]
-position = Vector2(-2489, -692)
-
-[node name="Stain8" parent="." instance=ExtResource("32_tjlln")]
-position = Vector2(-2191, -1015)
-
-[node name="Stain9" parent="." instance=ExtResource("31_5y388")]
-position = Vector2(-1865, -1287)
-
-[node name="Stain10" parent="." instance=ExtResource("32_tjlln")]
-position = Vector2(-864, -1349)
-
-[node name="Dirt3" parent="." instance=ExtResource("3_uvf08")]
-position = Vector2(-2459, -1080)
-
-[node name="Dirt10" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-2080, -1298)
-
-[node name="Cactus3" parent="." instance=ExtResource("15_ttcjo")]
-position = Vector2(-2088, -1311)
-
-[node name="Cactus2" parent="Cactus3" instance=ExtResource("24_vcx55")]
-position = Vector2(22, 10)
-
-[node name="Rock1" parent="." instance=ExtResource("10_5xl5v")]
-position = Vector2(-2118, -1302)
-
-[node name="Dirt12" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-2101, -2222)
-
-[node name="Cactus7" parent="." instance=ExtResource("15_ttcjo")]
-position = Vector2(-2109, -2235)
-
-[node name="Cactus2" parent="Cactus7" instance=ExtResource("24_vcx55")]
-position = Vector2(22, 10)
-
-[node name="Rock2" parent="." instance=ExtResource("10_5xl5v")]
-position = Vector2(-2139, -2226)
-
-[node name="Dirt13" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-401, -2328)
-
-[node name="Cactus8" parent="." instance=ExtResource("15_ttcjo")]
-position = Vector2(-409, -2341)
-
-[node name="Cactus2" parent="Cactus8" instance=ExtResource("24_vcx55")]
-position = Vector2(22, 10)
-
-[node name="Rock3" parent="." instance=ExtResource("10_5xl5v")]
-position = Vector2(-439, -2332)
-
-[node name="Dirt14" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-49, -1502)
-
-[node name="Cactus9" parent="." instance=ExtResource("15_ttcjo")]
-position = Vector2(-57, -1515)
-
-[node name="Cactus2" parent="Cactus9" instance=ExtResource("24_vcx55")]
-position = Vector2(22, 10)
-
-[node name="Rock4" parent="." instance=ExtResource("10_5xl5v")]
-position = Vector2(-87, -1506)
-
-[node name="Dirt11" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-1272, -789)
-
-[node name="Cactus1" parent="." instance=ExtResource("23_dfokq")]
-position = Vector2(-1283, -788)
-
-[node name="Cactus4" parent="." instance=ExtResource("24_vcx55")]
-position = Vector2(-2239, -386)
-
-[node name="Dirt15" parent="." instance=ExtResource("5_xe48h")]
-position = Vector2(-1586, -1756)
-
-[node name="Cactus10" parent="." instance=ExtResource("24_vcx55")]
-position = Vector2(-1599, -1758)
-
-[node name="Cactus5" parent="." instance=ExtResource("15_ttcjo")]
-position = Vector2(-887, -1401)
-
-[node name="DeadGrass5" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-941, -1387)
-
-[node name="DeadGrass4" parent="." instance=ExtResource("28_qqffy")]
-position = Vector2(-873, -1372)
-
-[node name="DeadGrass6" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-926, -1435)
-
-[node name="DeadTree" parent="." instance=ExtResource("1_xmtam")]
-position = Vector2(-899, -1432)
-
-[node name="WateringHole" parent="." instance=ExtResource("9_w55pe")]
-position = Vector2(-918, -1418)
-
-[node name="Cactus6" parent="." instance=ExtResource("23_dfokq")]
-position = Vector2(-2808, -1043)
-
 [node name="FlaskTargetArea" type="Node2D" parent="."]
 y_sort_enabled = true
-position = Vector2(523, 644)
+position = Vector2(1, 66)
 
 [node name="DeadOasisGround" type="Sprite2D" parent="FlaskTargetArea"]
 z_index = -9
@@ -2355,12 +2460,36 @@ z_index = -9
 position = Vector2(-1804, -2509)
 texture = ExtResource("33_c6bvu")
 
+[node name="DeadOasisGround4" type="Sprite2D" parent="FlaskTargetArea"]
+z_index = -9
+position = Vector2(-1930, -2448)
+texture = ExtResource("33_c6bvu")
+
+[node name="DeadOasisGround5" type="Sprite2D" parent="FlaskTargetArea"]
+z_index = -9
+position = Vector2(-1896, -2302)
+texture = ExtResource("33_c6bvu")
+
+[node name="DeadOasisGround6" type="Sprite2D" parent="FlaskTargetArea"]
+z_index = -9
+position = Vector2(-1693, -2178)
+texture = ExtResource("33_c6bvu")
+
+[node name="DeadOasisGround7" type="Sprite2D" parent="FlaskTargetArea"]
+z_index = -9
+position = Vector2(-1584, -2143)
+texture = ExtResource("33_c6bvu")
+
 [node name="Flask" parent="FlaskTargetArea" instance=ExtResource("6_txfox")]
 position = Vector2(-1775, -2642)
 
 [node name="Stain11" parent="FlaskTargetArea" instance=ExtResource("32_tjlln")]
 z_index = -3
 position = Vector2(-1712, -2526)
+
+[node name="Stain15" parent="FlaskTargetArea" instance=ExtResource("32_tjlln")]
+z_index = -3
+position = Vector2(-1860, -2300)
 
 [node name="Stain14" parent="FlaskTargetArea" instance=ExtResource("32_tjlln")]
 z_index = -3
@@ -2483,6 +2612,9 @@ position = Vector2(-1711, -2671)
 [node name="DeadTree3" parent="FlaskTargetArea" instance=ExtResource("1_xmtam")]
 position = Vector2(-1806, -2557)
 
+[node name="DeadTree6" parent="FlaskTargetArea" instance=ExtResource("1_xmtam")]
+position = Vector2(-1959, -2506)
+
 [node name="DeadTree4" parent="FlaskTargetArea" instance=ExtResource("1_xmtam")]
 position = Vector2(-1653, -2534)
 
@@ -2507,50 +2639,455 @@ position = Vector2(-1754, -2641)
 [node name="TreeStump" parent="FlaskTargetArea" instance=ExtResource("11_vb7pe")]
 position = Vector2(-1652, -2622)
 
-[node name="DeadGrass8" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-1959, -1232)
+[node name="DeadGrass9" parent="FlaskTargetArea" instance=ExtResource("26_pkq87")]
+position = Vector2(-1744, -2518)
 
-[node name="DeadGrass9" parent="." instance=ExtResource("28_qqffy")]
-position = Vector2(-1467, -843)
+[node name="DeadGrass10" parent="FlaskTargetArea" instance=ExtResource("29_udmdw")]
+position = Vector2(-1788, -2566)
 
-[node name="DeadGrass10" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-1971, -719)
+[node name="DeadGrass8" parent="FlaskTargetArea" instance=ExtResource("30_416im")]
+position = Vector2(-1835, -2539)
 
-[node name="DeadGrass11" parent="." instance=ExtResource("28_qqffy")]
-position = Vector2(-1595, -806)
+[node name="DeadGrass11" parent="FlaskTargetArea" instance=ExtResource("28_qqffy")]
+position = Vector2(-1715, -2579)
 
-[node name="DeadGrass2" parent="." instance=ExtResource("30_416im")]
-position = Vector2(-1035, -1613)
+[node name="DeadGrass12" parent="FlaskTargetArea" instance=ExtResource("29_udmdw")]
+position = Vector2(-1634, -2593)
 
-[node name="DeadGrass12" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-628, -1148)
+[node name="DeadGrass3" parent="FlaskTargetArea" instance=ExtResource("27_5b8r7")]
+position = Vector2(-1670, -2537)
 
-[node name="DeadGrass13" parent="." instance=ExtResource("26_pkq87")]
-position = Vector2(-779, -1044)
+[node name="DeadGrass13" parent="FlaskTargetArea" instance=ExtResource("28_qqffy")]
+position = Vector2(-1650, -2667)
 
-[node name="DeadGrass14" parent="." instance=ExtResource("28_qqffy")]
-position = Vector2(-553, -825)
+[node name="DeadGrass14" parent="FlaskTargetArea" instance=ExtResource("29_udmdw")]
+position = Vector2(-1856, -2614)
 
-[node name="DeadGrass15" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-1129, -462)
+[node name="DeadGrass15" parent="FlaskTargetArea" instance=ExtResource("26_pkq87")]
+position = Vector2(-1862, -2718)
 
-[node name="DeadGrass16" parent="." instance=ExtResource("26_pkq87")]
-position = Vector2(-1483, -323)
+[node name="DeadGrass16" parent="FlaskTargetArea" instance=ExtResource("27_5b8r7")]
+position = Vector2(-1795, -2692)
 
-[node name="DeadGrass17" parent="." instance=ExtResource("30_416im")]
-position = Vector2(-1995, -104)
+[node name="DeadGrass17" parent="FlaskTargetArea" instance=ExtResource("26_pkq87")]
+position = Vector2(-1738, -2675)
 
-[node name="DeadGrass18" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-1890, -222)
+[node name="DeadGrass2" parent="FlaskTargetArea" instance=ExtResource("27_5b8r7")]
+position = Vector2(-1868, -2584)
+
+[node name="Dirt2" parent="." instance=ExtResource("3_uvf08")]
+position = Vector2(-2065, -210)
+
+[node name="Dirt4" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-2226, -384)
+
+[node name="Dirt6" parent="." instance=ExtResource("6_qk0cv")]
+position = Vector2(-1908, -607)
+
+[node name="Dirt5" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-1894, -838)
+
+[node name="Dirt16" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-2308, -1323)
+
+[node name="Dirt1" parent="." instance=ExtResource("2_yer6a")]
+position = Vector2(-1714, -719)
+
+[node name="Dirt7" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-1506, -677)
+
+[node name="Dirt8" parent="." instance=ExtResource("6_qk0cv")]
+position = Vector2(-1461, -710)
+
+[node name="Dirt9" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-1305, -970)
+
+[node name="Stain2" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-1211, -559)
+
+[node name="Stain1" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-1620, -552)
+
+[node name="DeadGrass1" parent="." instance=ExtResource("27_5b8r7")]
+position = Vector2(-1521, -1043)
+
+[node name="Stain11" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-1503, -1000)
+
+[node name="Stain3" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-2557, -410)
+
+[node name="Stain4" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-2681, -96)
+
+[node name="Stain5" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-1746, -118)
+
+[node name="Stain6" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-1695, -178)
+
+[node name="Stain7" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-2489, -692)
+
+[node name="Stain8" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-2191, -1015)
+
+[node name="Stain21" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-3092, -946)
+
+[node name="Stain22" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-3218, -1600)
+
+[node name="Stain12" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-2605, -1583)
+
+[node name="Stain9" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-1865, -1287)
+
+[node name="Stain13" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-2063, -1761)
+
+[node name="Stain14" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-1254, -1900)
+
+[node name="Stain15" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-1308, -2530)
+
+[node name="Stain16" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-2178, -2470)
+
+[node name="Stain17" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-3324, -1687)
+
+[node name="Stain18" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-3018, -928)
+
+[node name="Stain19" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-3607, -675)
+
+[node name="Stain20" parent="." instance=ExtResource("31_5y388")]
+position = Vector2(-3537, 116)
+
+[node name="Stain10" parent="." instance=ExtResource("32_tjlln")]
+position = Vector2(-864, -1349)
+
+[node name="Dirt3" parent="." instance=ExtResource("3_uvf08")]
+position = Vector2(-2459, -1080)
+
+[node name="Dirt10" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-2727, -1567)
+
+[node name="Cactus2" parent="." instance=ExtResource("24_vcx55")]
+position = Vector2(-2713, -1570)
+
+[node name="Cactus3" parent="." instance=ExtResource("15_ttcjo")]
+position = Vector2(-2735, -1580)
+
+[node name="Rock1" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2765, -1571)
+
+[node name="Dirt12" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-2101, -2222)
+
+[node name="Cactus6" parent="." instance=ExtResource("24_vcx55")]
+position = Vector2(-2087, -2225)
+
+[node name="Cactus7" parent="." instance=ExtResource("15_ttcjo")]
+position = Vector2(-2109, -2235)
+
+[node name="Rock2" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2139, -2226)
+
+[node name="Dirt13" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-401, -2328)
+
+[node name="Cactus11" parent="." instance=ExtResource("24_vcx55")]
+position = Vector2(-387, -2331)
+
+[node name="Cactus8" parent="." instance=ExtResource("15_ttcjo")]
+position = Vector2(-409, -2341)
+
+[node name="Rock3" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-439, -2332)
+
+[node name="Dirt14" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-49, -1502)
+
+[node name="Cactus12" parent="." instance=ExtResource("24_vcx55")]
+position = Vector2(-35, -1505)
+
+[node name="Cactus9" parent="." instance=ExtResource("15_ttcjo")]
+position = Vector2(-57, -1515)
+
+[node name="Rock4" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-87, -1506)
+
+[node name="Dirt11" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-1272, -789)
+
+[node name="Cactus4" parent="." instance=ExtResource("24_vcx55")]
+position = Vector2(-2239, -386)
+
+[node name="Dirt15" parent="." instance=ExtResource("5_xe48h")]
+position = Vector2(-1198, -2096)
+
+[node name="Cactus10" parent="." instance=ExtResource("24_vcx55")]
+position = Vector2(-1211, -2098)
+
+[node name="Cactus5" parent="." instance=ExtResource("15_ttcjo")]
+position = Vector2(-887, -1401)
+
+[node name="DeadGrass5" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-941, -1387)
+
+[node name="DeadGrass4" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-873, -1372)
+
+[node name="DeadGrass6" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-926, -1435)
+
+[node name="DeadTree" parent="." instance=ExtResource("1_xmtam")]
+position = Vector2(-899, -1432)
+
+[node name="WateringHole" parent="." instance=ExtResource("9_w55pe")]
+position = Vector2(-918, -1418)
+
+[node name="DeadGrass8" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-1662, -1953)
+
+[node name="DeadGrass9" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-1203, -1647)
+
+[node name="DeadGrass10" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-789, -1999)
+
+[node name="DeadGrass11" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-1037, -2270)
+
+[node name="DeadGrass17" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-1932, -614)
+
+[node name="DeadGrass16" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-1922, -594)
+
+[node name="DeadGrass15" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-1953, -599)
+
+[node name="TreeStump5" parent="." instance=ExtResource("11_vb7pe")]
+position = Vector2(-2042, -1106)
+
+[node name="WateringHole9" parent="." instance=ExtResource("9_w55pe")]
+position = Vector2(-2059, -1094)
+
+[node name="DeadGrass97" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-2095, -1210)
+
+[node name="Dirt17" parent="." instance=ExtResource("6_qk0cv")]
+position = Vector2(-2032, -1098)
+
+[node name="DeadGrass37" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-2056, -1105)
+
+[node name="DeadGrass38" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-2046, -1085)
+
+[node name="DeadGrass39" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-2077, -1090)
+
+[node name="DeadGrass40" parent="." instance=ExtResource("27_5b8r7")]
+position = Vector2(-2035, -1092)
+
+[node name="TreeStump6" parent="." instance=ExtResource("11_vb7pe")]
+position = Vector2(-1818, -1548)
+
+[node name="WateringHole10" parent="." instance=ExtResource("9_w55pe")]
+position = Vector2(-1835, -1536)
+
+[node name="Dirt18" parent="." instance=ExtResource("6_qk0cv")]
+position = Vector2(-1808, -1540)
+
+[node name="DeadGrass41" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-1832, -1547)
+
+[node name="DeadGrass42" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-1822, -1527)
+
+[node name="DeadGrass43" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-1853, -1532)
+
+[node name="DeadGrass44" parent="." instance=ExtResource("27_5b8r7")]
+position = Vector2(-1811, -1534)
+
+[node name="DeadGrass2" parent="." instance=ExtResource("27_5b8r7")]
+position = Vector2(-1911, -601)
 
 [node name="DeadGrass19" parent="." instance=ExtResource("26_pkq87")]
-position = Vector2(-1633, -586)
+position = Vector2(-1353, -1295)
+
+[node name="DeadGrass18" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-1353, -1280)
+
+[node name="DeadGrass14" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-1368, -1284)
+
+[node name="DeadGrass12" parent="." instance=ExtResource("30_416im")]
+position = Vector2(-1373, -1294)
+
+[node name="DeadGrass23" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-2056, -903)
+
+[node name="DeadGrass24" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-2056, -888)
+
+[node name="DeadGrass25" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-2071, -892)
+
+[node name="DeadGrass26" parent="." instance=ExtResource("30_416im")]
+position = Vector2(-2076, -902)
+
+[node name="DeadGrass29" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-817, -2051)
+
+[node name="DeadGrass30" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-817, -2036)
+
+[node name="DeadGrass31" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-832, -2040)
+
+[node name="DeadGrass32" parent="." instance=ExtResource("30_416im")]
+position = Vector2(-837, -2050)
+
+[node name="DeadGrass33" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-919, -2724)
+
+[node name="DeadGrass34" parent="." instance=ExtResource("28_qqffy")]
+position = Vector2(-919, -2709)
+
+[node name="DeadGrass35" parent="." instance=ExtResource("29_udmdw")]
+position = Vector2(-934, -2713)
+
+[node name="DeadGrass36" parent="." instance=ExtResource("30_416im")]
+position = Vector2(-939, -2723)
+
+[node name="DeadGrass45" parent="." instance=ExtResource("26_pkq87")]
+position = Vector2(-1504, -699)
+
+[node name="DeadGrass13" parent="." instance=ExtResource("30_416im")]
+position = Vector2(-1485, -700)
 
 [node name="DeadGrass20" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-1831, -961)
+position = Vector2(-1487, -713)
 
 [node name="DeadGrass21" parent="." instance=ExtResource("28_qqffy")]
-position = Vector2(-2361, -915)
+position = Vector2(-1482, -705)
 
 [node name="DeadGrass22" parent="." instance=ExtResource("29_udmdw")]
-position = Vector2(-2289, -1181)
+position = Vector2(-1492, -700)
+
+[node name="Signage" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sign13" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(1500, 1715)
+
+[node name="Sign12" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(2178, 1287)
+
+[node name="Sign11" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(2517, -56)
+
+[node name="Sign10" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(2534, 512)
+
+[node name="Sign9" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(2237, -429)
+
+[node name="Sign8" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(2386, -768)
+
+[node name="Sign7" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(1500, -1222)
+
+[node name="Sign14" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(97, -1086)
+
+[node name="Sign6" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(491, -1582)
+
+[node name="Sign5" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-305, -2226)
+
+[node name="Sign4" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-975, -2590)
+
+[node name="Sign3" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-1694, -2786)
+
+[node name="Sign2" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-2382, -2595)
+
+[node name="Sign1" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-3391, -1504)
+
+[node name="Sign15" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-3604, -1020)
+
+[node name="Sign16" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-3229, -500)
+
+[node name="Sign17" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-3096, -231)
+
+[node name="Sign18" parent="Signage" instance=ExtResource("25_huxso")]
+position = Vector2(-3145, 111)
+
+[node name="Rock8" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1619, -2111)
+
+[node name="Rock1" parent="Rock8" instance=ExtResource("10_5xl5v")]
+position = Vector2(-1173, 761)
+
+[node name="Rock7" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1949, -2024)
+
+[node name="Rock6" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1584, -1843)
+
+[node name="Rock5" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1676, -1529)
+
+[node name="Rock9" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2912, -1761)
+
+[node name="Rock10" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1105, -869)
+
+[node name="Rock11" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1834, -733)
+
+[node name="Rock12" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1444, -609)
+
+[node name="Rock13" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2219, -575)
+
+[node name="Rock14" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2236, -100)
+
+[node name="Rock15" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2474, -315)
+
+[node name="Rock16" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-2604, -9)
+
+[node name="Rock17" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1142, -1244)
+
+[node name="Rock18" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-1170, -1555)
+
+[node name="Rock19" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-848, -1781)
+
+[node name="Rock20" parent="." instance=ExtResource("10_5xl5v")]
+position = Vector2(-999, -2135)

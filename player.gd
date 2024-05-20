@@ -581,7 +581,7 @@ func _anim_dig_hole(spawn_west: bool) -> void:
 			item.consume()
 			
 			# Immediately add a lot of water to the player
-			water_buffs += 50.0
+			water_buffs += 30.0
 			
 			water_refill.play()
 			 
