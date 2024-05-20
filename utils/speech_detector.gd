@@ -5,6 +5,7 @@ class_name SpeechDetector
 
 @onready var dialog_hint: Sprite2D = $DialogHint
 @onready var dialog_box: Sprite2D = $DialogBox
+@onready var dialog_advancekey: Sprite2D = $DialogAdvancekey
 
 @onready var mumblings: AudioStreamPlayer2D = get_node_or_null("../Mumblings")
 
@@ -24,6 +25,7 @@ func _ready() -> void:
 	
 	dialog_hint.visible = true
 	dialog_box.visible = false
+	dialog_advancekey.visible = false
 
 	WorldManager.player_upgraded.connect(_on_player_upgrade)
 	
@@ -50,11 +52,13 @@ func _on_body_entered(body: Node2D) -> void:
 		if dialog_box.visible == false and mumblings != null:
 			mumblings.play()
 		dialog_box.visible = true
+		dialog_advancekey.visible = true
 		active_dialog_tree.get_children()[dialog_offset].visible = true
 		
 func _on_body_exited(body: Node2D) -> void:
 	if body is Player and not body.is_remote_player:
 		dialog_box.visible = false
+		dialog_advancekey.visible = false
 		
 		advance()
 		

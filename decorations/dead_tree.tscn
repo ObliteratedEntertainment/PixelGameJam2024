@@ -26,6 +26,7 @@ texture = ExtResource("3_3ds32")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("3_goylr")
+shade_value = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shade"]
 polygon = PackedVector2Array(4, -4, 31, 9, 49, 10, 43, 29, 25, 14, -1, 0)

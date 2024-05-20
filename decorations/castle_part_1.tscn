@@ -20,6 +20,6 @@ position = Vector2(-29, -4)
 polygon = PackedVector2Array(30, -57, 29, -67, 30, -92, 51, -87, 124, -40, 130, -15, 112, -6, 67, -30, 62, -36, 36, -45)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-z_index = -2
+z_index = -3
 position = Vector2(-55, 12)
 texture = ExtResource("2_4lhef")

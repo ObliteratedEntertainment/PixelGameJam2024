@@ -15,22 +15,31 @@ func _ready() -> void:
 	_respawn_flowers()
 	
 func consume() -> int:
+	if consumed:
+		return 0
+	
 	consumed = true
-	print("Player ate cactus")
 	
-	for flower in flowers:
-		flower.get_parent().remove_child(flower)
+	var flowers = _clear_flowers()
 	
-	return len(flowers)
+	return flowers
+
+func _clear_flowers() -> int:
+	var flower_count := 0
+	for spot in flower_spots.get_children():
+		# Clear out any old stuff
+		for child in spot.get_children():
+			spot.remove_child(child)
+			flower_count += 1
 	
+	return flower_count
+
 func _respawn_flowers() -> void:
 	consumed = false
-	flowers = []
+	
+	_clear_flowers()
 	
 	for spot in flower_spots.get_children():
-		if spot.get_child_count() > 0:
-			continue
 		
 		var flower := CACTUS_FLOWER.instantiate()
 		spot.add_child(flower)
-		flowers.push_back(flower)

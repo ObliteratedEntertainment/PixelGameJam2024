@@ -212,15 +212,6 @@ motion_mode = 1
 idling = true
 exhausted = false
 
-[node name="BackgroundWorldColor" type="ColorRect" parent="Player"]
-z_index = -10
-offset_left = -50000.0
-offset_top = -50000.0
-offset_right = -49960.0
-offset_bottom = -49960.0
-scale = Vector2(1e+06, 1e+06)
-color = Color(0.901961, 0.901961, 0.627451, 1)
-
 [node name="Oases" type="Node2D" parent="."]
 y_sort_enabled = true
 

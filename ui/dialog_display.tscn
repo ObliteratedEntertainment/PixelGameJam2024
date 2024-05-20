@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cijeuqu5rln8c"]
+[gd_scene load_steps=6 format=3 uid="uid://cijeuqu5rln8c"]
 
 [ext_resource type="Script" path="res://utils/speech_detector.gd" id="1_v3dkw"]
 [ext_resource type="Texture2D" uid="uid://dho2pe0dreii0" path="res://ui/dialog_hint.png" id="2_ep5pv"]
 [ext_resource type="Texture2D" uid="uid://c51lm4844hki2" path="res://ui/dialog_bubble.png" id="3_rymqi"]
+[ext_resource type="Texture2D" uid="uid://c1yttn7wiksst" path="res://ui/key_e.png" id="4_mbao7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cpkpa"]
 radius = 31.0161
@@ -19,6 +20,12 @@ visible = false
 z_index = 50
 position = Vector2(0, -34)
 texture = ExtResource("2_ep5pv")
+
+[node name="DialogAdvancekey" type="Sprite2D" parent="."]
+visible = false
+z_index = 51
+position = Vector2(58, -28)
+texture = ExtResource("4_mbao7")
 
 [node name="DialogBox" type="Sprite2D" parent="."]
 visible = false
